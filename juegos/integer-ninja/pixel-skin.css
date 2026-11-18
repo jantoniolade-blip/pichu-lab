@@ -169,3 +169,7 @@ legend { color: var(--mostaza); font-family: var(--px-title); font-weight: 700; 
 
 /* Pixelify Sans dibuja mal la ligadura "fi" (justificante): sin ligaduras */
 html, body, button, input, select { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+
+/* Menú: centrado si cabe; si no cabe (móviles bajos), empieza arriba y se puede desplazar sin cortar el botón de volver */
+#sMenu { align-items: flex-start; }
+#sMenu .menu-wrap { margin: auto 0; }
