@@ -176,3 +176,8 @@ html, body, button, input, select { font-variant-ligatures: none; font-feature-s
 
 /* Jersey 10 solo tiene un grosor: sin negrita sintética (emborrona los píxeles) */
 html { font-synthesis: none; }
+
+/* Jersey 10 es más estrecha: textos algo mayores */
+body { font-size: 1.12rem; }
+.btn, .menu-buttons .btn { font-size: 1.2rem; }
+.muted, .howto-card p, .level .t small, .intro-body { font-size: 1.08rem; }

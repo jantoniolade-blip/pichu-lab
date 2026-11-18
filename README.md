@@ -8,14 +8,15 @@ Los juegos se copian desde `Aula-de-Matematicas` (que no se modifica) y aquí so
 
 ```
 index.html                 Portada: acceso a todos los juegos y galería de héroes
-shared/pichu-theme.css     Tema común (paleta, fuentes, botones pixel art)
+shared/pichu-theme.css     Tema común (paleta, fuentes Jersey 10 y Press Start 2P, botones)
 assets/pichu-royale/       Banco de recursos (héroes, enemigos, iconos, escenarios, logo, manifest.json)
 juegos/<juego>/            Cada juego es un módulo independiente
-  integer-ninja/
-    index.html             Juego original + 16 líneas de enganche visual (ver su README)
-    pixel-skin.css         Capa pixel art (solo aspecto)
-    pixel-skin.js          Lienzo y sprites pixelados (solo aspecto)
-    api/ranking.js         Proxy del ranking (solo funciona en Vercel)
+  integer-ninja/            Números enteros (cortar frutas)
+  divisibilidad/            Duelo de cartas + modo fácil sin cartas (facil.html)
+  fracciones/               Pizza Duel
+shared/pixel-sprites.js     Sprites pixelados reutilizables
+
+Cada juego tiene su README con lo que se ha cambiado respecto al original.
 ```
 
 ## Añadir un juego

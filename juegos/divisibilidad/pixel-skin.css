@@ -88,3 +88,6 @@ button:focus-visible { outline: 3px dashed var(--oro); outline-offset: 3px; }
 
 /* Jersey 10 solo tiene un grosor: sin negrita sintética (emborrona los píxeles) */
 html { font-synthesis: none; }
+
+body { font-size: 1.1rem; }
+.btn { font-size: 1.25rem; }

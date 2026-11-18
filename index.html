@@ -30,30 +30,31 @@
   header.hero { text-align: center; padding: 8px 0 20px; }
   header.hero img.logo { width: min(320px, 78vw); height: auto; display: block; margin: 0 auto 8px; border: 4px solid var(--px-negro); box-shadow: 4px 4px 0 var(--px-negro); }
   header.hero h1 { font-family: var(--px-font-arcade); font-weight: 400; text-transform: none; font-size: clamp(18px, 5vw, 30px); margin: 12px 0 6px; }
-  header.hero p.sub { font-family: var(--px-font-title); font-weight: 700; letter-spacing: 1px; font-size: clamp(14px, 3.4vw, 18px); color: var(--px-turquesa); margin: 0; line-height: 1.6; }
+  header.hero p.sub { font-family: var(--px-font-title); font-weight: 700; letter-spacing: 1px; font-size: clamp(18px, 4.4vw, 22px); color: var(--px-turquesa); margin: 0; line-height: 1.6; }
 
-  h2.section { font-size: clamp(18px, 4vw, 22px); margin: 28px 0 14px; }
+  h2.section { font-size: clamp(24px, 5vw, 28px); margin: 28px 0 14px; }
 
   .games { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
   .card { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
   .card .top { display: flex; gap: 12px; align-items: center; }
   .card .top img { width: 72px; height: 72px; flex: none; background: var(--px-bg-deep); border: 4px solid var(--px-negro); }
-  .card h3 { font-family: var(--px-font-title); font-weight: 700; font-size: 20px; line-height: 1.5; margin: 0; color: var(--px-dorado); }
-  .card .tema { font-size: 15px; color: var(--px-turquesa); margin: 4px 0 0; }
+  .card h3 { font-family: var(--px-font-title); font-weight: 700; font-size: 26px; line-height: 1.5; margin: 0; color: var(--px-dorado); }
+  .card .tema { font-size: 19px; color: var(--px-turquesa); margin: 4px 0 0; }
   .card p.desc { margin: 0; line-height: 1.35; }
   .card .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
   .card a.px-btn { text-decoration: none; display: inline-flex; align-items: center; }
+  .card a.px-btn.alt { background: var(--px-crema); box-shadow: inset -4px -4px 0 #cdbb98, inset 4px 4px 0 #fff, 0 4px 0 var(--px-negro); }
   .card.locked { opacity: .62; }
   .card.locked .top img { filter: grayscale(.7) brightness(.8); }
-  .badge { font-family: var(--px-font-title); font-weight: 700; font-size: 13px; padding: 6px 8px; background: var(--px-bg-deep); border: 3px solid var(--px-negro); color: var(--px-lavanda); }
+  .badge { font-family: var(--px-font-title); font-weight: 700; font-size: 17px; padding: 6px 8px; background: var(--px-bg-deep); border: 3px solid var(--px-negro); color: var(--px-lavanda); }
 
   .heroes { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px; }
   .heroe { padding: 8px; text-align: center; }
   .heroe img { width: 100%; height: auto; aspect-ratio: 1; display: block; }
-  .heroe b { display: block; font-size: 15px; line-height: 1.15; margin-top: 4px; }
-  .heroe span { display: block; font-size: 13px; color: var(--px-turquesa); }
+  .heroe b { display: block; font-size: 19px; line-height: 1.15; margin-top: 4px; }
+  .heroe span { display: block; font-size: 16px; color: var(--px-turquesa); }
 
-  footer { text-align: center; font-size: 14px; color: var(--px-lavanda); margin-top: 32px; }
+  footer { text-align: center; font-size: 18px; color: var(--px-lavanda); margin-top: 32px; }
 </style>
 </head>
 <body>
@@ -79,10 +80,11 @@
   const JUEGOS = [
     { id: "integer-ninja", titulo: "Integer Ninja", tema: "Números enteros", enemigo: "negatron",
       desc: "Corta frutas con números enteros, alcanza objetivos exactos y derrota al Rey de los Signos.", activo: true },
-    { id: "divisibilidad", titulo: "Divisibilidad", tema: "Divisibilidad", enemigo: "primox",
-      desc: "Próximamente: múltiplos, divisores y números primos.", activo: false },
-    { id: "fracciones", titulo: "Fracciones", tema: "Fracciones", enemigo: "denominadoron",
-      desc: "Próximamente: equivalencias, simplificación y operaciones.", activo: false }
+    { id: "divisibilidad", titulo: "Reino de la divisibilidad", tema: "Divisibilidad", enemigo: "primox",
+      desc: "Divisores, primos, factorización, MCD y mcm. Elige el modo fácil (una pregunta cada vez) o el duelo de cartas.",
+      activo: true, botones: [["facil.html", "▶ Modo fácil"], ["", "⚔ Duelo de cartas"]] },
+    { id: "fracciones", titulo: "Pizza Duel", tema: "Fracciones", enemigo: "denominadoron",
+      desc: "Sirve porciones exactas de pizza a los chefs rivales: sumar, multiplicar y dividir fracciones.", activo: true }
   ];
 
   const A = "assets/pichu-royale/";
@@ -97,9 +99,10 @@
       </div>
       <p class="desc">${j.desc}</p>
       <div class="foot">
-        ${j.activo
-          ? `<a class="px-btn" href="juegos/${j.id}/">▶ Jugar</a>`
-          : `<span class="badge">🔒 PRÓXIMAMENTE</span>`}
+        ${!j.activo
+          ? `<span class="badge">🔒 PRÓXIMAMENTE</span>`
+          : (j.botones || [["", "▶ Jugar"]]).map(([ruta, txt], i) =>
+              `<a class="px-btn${i ? " alt" : ""}" href="juegos/${j.id}/${ruta}">${txt}</a>`).join("")}
       </div>`;
     games.appendChild(el);
   }

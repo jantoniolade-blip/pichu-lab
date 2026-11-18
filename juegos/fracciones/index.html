@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pizza Duel πCHU · Fracciones</title>
 <meta name="description" content="Pizza Duel: duelos de cocina contra chefs rivales. Sirve fracciones exactas para ganar.">
-<meta name="theme-color" content="#332B2A">
-<!-- πCHU: botón para volver a la portada -->
-<script src="../../compartido/volver.js" defer></script>
+<meta name="theme-color" content="#211736">
+<!-- πCHU: botón para volver a la portada (en pichu-lab no existe compartido/volver.js: se usa el enlace .px-back del mapa)
+<script src="../../compartido/volver.js" defer></script> -->
 <style>
 @font-face{font-family:"Lato";font-weight:400;font-display:swap;src:url("../../compartido/fuentes/lato-latin-400-normal.woff2") format("woff2")}
 @font-face{font-family:"Lato";font-weight:700;font-display:swap;src:url("../../compartido/fuentes/lato-latin-700-normal.woff2") format("woff2")}
@@ -243,12 +243,19 @@ img{max-width:100%}
 .sin-mov *,.sin-mov *::before,.sin-mov *::after{animation:none!important;transition:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
+<!-- πCHU ROYALE: capa pixel art (solo aspecto). Quitar estas líneas para volver al aspecto original. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Jersey+10&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pixel-skin.css">
+<script src="../../shared/pixel-sprites.js" data-selector="img" data-grid="80"></script>
 </head>
 <body>
 
 <!-- ================= MAPA DE RIVALES ================= -->
 <main id="mapa">
   <div class="ini">
+    <a class="px-back" href="../../" aria-label="Volver a la portada de πCHU ROYALE">◀ πCHU ROYALE</a>
     <header class="logo">
       <img id="logoPichu" alt="">
       <h1>PIZZA <span>DUEL</span></h1>
