@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#1E1918">
+<meta name="theme-color" content="#211736">
 <meta name="description" content="πCHU Royale: duelos de cartas contra los rivales del reino de la divisibilidad. Divisores, factorización, MCD y mcm para 1.º ESO.">
 <title>πCHU Royale · Duelo de divisibilidad</title>
 <style>
@@ -550,6 +550,12 @@ body.quieto .rival-png,body.quieto .carta-reto,body.quieto .heroe-salto{animatio
  .mano-wrap{align-self:start}
 }
 </style>
+<!-- πCHU ROYALE: capa pixel art (solo aspecto). Quitar estas líneas para volver al aspecto original. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Jersey+10&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pixel-skin.css">
+<script src="../../shared/pixel-sprites.js" data-selector="img" data-grid="80"></script>
 </head>
 <body>
 <canvas id="particulas" aria-hidden="true"></canvas>
@@ -559,6 +565,7 @@ body.quieto .rival-png,body.quieto .carta-reto,body.quieto .heroe-salto{animatio
 <div id="sinGuardar" class="sin-guardar oculto" role="status">El navegador no permite guardar el progreso. Puedes seguir jugando.</div>
 
 <div class="capa" id="inicio"><div class="panel panel-inicio" id="inicioPanel"></div></div>
+<nav class="px-nav" aria-label="πCHU ROYALE"><a href="../../">◀ πCHU ROYALE</a><a class="facil" href="facil.html">MODO FÁCIL ▶</a></nav>
 
 <div id="juego" class="oculto">
   <header class="hud">

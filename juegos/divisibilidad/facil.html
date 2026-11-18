@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#211736">
+<meta name="description" content="πCHU ROYALE · Divisibilidad exprés: modo fácil sin cartas. Divisores, primos, MCD y mcm para 1.º ESO.">
+<title>Divisibilidad exprés · πCHU ROYALE</title>
+<link rel="icon" href="../../assets/pichu-royale/iconos/corona.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Jersey+10&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/pichu-theme.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    background: var(--px-bg);
+    background-image: linear-gradient(rgba(33,23,54,.88), rgba(22,15,38,.96)), url("../../assets/pichu-royale/escenarios/laboratorio.png");
+    background-size: cover; background-position: center; background-attachment: fixed;
+    color: var(--px-crema); font-family: var(--px-font-body); font-size: 22px;
+    padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  }
+  main { max-width: 720px; margin: 0 auto; }
+  .oculto { display: none !important; }
+  .top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+  .top a { font-family: var(--px-font-title); font-size: 19px; line-height: 1.4; color: var(--px-crema); text-decoration: none; background: var(--px-bg-deep); border: 3px solid var(--px-negro); box-shadow: 3px 3px 0 var(--px-negro); padding: 8px 10px; }
+  .top a:focus-visible, button:focus-visible { outline: 3px dashed var(--px-turquesa); outline-offset: 3px; }
+  h1 { font-size: clamp(22px, 6vw, 34px); margin: 4px 0 2px; text-align: center; }
+  .sub { text-align: center; margin: 0 0 16px; color: var(--px-turquesa); font-weight: 700; }
+  .panel { padding: 16px; margin-bottom: 14px; }
+  .panel h2 { font-family: var(--px-font-title); font-size: 18px; margin: 0 0 10px; color: var(--px-dorado); text-transform: uppercase; }
+  .opciones-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 10px; }
+  .elegir { font: inherit; font-weight: 700; color: var(--px-negro); background: var(--px-crema); border: 4px solid var(--px-negro); box-shadow: inset -4px -4px 0 #cdbb98, 0 4px 0 var(--px-negro); padding: 10px; min-height: 52px; cursor: pointer; text-align: left; display: flex; gap: 8px; align-items: center; }
+  .elegir[aria-pressed="true"] { background: var(--px-dorado); box-shadow: inset -4px -4px 0 var(--px-dorado-osc), 0 4px 0 var(--px-negro); }
+  .elegir img { width: 44px; height: 44px; image-rendering: pixelated; flex: none; }
+  .elegir small { display: block; font-weight: 400; font-size: 17px; }
+  .start { display: block; width: 100%; font-size: 20px; margin-top: 4px; }
+
+  /* Combate */
+  .hud { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .enemigo { display: flex; gap: 12px; align-items: center; padding: 10px; }
+  .enemigo img { width: 84px; height: 84px; image-rendering: pixelated; flex: none; }
+  .enemigo img.golpe { animation: golpe .4s steps(4); }
+  .enemigo img.ko { filter: grayscale(1) brightness(.6); transform: rotate(20deg); }
+  @keyframes golpe { 25% { transform: translateX(8px); filter: brightness(2); } 75% { transform: translateX(-6px); } }
+  .enemigo b { display: block; color: var(--px-dorado); font-size: 20px; }
+  .vida { height: 16px; background: var(--px-negro); border: 3px solid var(--px-negro); margin-top: 6px; }
+  .vida i { display: block; height: 100%; background: repeating-linear-gradient(90deg, var(--px-alerta) 0 8px, #ff8a8a 8px 12px); transition: width .3s steps(4); }
+  .contador { font-family: var(--px-font-arcade); font-size: 12px; line-height: 1.6; text-align: center; padding: 10px; min-width: 96px; }
+  .contador span { display: block; font-family: var(--px-font-title); font-size: 13px; color: var(--px-turquesa); }
+  .pregunta { font-size: clamp(22px, 5.4vw, 30px); line-height: 1.3; font-weight: 700; text-align: center; margin: 4px 0 14px; }
+  .pregunta b { color: var(--px-dorado); }
+  .respuestas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .resp { font-family: var(--px-font-arcade); font-size: clamp(18px, 5vw, 24px); color: var(--px-negro); background: var(--px-crema); border: 4px solid var(--px-negro); box-shadow: inset -5px -5px 0 #cdbb98, inset 5px 5px 0 #fff, 0 5px 0 var(--px-negro); min-height: 76px; cursor: pointer; }
+  .resp:active { transform: translateY(5px); box-shadow: inset -5px -5px 0 #cdbb98, inset 5px 5px 0 #fff, 0 0 0 var(--px-negro); }
+  .resp.bien { background: #8ee6c9; box-shadow: inset -5px -5px 0 #3e8f8a, 0 5px 0 var(--px-negro); }
+  .resp.mal { background: #ffb3b3; box-shadow: inset -5px -5px 0 #a63c3c, 0 5px 0 var(--px-negro); }
+  .resp:disabled { cursor: default; }
+  .resp .k { display: block; font-family: var(--px-font-body); font-size: 12px; opacity: .6; }
+  .feedback { margin-top: 14px; padding: 12px 14px; line-height: 1.4; }
+  .feedback h3 { margin: 0 0 6px; font-size: 20px; }
+  .feedback.ok h3 { color: #8ee6c9; } .feedback.ko h3 { color: #ffb3b3; }
+  .fila { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 12px; }
+  .secundario { background: var(--px-crema); box-shadow: inset -4px -4px 0 #cdbb98, inset 4px 4px 0 #fff, 0 4px 0 var(--px-negro); }
+  .heroe-dice { display: flex; gap: 10px; align-items: center; margin-top: 12px; }
+  .heroe-dice img { width: 64px; height: 64px; image-rendering: pixelated; flex: none; }
+  .heroe-dice p { margin: 0; background: var(--px-crema); color: var(--px-negro); border: 3px solid var(--px-negro); box-shadow: 3px 3px 0 var(--px-negro); padding: 8px 10px; font-weight: 700; line-height: 1.3; }
+  .final { text-align: center; }
+  .estrellas { font-size: 44px; letter-spacing: 6px; color: var(--px-dorado); text-shadow: 3px 3px 0 var(--px-negro); }
+  .estrellas .off { color: #5d4a80; }
+  .final .grande { font-family: var(--px-font-arcade); font-size: 28px; color: var(--px-dorado); margin: 8px 0; }
+  @media (max-width: 420px) { .enemigo img { width: 64px; height: 64px; } .resp { min-height: 68px; } }
+</style>
+</head>
+<body>
+<main>
+  <nav class="top" aria-label="πCHU ROYALE">
+    <a href="../../">◀ πCHU ROYALE</a>
+    <a href="index.html">DUELO DE CARTAS ▶</a>
+  </nav>
+
+  <!-- ============ INICIO ============ -->
+  <section id="sInicio">
+    <h1 class="px-title">Divisibilidad exprés</h1>
+    <p class="sub">Modo fácil · una pregunta cada vez · sin cartas</p>
+    <div class="panel px-box">
+      <h2>1 · Elige tema</h2>
+      <div class="opciones-grid" id="temas" role="group" aria-label="Tema"></div>
+    </div>
+    <div class="panel px-box">
+      <h2>2 · Dificultad</h2>
+      <div class="opciones-grid" id="niveles" role="group" aria-label="Dificultad"></div>
+    </div>
+    <div class="panel px-box">
+      <h2>3 · Tu héroe</h2>
+      <div class="opciones-grid" id="heroes" role="group" aria-label="Héroe"></div>
+    </div>
+    <button class="px-btn start" id="bEmpezar">▶ ¡A jugar!</button>
+  </section>
+
+  <!-- ============ COMBATE ============ -->
+  <section id="sJuego" class="oculto" aria-live="polite">
+    <div class="hud">
+      <div class="enemigo px-box">
+        <img id="eImg" alt="" width="84" height="84">
+        <div style="flex:1"><b id="eNombre"></b><small id="eReto"></small><div class="vida" aria-hidden="true"><i id="eVida" style="width:100%"></i></div></div>
+      </div>
+      <div class="contador px-box"><span>Pregunta</span><div id="cNum">1/10</div><span>Aciertos</span><div id="cOk">0</div></div>
+    </div>
+    <div class="panel px-box">
+      <div class="pregunta" id="pTexto"></div>
+      <div class="respuestas" id="pResp"></div>
+      <div class="fila"><button class="px-btn secundario" id="bPista">💡 Pista</button></div>
+      <div class="feedback px-box oculto" id="fb" role="status"><h3 id="fbTit"></h3><div id="fbTxt"></div></div>
+      <div class="fila oculto" id="filaSig"><button class="px-btn" id="bSig">Siguiente ▶</button></div>
+      <div class="heroe-dice"><img id="hImg" alt=""><p id="hDice">¡Vamos allá!</p></div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL ============ -->
+  <section id="sFinal" class="oculto">
+    <div class="panel px-box final">
+      <h2 id="fTitulo">¡Combate terminado!</h2>
+      <img id="fImg" alt="" width="120" height="120" style="image-rendering:pixelated">
+      <div class="estrellas" id="fEstrellas" aria-label=""></div>
+      <div class="grande" id="fAciertos"></div>
+      <p id="fTexto"></p>
+      <p id="fRecord"></p>
+      <div class="fila">
+        <button class="px-btn" id="bOtra">↻ Otra vez</button>
+        <button class="px-btn secundario" id="bMenu">Cambiar tema</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="motor.js"></script>
+<script>
+(function () {
+  'use strict';
+  /* Las preguntas, la respuesta correcta y la explicación salen del MOTOR del
+     Duelo de divisibilidad (motor.js). Aquí solo se muestran como pregunta
+     de 4 opciones. Fallar no quita vidas: se ve la explicación y se sigue. */
+  const Q = window.PichuRoyale;
+  const A = '../../assets/pichu-royale/';
+  const $ = (s) => document.querySelector(s);
+  const NPREG = 10;
+
+  const TEMAS = [
+    { id: 'div', nombre: 'Divisores', desc: '¿Cuántos divisores? · El intruso', tipos: ['cuantos', 'intruso'], enemigo: 'multiplax' },
+    { id: 'fac', nombre: 'Primos y potencias', desc: 'Reconstruye el número', tipos: ['reconstruye'], enemigo: 'primox' },
+    { id: 'mm', nombre: 'MCD y mcm', desc: 'Cálculo mental', tipos: ['mcd', 'mcm'], enemigo: 'multiplax' },
+    { id: 'mix', nombre: 'Mezcla', desc: 'Todo, con número secreto', tipos: ['cuantos', 'intruso', 'reconstruye', 'mcd', 'mcm', 'secreto'], enemigo: 'primox' }
+  ];
+  const NIVELES = [{ id: 0, nombre: 'Fácil', desc: 'Números pequeños' }, { id: 2, nombre: 'Medio', desc: 'Números más grandes' }];
+  const ENEMIGOS = { multiplax: 'Múltiplax', primox: 'Prímox' };
+  const HEROES_DEF = [
+    { id: 'hipatia', nombre: 'Hipatia' }, { id: 'ada_lovelace', nombre: 'Ada Lovelace' }, { id: 'emmy_noether', nombre: 'Emmy Noether' },
+    { id: 'sophie_germain', nombre: 'Sophie Germain' }, { id: 'gauss', nombre: 'Gauss' }, { id: 'fibonacci', nombre: 'Fibonacci' },
+    { id: 'ramanujan', nombre: 'Ramanujan' }, { id: 'al_juarismi', nombre: 'Al-Juarismi' }
+  ];
+  const ANIMO_OK = ['¡Eso es!', '¡Muy bien pensado!', '¡Directo al blanco!', '¡Imparable!', '¡Genial!'];
+  const ANIMO_KO = ['¡Casi! Lee la explicación.', 'Equivocarse también enseña.', 'Mira el porqué y a por la siguiente.', '¡Ánimo, la próxima es tuya!'];
+
+  let cfg = { tema: 'div', nivel: 0, heroe: 'hipatia' };
+  let rec = {};
+  try { cfg = Object.assign(cfg, JSON.parse(localStorage.getItem('pichu-div-facil-cfg') || '{}')); rec = JSON.parse(localStorage.getItem('pichu-div-facil-rec') || '{}'); } catch (e) { /* sin guardado */ }
+  const save = () => { try { localStorage.setItem('pichu-div-facil-cfg', JSON.stringify(cfg)); localStorage.setItem('pichu-div-facil-rec', JSON.stringify(rec)); } catch (e) {} };
+
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+  /* ---------- Menú ---------- */
+  function boton(cont, grupo, item, html) {
+    const b = document.createElement('button');
+    b.className = 'elegir'; b.type = 'button'; b.innerHTML = html;
+    b.setAttribute('aria-pressed', String(cfg[grupo] === item));
+    b.addEventListener('click', () => { cfg[grupo] = item; save(); pintarMenu(); });
+    cont.appendChild(b);
+  }
+  function pintarMenu() {
+    const t = $('#temas'), n = $('#niveles'), h = $('#heroes');
+    t.innerHTML = n.innerHTML = h.innerHTML = '';
+    TEMAS.forEach((x) => boton(t, 'tema', x.id, `<img src="${A}enemigos/${x.enemigo}.png" alt=""><span>${x.nombre}<small>${x.desc}</small></span>`));
+    NIVELES.forEach((x) => boton(n, 'nivel', x.id, `<span>${x.nombre}<small>${x.desc}</small></span>`));
+    HEROES_DEF.forEach((x) => boton(h, 'heroe', x.id, `<img src="${A}heroes/${x.id}.png" alt=""><span>${x.nombre}</span>`));
+  }
+
+  /* ---------- Preguntas a partir del motor ---------- */
+  function nuevaPregunta(tema) {
+    for (let intento = 0; intento < 20; intento++) {
+      const tipo = pick(tema.tipos);
+      const r = Q.GEN[tipo](cfg.nivel, Math.random);
+      r.tipo = tipo;
+      r.mano = r.valores.map((n, i) => ({ id: i + 1, n }));
+      const evalua = (n) => Q.evaluar(r, [{ id: 99, n }]);
+      const buenas = [...new Set(r.valores)].filter((n) => evalua(n).ok);
+      const malas = [...new Set(r.valores)].filter((n) => !evalua(n).ok);
+      if (buenas.length !== 1 || malas.length < 3) continue;
+      const opciones = shuffle([buenas[0], ...shuffle(malas).slice(0, 3)]);
+      // En pantalla hablamos de «número», no de «carta»
+      const texto = r.enunciado.replace(/\bcarta\b/g, 'número');
+      return { r, texto, opciones, correcta: buenas[0], evalua };
+    }
+    return null;
+  }
+
+  /* ---------- Partida ---------- */
+  let P = null;
+  function empezar() {
+    const tema = TEMAS.find((x) => x.id === cfg.tema);
+    P = { tema, n: 0, ok: 0, actual: null };
+    $('#eImg').src = A + 'enemigos/' + tema.enemigo + '.png';
+    $('#eImg').classList.remove('ko');
+    $('#eNombre').textContent = ENEMIGOS[tema.enemigo];
+    $('#eReto').textContent = tema.nombre + ' · ' + NIVELES.find((x) => x.id === cfg.nivel).nombre;
+    $('#hImg').src = A + 'heroes/' + cfg.heroe + '.png';
+    $('#hDice').textContent = '¡A por ' + ENEMIGOS[tema.enemigo] + '! Cada acierto le quita vida.';
+    mostrar('#sJuego');
+    siguiente();
+  }
+  function siguiente() {
+    if (P.n >= NPREG) return P.fin ? null : terminar();
+    P.actual = nuevaPregunta(P.tema);
+    P.respondida = false;
+    $('#cNum').textContent = (P.n + 1) + '/' + NPREG;
+    $('#cOk').textContent = P.ok;
+    $('#pTexto').innerHTML = P.actual.texto;
+    const box = $('#pResp'); box.innerHTML = '';
+    P.actual.opciones.forEach((v, i) => {
+      const b = document.createElement('button');
+      b.className = 'resp'; b.type = 'button'; b.dataset.v = v;
+      b.innerHTML = `${v}<span class="k">${i + 1}</span>`;
+      b.setAttribute('aria-label', `Respuesta ${i + 1}: ${v}`);
+      b.addEventListener('click', () => responder(v));
+      box.appendChild(b);
+    });
+    $('#fb').classList.add('oculto');
+    $('#filaSig').classList.add('oculto');
+    $('#bPista').disabled = false;
+    box.querySelector('.resp').focus({ preventScroll: true });
+  }
+  function responder(v) {
+    if (P.respondida) return;
+    P.respondida = true; P.n++;
+    const e = P.actual.evalua(v);
+    document.querySelectorAll('.resp').forEach((b) => {
+      b.disabled = true;
+      if (+b.dataset.v === P.actual.correcta) b.classList.add('bien');
+      else if (+b.dataset.v === v) b.classList.add('mal');
+    });
+    const fb = $('#fb');
+    fb.classList.remove('oculto', 'ok', 'ko');
+    if (e.ok) {
+      P.ok++;
+      fb.classList.add('ok'); $('#fbTit').textContent = '✔ ¡Correcto!'; $('#fbTxt').innerHTML = e.explicacion;
+      $('#hDice').textContent = pick(ANIMO_OK);
+      const img = $('#eImg'); img.classList.remove('golpe'); void img.offsetWidth; img.classList.add('golpe');
+    } else {
+      fb.classList.add('ko'); $('#fbTit').textContent = '✘ No es ' + v; $('#fbTxt').innerHTML = e.error;
+      $('#hDice').textContent = pick(ANIMO_KO);
+    }
+    $('#eVida').style.width = Math.max(0, 100 - P.ok * (100 / NPREG)) + '%';
+    $('#cOk').textContent = P.ok;
+    $('#bPista').disabled = true;
+    $('#filaSig').classList.remove('oculto');
+    $('#bSig').textContent = P.n >= NPREG ? 'Ver resultado ▶' : 'Siguiente ▶';
+    $('#bSig').focus({ preventScroll: true });
+  }
+  function terminar() {
+    P.fin = true;
+    const s = P.ok >= 9 ? 3 : P.ok >= 7 ? 2 : P.ok >= 5 ? 1 : 0;
+    const key = cfg.tema + '-' + cfg.nivel;
+    const nuevo = !(rec[key] >= P.ok);
+    if (nuevo) { rec[key] = P.ok; save(); }
+    $('#fImg').src = A + 'enemigos/' + P.tema.enemigo + '.png';
+    $('#fImg').className = P.ok >= NPREG / 2 ? 'ko' : '';
+    $('#fImg').style.filter = P.ok >= NPREG / 2 ? 'grayscale(1) brightness(.6)' : '';
+    $('#fTitulo').textContent = P.ok >= NPREG / 2 ? '¡Has derrotado a ' + ENEMIGOS[P.tema.enemigo] + '!' : ENEMIGOS[P.tema.enemigo] + ' resiste…';
+    $('#fEstrellas').innerHTML = [0, 1, 2].map((i) => `<span class="${i < s ? '' : 'off'}">★</span>`).join('');
+    $('#fEstrellas').setAttribute('aria-label', s + ' de 3 estrellas');
+    $('#fAciertos').textContent = P.ok + ' / ' + NPREG;
+    $('#fTexto').textContent = s === 3 ? '¡Dominas este tema! Prueba la dificultad media o el duelo de cartas.' : s >= 1 ? '¡Buen trabajo! Repite para conseguir más estrellas.' : 'Cada intento cuenta. Usa la pista y lee las explicaciones.';
+    $('#fRecord').textContent = nuevo ? '🏆 ¡Nuevo récord en este tema!' : 'Tu récord: ' + rec[key] + ' / ' + NPREG;
+    mostrar('#sFinal');
+  }
+  function mostrar(id) {
+    ['#sInicio', '#sJuego', '#sFinal'].forEach((s) => $(s).classList.toggle('oculto', s !== id));
+    window.scrollTo(0, 0);
+  }
+
+  $('#bEmpezar').addEventListener('click', empezar);
+  $('#bSig').addEventListener('click', siguiente);
+  $('#bOtra').addEventListener('click', empezar);
+  $('#bMenu').addEventListener('click', () => { pintarMenu(); mostrar('#sInicio'); });
+  $('#bPista').addEventListener('click', () => { $('#hDice').innerHTML = P.actual.r.pista; $('#bPista').disabled = true; });
+  document.addEventListener('keydown', (ev) => {
+    if ($('#sJuego').classList.contains('oculto')) return;
+    const k = +ev.key;
+    if (k >= 1 && k <= 4 && !P.respondida) { const b = document.querySelectorAll('.resp')[k - 1]; if (b) b.click(); }
+  });
+  pintarMenu();
+})();
+</script>
+</body>
+</html>

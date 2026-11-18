@@ -22,8 +22,8 @@
 
   /* Press Start 2P no dibuja bien las mayúsculas con tilde (Ó, Ú): solo para cifras y logotipos */
   --px-font-arcade: "Press Start 2P", ui-monospace, monospace;
-  --px-font-title: "Pixelify Sans", "Trebuchet MS", system-ui, sans-serif;
-  --px-font-body: "Pixelify Sans", "Trebuchet MS", system-ui, sans-serif;
+  --px-font-title: "Jersey 10", "Trebuchet MS", system-ui, sans-serif;
+  --px-font-body: "Jersey 10", "Trebuchet MS", system-ui, sans-serif;
 
   --px-u: 4px; /* unidad de píxel */
   --px-border: calc(var(--px-u) * 1);
@@ -88,5 +88,8 @@
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
 
-/* Pixelify Sans dibuja mal la ligadura "fi" (justificante): sin ligaduras */
+/* Ligaduras desactivadas por legibilidad: sin ligaduras */
 html, body, button, input, select { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
+
+/* Jersey 10 solo tiene un grosor: sin negrita sintética (emborrona los píxeles) */
+html { font-synthesis: none; }

@@ -14,7 +14,7 @@
   --crema-2: #d9c8ef;
   --mostaza: #f8bc49;
   --tinta: #fdf0d6;
-  --font: 'Pixelify Sans', 'Lato', system-ui, sans-serif;
+  --font: 'Jersey 10', 'Lato', system-ui, sans-serif;
   --radius: 0px;
 
   --px-panel: #3d2a60;
@@ -24,7 +24,7 @@
   --px-muted: #d9c8ef;
   /* Press Start 2P no dibuja bien Ó/Ú mayúsculas: solo para cifras y logotipos */
   --px-digits: 'Press Start 2P', ui-monospace, monospace;
-  --px-title: 'Pixelify Sans', 'Lato', system-ui, sans-serif;
+  --px-title: 'Jersey 10', 'Lato', system-ui, sans-serif;
 }
 
 html, body { background: var(--espresso-2); }
@@ -167,9 +167,12 @@ legend { color: var(--mostaza); font-family: var(--px-title); font-weight: 700; 
 .verify-out.ok { color: #8ee6c9; } .verify-out.ko { color: #ff9f9f; }
 .inbox-done { border-bottom-color: var(--px-lavanda); }
 
-/* Pixelify Sans dibuja mal la ligadura "fi" (justificante): sin ligaduras */
+/* Ligaduras desactivadas por legibilidad: sin ligaduras */
 html, body, button, input, select { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
 
 /* Menú: centrado si cabe; si no cabe (móviles bajos), empieza arriba y se puede desplazar sin cortar el botón de volver */
 #sMenu { align-items: flex-start; }
 #sMenu .menu-wrap { margin: auto 0; }
+
+/* Jersey 10 solo tiene un grosor: sin negrita sintética (emborrona los píxeles) */
+html { font-synthesis: none; }
