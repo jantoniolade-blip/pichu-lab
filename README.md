@@ -13,7 +13,7 @@ assets/pichu-royale/       Banco de recursos (héroes, enemigos, iconos, escenar
 juegos/<juego>/            Cada juego es un módulo independiente
   integer-ninja/            Números enteros (cortar frutas)
   divisibilidad/            Duelo de cartas + modo fácil sin cartas (facil.html)
-  fracciones/               Pizza Duel
+  fracciones/               Laboratorio πCHU (fracciones con Biología y Geología)
 shared/pixel-sprites.js     Sprites pixelados reutilizables
 
 Cada juego tiene su README con lo que se ha cambiado respecto al original.
