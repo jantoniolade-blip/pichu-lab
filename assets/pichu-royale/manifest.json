@@ -1,0 +1,521 @@
+{
+  "proyecto": "πCHU ROYALE",
+  "subtitulo": "La rebelión de los números",
+  "estilo": "Pixel art 16-bit, colores púrpura nocturno, dorado, lavanda y turquesa; contornos gruesos; interfaces en español.",
+  "paleta": {
+    "fondo": "#211736",
+    "panel": "#3D2A60",
+    "lavanda": "#A477D4",
+    "dorado": "#F8BC49",
+    "crema": "#FDF0D6",
+    "turquesa": "#6BC9C3",
+    "alerta": "#E46666"
+  },
+  "temas": [
+    {
+      "id": "naturales_potencias_raices",
+      "nombre": "Naturales, potencias y raíces",
+      "enemigos": [
+        "potenciator",
+        "radicosmico"
+      ]
+    },
+    {
+      "id": "divisibilidad",
+      "nombre": "Divisibilidad",
+      "enemigos": [
+        "multiplax",
+        "primox"
+      ]
+    },
+    {
+      "id": "numeros_enteros",
+      "nombre": "Números enteros",
+      "enemigos": [
+        "negatron",
+        "parentesis_maldito"
+      ]
+    },
+    {
+      "id": "fracciones",
+      "nombre": "Fracciones",
+      "enemigos": [
+        "denominadoron",
+        "simplifract"
+      ]
+    },
+    {
+      "id": "proporcionalidad",
+      "nombre": "Proporcionalidad",
+      "enemigos": [
+        "senor_escala",
+        "porcentajin"
+      ]
+    },
+    {
+      "id": "algebra",
+      "nombre": "Álgebra",
+      "enemigos": [
+        "incognita_x",
+        "polinomio_mutante"
+      ]
+    },
+    {
+      "id": "ecuaciones",
+      "nombre": "Ecuaciones",
+      "enemigos": [
+        "equilibrius",
+        "despejador_oscuro"
+      ]
+    },
+    {
+      "id": "funciones",
+      "nombre": "Funciones",
+      "enemigos": [
+        "pendientor",
+        "parabola_vortice"
+      ]
+    },
+    {
+      "id": "estadistica",
+      "nombre": "Estadística",
+      "enemigos": [
+        "mediana_traviesa",
+        "grafico_tramposo"
+      ]
+    },
+    {
+      "id": "probabilidad",
+      "nombre": "Probabilidad",
+      "enemigos": [
+        "dado_caotico",
+        "ruleta_imposible"
+      ]
+    }
+  ],
+  "heroes": [
+    {
+      "id": "hipatia",
+      "nombre": "Hipatia de Alejandría",
+      "periodo": "c. 355–415",
+      "especialidad": "Geometría y razonamiento",
+      "habilidad": "Escudo geométrico",
+      "efecto_propuesto": "Crea una figura protectora que permite un segundo intento.",
+      "imagen": "heroes/hipatia.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    },
+    {
+      "id": "ada_lovelace",
+      "nombre": "Ada Lovelace",
+      "periodo": "1815–1852",
+      "especialidad": "Algoritmos",
+      "habilidad": "Código maestro",
+      "efecto_propuesto": "Ofrece una pista sobre el siguiente paso del problema.",
+      "imagen": "heroes/ada_lovelace.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    },
+    {
+      "id": "emmy_noether",
+      "nombre": "Emmy Noether",
+      "periodo": "1882–1935",
+      "especialidad": "Álgebra y estructuras",
+      "habilidad": "Patrón oculto",
+      "efecto_propuesto": "Destaca una regularidad en el reto.",
+      "imagen": "heroes/emmy_noether.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    },
+    {
+      "id": "sophie_germain",
+      "nombre": "Sophie Germain",
+      "periodo": "1776–1831",
+      "especialidad": "Teoría de números",
+      "habilidad": "Primo protector",
+      "efecto_propuesto": "Descarta una opción incorrecta en un reto de divisibilidad.",
+      "imagen": "heroes/sophie_germain.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    },
+    {
+      "id": "gauss",
+      "nombre": "Carl Friedrich Gauss",
+      "periodo": "1777–1855",
+      "especialidad": "Aritmética y estadística",
+      "habilidad": "Cálculo relámpago",
+      "efecto_propuesto": "Aumenta el tiempo de respuesta en una ronda.",
+      "imagen": "heroes/gauss.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    },
+    {
+      "id": "fibonacci",
+      "nombre": "Leonardo de Pisa (Fibonacci)",
+      "periodo": "c. 1170–c. 1250",
+      "especialidad": "Sucesiones y patrones",
+      "habilidad": "Cadena Fibonacci",
+      "efecto_propuesto": "Encadena dos respuestas correctas para obtener un multiplicador.",
+      "imagen": "heroes/fibonacci.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    },
+    {
+      "id": "ramanujan",
+      "nombre": "Srinivasa Ramanujan",
+      "periodo": "1887–1920",
+      "especialidad": "Números y series",
+      "habilidad": "Intuición numérica",
+      "efecto_propuesto": "Muestra una pista numérica adicional.",
+      "imagen": "heroes/ramanujan.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    },
+    {
+      "id": "al_juarismi",
+      "nombre": "Al-Juarismi",
+      "periodo": "c. 780–c. 850",
+      "especialidad": "Álgebra y ecuaciones",
+      "habilidad": "Despeje maestro",
+      "efecto_propuesto": "Simplifica visualmente un paso de una ecuación.",
+      "imagen": "heroes/al_juarismi.png",
+      "tipo": "personaje_jugable",
+      "sprite_actual": "retrato/idle; pendiente animación"
+    }
+  ],
+  "enemigos": [
+    {
+      "id": "potenciator",
+      "nombre": "Potenciator",
+      "tema_id": "naturales_potencias_raices",
+      "tema": "Naturales, potencias y raíces",
+      "rol": "enemigo",
+      "reto": "Acierta potencias y aplica propiedades.",
+      "imagen": "enemigos/potenciator.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "radicosmico",
+      "nombre": "Radicósmico",
+      "tema_id": "naturales_potencias_raices",
+      "tema": "Naturales, potencias y raíces",
+      "rol": "minijefe",
+      "reto": "Calcula raíces exactas y estima resultados.",
+      "imagen": "enemigos/radicosmico.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "multiplax",
+      "nombre": "Múltiplax",
+      "tema_id": "divisibilidad",
+      "tema": "Divisibilidad",
+      "rol": "enemigo",
+      "reto": "Busca múltiplos y divisores.",
+      "imagen": "enemigos/multiplax.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "primox",
+      "nombre": "Prímox",
+      "tema_id": "divisibilidad",
+      "tema": "Divisibilidad",
+      "rol": "minijefe",
+      "reto": "Distingue números primos y compuestos.",
+      "imagen": "enemigos/primox.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "negatron",
+      "nombre": "Negatrón",
+      "tema_id": "numeros_enteros",
+      "tema": "Números enteros",
+      "rol": "enemigo",
+      "reto": "Resuelve operaciones de enteros con signos.",
+      "imagen": "enemigos/negatron.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "parentesis_maldito",
+      "nombre": "Paréntesis Maldito",
+      "tema_id": "numeros_enteros",
+      "tema": "Números enteros",
+      "rol": "minijefe",
+      "reto": "Aplica correctamente las reglas de signos y paréntesis.",
+      "imagen": "enemigos/parentesis_maldito.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "denominadoron",
+      "nombre": "Denominadorón",
+      "tema_id": "fracciones",
+      "tema": "Fracciones",
+      "rol": "enemigo",
+      "reto": "Encuentra denominadores comunes y compara fracciones.",
+      "imagen": "enemigos/denominadoron.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "simplifract",
+      "nombre": "Simplifract",
+      "tema_id": "fracciones",
+      "tema": "Fracciones",
+      "rol": "minijefe",
+      "reto": "Simplifica y opera con fracciones.",
+      "imagen": "enemigos/simplifract.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "senor_escala",
+      "nombre": "Señor Escala",
+      "tema_id": "proporcionalidad",
+      "tema": "Proporcionalidad",
+      "rol": "enemigo",
+      "reto": "Resuelve escalas, tablas y razones.",
+      "imagen": "enemigos/senor_escala.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "porcentajin",
+      "nombre": "Porcentajín",
+      "tema_id": "proporcionalidad",
+      "tema": "Proporcionalidad",
+      "rol": "minijefe",
+      "reto": "Calcula porcentajes, aumentos y descuentos.",
+      "imagen": "enemigos/porcentajin.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "incognita_x",
+      "nombre": "Incógnita X",
+      "tema_id": "algebra",
+      "tema": "Álgebra",
+      "rol": "enemigo",
+      "reto": "Traduce expresiones al lenguaje algebraico.",
+      "imagen": "enemigos/incognita_x.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "polinomio_mutante",
+      "nombre": "Polinomio Mutante",
+      "tema_id": "algebra",
+      "tema": "Álgebra",
+      "rol": "minijefe",
+      "reto": "Reduce términos semejantes y opera expresiones.",
+      "imagen": "enemigos/polinomio_mutante.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "equilibrius",
+      "nombre": "Equilibrius",
+      "tema_id": "ecuaciones",
+      "tema": "Ecuaciones",
+      "rol": "enemigo",
+      "reto": "Conserva el equilibrio al resolver ecuaciones.",
+      "imagen": "enemigos/equilibrius.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "despejador_oscuro",
+      "nombre": "Despejador Oscuro",
+      "tema_id": "ecuaciones",
+      "tema": "Ecuaciones",
+      "rol": "minijefe",
+      "reto": "Despeja la incógnita paso a paso.",
+      "imagen": "enemigos/despejador_oscuro.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "pendientor",
+      "nombre": "Pendientor",
+      "tema_id": "funciones",
+      "tema": "Funciones",
+      "rol": "enemigo",
+      "reto": "Interpreta pendiente y variaciones en gráficos.",
+      "imagen": "enemigos/pendientor.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "parabola_vortice",
+      "nombre": "Parábola Vórtice",
+      "tema_id": "funciones",
+      "tema": "Funciones",
+      "rol": "minijefe",
+      "reto": "Lee puntos y comprende gráficas de funciones.",
+      "imagen": "enemigos/parabola_vortice.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "mediana_traviesa",
+      "nombre": "Mediana Traviesa",
+      "tema_id": "estadistica",
+      "tema": "Estadística",
+      "rol": "enemigo",
+      "reto": "Calcula media, mediana y moda.",
+      "imagen": "enemigos/mediana_traviesa.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "grafico_tramposo",
+      "nombre": "Gráfico Tramposo",
+      "tema_id": "estadistica",
+      "tema": "Estadística",
+      "rol": "minijefe",
+      "reto": "Interpreta y detecta errores en gráficos.",
+      "imagen": "enemigos/grafico_tramposo.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "dado_caotico",
+      "nombre": "Dado Caótico",
+      "tema_id": "probabilidad",
+      "tema": "Probabilidad",
+      "rol": "enemigo",
+      "reto": "Calcula probabilidades simples con dados.",
+      "imagen": "enemigos/dado_caotico.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    },
+    {
+      "id": "ruleta_imposible",
+      "nombre": "Ruleta Imposible",
+      "tema_id": "probabilidad",
+      "tema": "Probabilidad",
+      "rol": "minijefe",
+      "reto": "Razona sobre sucesos probables, seguros e imposibles.",
+      "imagen": "enemigos/ruleta_imposible.png",
+      "sprite_actual": "idle estático; pendiente animación"
+    }
+  ],
+  "escenarios": [
+    {
+      "id": "biblioteca",
+      "nombre": "Aula o biblioteca",
+      "imagen": "escenarios/biblioteca.png",
+      "uso": "miniatura o concepto; crear fondo de juego adaptado a pantalla"
+    },
+    {
+      "id": "ciudad_clasica",
+      "nombre": "Ciudad clásica",
+      "imagen": "escenarios/ciudad_clasica.png",
+      "uso": "miniatura o concepto; crear fondo de juego adaptado a pantalla"
+    },
+    {
+      "id": "laboratorio",
+      "nombre": "Laboratorio matemático",
+      "imagen": "escenarios/laboratorio.png",
+      "uso": "miniatura o concepto; crear fondo de juego adaptado a pantalla"
+    },
+    {
+      "id": "mundo_digital",
+      "nombre": "Mundo digital",
+      "imagen": "escenarios/mundo_digital.png",
+      "uso": "miniatura o concepto; crear fondo de juego adaptado a pantalla"
+    }
+  ],
+  "iconos": [
+    {
+      "id": "terreno_cesped",
+      "imagen": "iconos/terreno_cesped.png"
+    },
+    {
+      "id": "terreno_tierra",
+      "imagen": "iconos/terreno_tierra.png"
+    },
+    {
+      "id": "terreno_roca",
+      "imagen": "iconos/terreno_roca.png"
+    },
+    {
+      "id": "terreno_ladrillo",
+      "imagen": "iconos/terreno_ladrillo.png"
+    },
+    {
+      "id": "agua",
+      "imagen": "iconos/agua.png"
+    },
+    {
+      "id": "lava",
+      "imagen": "iconos/lava.png"
+    },
+    {
+      "id": "hielo",
+      "imagen": "iconos/hielo.png"
+    },
+    {
+      "id": "estrella",
+      "imagen": "iconos/estrella.png"
+    },
+    {
+      "id": "trofeo",
+      "imagen": "iconos/trofeo.png"
+    },
+    {
+      "id": "calendario",
+      "imagen": "iconos/calendario.png"
+    },
+    {
+      "id": "libro",
+      "imagen": "iconos/libro.png"
+    },
+    {
+      "id": "engranaje",
+      "imagen": "iconos/engranaje.png"
+    },
+    {
+      "id": "tienda",
+      "imagen": "iconos/tienda.png"
+    },
+    {
+      "id": "llave",
+      "imagen": "iconos/llave.png"
+    },
+    {
+      "id": "candado",
+      "imagen": "iconos/candado.png"
+    },
+    {
+      "id": "cofre",
+      "imagen": "iconos/cofre.png"
+    },
+    {
+      "id": "pocion_azul",
+      "imagen": "iconos/pocion_azul.png"
+    },
+    {
+      "id": "pocion_roja",
+      "imagen": "iconos/pocion_roja.png"
+    },
+    {
+      "id": "pocion_verde",
+      "imagen": "iconos/pocion_verde.png"
+    },
+    {
+      "id": "corazon",
+      "imagen": "iconos/corazon.png"
+    },
+    {
+      "id": "moneda",
+      "imagen": "iconos/moneda.png"
+    },
+    {
+      "id": "diamante",
+      "imagen": "iconos/diamante.png"
+    },
+    {
+      "id": "escudo",
+      "imagen": "iconos/escudo.png"
+    },
+    {
+      "id": "medalla",
+      "imagen": "iconos/medalla.png"
+    },
+    {
+      "id": "corona",
+      "imagen": "iconos/corona.png"
+    },
+    {
+      "id": "misiones",
+      "imagen": "iconos/misiones.png"
+    }
+  ],
+  "notas": "Sprites extraídos y limpiados del arte conceptual: imágenes estáticas, no spritesheets de movimiento. Revisar los bordes antes de producción. No contiene alumnado ni datos personales."
+}

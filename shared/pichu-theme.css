@@ -1,0 +1,92 @@
+/* =========================================================
+   πCHU ROYALE — tema común pixel art 16-bit
+   Paleta tomada de assets/pichu-royale/manifest.json
+   Se carga en la portada y en cada juego. Solo aspecto visual.
+   ========================================================= */
+:root {
+  --px-bg: #211736;
+  --px-bg-deep: #160f26;
+  --px-panel: #3d2a60;
+  --px-panel-2: #4f3878;
+  --px-lavanda: #a477d4;
+  --px-dorado: #f8bc49;
+  --px-dorado-osc: #c98a1f;
+  --px-crema: #fdf0d6;
+  --px-turquesa: #6bc9c3;
+  --px-turquesa-osc: #3e8f8a;
+  --px-alerta: #e46666;
+  --px-alerta-osc: #a63c3c;
+  --px-verde: #5fbf5a;
+  --px-verde-osc: #2f7d33;
+  --px-negro: #120b1f;
+
+  /* Press Start 2P no dibuja bien las mayúsculas con tilde (Ó, Ú): solo para cifras y logotipos */
+  --px-font-arcade: "Press Start 2P", ui-monospace, monospace;
+  --px-font-title: "Pixelify Sans", "Trebuchet MS", system-ui, sans-serif;
+  --px-font-body: "Pixelify Sans", "Trebuchet MS", system-ui, sans-serif;
+
+  --px-u: 4px; /* unidad de píxel */
+  --px-border: calc(var(--px-u) * 1);
+}
+
+/* Contorno pixelado: borde grueso + esquinas recortadas + sombra dura */
+.px-box {
+  background: var(--px-panel);
+  color: var(--px-crema);
+  border: var(--px-border) solid var(--px-negro);
+  box-shadow:
+    inset calc(var(--px-u) * -1) calc(var(--px-u) * -1) 0 rgba(0, 0, 0, .35),
+    inset var(--px-u) var(--px-u) 0 rgba(255, 255, 255, .12),
+    var(--px-u) var(--px-u) 0 var(--px-negro);
+  clip-path: polygon(
+    0 var(--px-u), var(--px-u) var(--px-u), var(--px-u) 0,
+    calc(100% - var(--px-u)) 0, calc(100% - var(--px-u)) var(--px-u), 100% var(--px-u),
+    100% calc(100% - var(--px-u)), calc(100% - var(--px-u)) calc(100% - var(--px-u)), calc(100% - var(--px-u)) 100%,
+    var(--px-u) 100%, var(--px-u) calc(100% - var(--px-u)), 0 calc(100% - var(--px-u))
+  );
+}
+
+.px-title {
+  font-family: var(--px-font-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--px-dorado);
+  text-shadow: 3px 3px 0 var(--px-negro), -1px -1px 0 var(--px-negro), 1px -1px 0 var(--px-negro), -1px 1px 0 var(--px-negro);
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.px-btn {
+  font-family: var(--px-font-title);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--px-negro);
+  background: var(--px-dorado);
+  border: var(--px-border) solid var(--px-negro);
+  box-shadow:
+    inset -4px -4px 0 var(--px-dorado-osc),
+    inset 4px 4px 0 rgba(255, 255, 255, .45),
+    0 4px 0 var(--px-negro);
+  padding: 14px 18px;
+  min-height: 48px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform .06s steps(1), box-shadow .06s steps(1);
+  -webkit-tap-highlight-color: transparent;
+}
+.px-btn:hover { filter: brightness(1.08); }
+.px-btn:active { transform: translateY(4px); box-shadow: inset -4px -4px 0 var(--px-dorado-osc), inset 4px 4px 0 rgba(255,255,255,.45), 0 0 0 var(--px-negro); }
+.px-btn:focus-visible { outline: 4px dashed var(--px-turquesa); outline-offset: 4px; }
+
+.px-sprite, img.px-sprite {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+/* Pixelify Sans dibuja mal la ligadura "fi" (justificante): sin ligaduras */
+html, body, button, input, select { font-variant-ligatures: none; font-feature-settings: "liga" 0, "clig" 0; }
