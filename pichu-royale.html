@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#211736">
+<title>πCHU ROYALE — La rebelión de los números</title>
+<link rel="icon" href="assets/pichu-royale/iconos/corona.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Jersey+10&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/pichu-theme.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    background: var(--px-bg);
+    background-image:
+      linear-gradient(rgba(33,23,54,.86), rgba(22,15,38,.96)),
+      url("assets/pichu-royale/escenarios/mundo_digital.png");
+    background-size: cover; background-position: center; background-attachment: fixed;
+    color: var(--px-crema);
+    font-family: var(--px-font-body);
+    font-size: 22px;
+    padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  }
+  main { max-width: 1040px; margin: 0 auto; }
+
+  header.hero { text-align: center; padding: 8px 0 20px; }
+  header.hero img.logo { width: min(320px, 78vw); height: auto; display: block; margin: 0 auto 8px; border: 4px solid var(--px-negro); box-shadow: 4px 4px 0 var(--px-negro); }
+  header.hero h1 { font-family: var(--px-font-arcade); font-weight: 400; text-transform: none; font-size: clamp(18px, 5vw, 30px); margin: 12px 0 6px; }
+  header.hero p.sub { font-family: var(--px-font-title); font-weight: 700; letter-spacing: 1px; font-size: clamp(18px, 4.4vw, 22px); color: var(--px-turquesa); margin: 0; line-height: 1.6; }
+
+  h2.section { font-size: clamp(24px, 5vw, 28px); margin: 28px 0 14px; }
+
+  .games { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+  .card { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+  .card .top { display: flex; gap: 12px; align-items: center; }
+  .card .top img { width: 72px; height: 72px; flex: none; background: var(--px-bg-deep); border: 4px solid var(--px-negro); }
+  .card h3 { font-family: var(--px-font-title); font-weight: 700; font-size: 26px; line-height: 1.5; margin: 0; color: var(--px-dorado); }
+  .card .tema { font-size: 19px; color: var(--px-turquesa); margin: 4px 0 0; }
+  .card p.desc { margin: 0; line-height: 1.35; }
+  .card .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .card a.px-btn { text-decoration: none; display: inline-flex; align-items: center; }
+  .card a.px-btn.alt { background: var(--px-crema); box-shadow: inset -4px -4px 0 #cdbb98, inset 4px 4px 0 #fff, 0 4px 0 var(--px-negro); }
+  .card.locked { opacity: .62; }
+  .card.locked .top img { filter: grayscale(.7) brightness(.8); }
+  .badge { font-family: var(--px-font-title); font-weight: 700; font-size: 17px; padding: 6px 8px; background: var(--px-bg-deep); border: 3px solid var(--px-negro); color: var(--px-lavanda); }
+
+  .heroes { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px; }
+  .heroe { padding: 8px; text-align: center; }
+  .heroe img { width: 100%; height: auto; aspect-ratio: 1; display: block; }
+  .heroe b { display: block; font-size: 19px; line-height: 1.15; margin-top: 4px; }
+  .heroe span { display: block; font-size: 16px; color: var(--px-turquesa); }
+
+  footer { text-align: center; font-size: 18px; color: var(--px-lavanda); margin-top: 32px; }
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <img class="logo px-sprite" src="assets/pichu-royale/identidad/logo_pichu_royale.png" alt="Logo de πCHU ROYALE" width="392" height="313">
+    <h1 class="px-title">πCHU ROYALE</h1>
+    <p class="sub">LA REBELIÓN DE LOS NÚMEROS · MATEMÁTICAS 1.º ESO</p>
+  </header>
+
+  <h2 class="section px-title">▶ ELIGE TU MISIÓN</h2>
+  <section class="games" id="games" aria-label="Juegos"></section>
+
+  <h2 class="section px-title">★ HÉROES MATEMÁTICOS</h2>
+  <section class="heroes" id="heroes" aria-label="Héroes"></section>
+
+  <footer>πCHU ROYALE · pichu-lab</footer>
+</main>
+
+<script>
+  // Catálogo de juegos. Cada juego es un módulo independiente en /juegos/<id>/
+  // Para añadir un juego: copiar su carpeta y añadir una entrada aquí.
+  const JUEGOS = [
+    { id: "integer-ninja", titulo: "Integer Ninja", tema: "Números enteros", enemigo: "negatron",
+      desc: "Corta frutas con números enteros, alcanza objetivos exactos y derrota al Rey de los Signos.", activo: true },
+    { id: "divisibilidad", titulo: "Reino de la divisibilidad", tema: "Divisibilidad", enemigo: "primox",
+      desc: "Divisores, primos, factorización, MCD y mcm. Elige el modo fácil (una pregunta cada vez) o el duelo de cartas.",
+      activo: true, botones: [["facil.html", "▶ Modo fácil"], ["", "⚔ Duelo de cartas"]] },
+    { id: "fracciones", titulo: "Laboratorio πCHU", tema: "Fracciones", enemigo: "denominadoron",
+      desc: "Fracciones con Biología y Geología: colorea, mide en la probeta, simplifica y resuelve problemas de la Tierra, la célula y los seres vivos.", activo: true }
+  ];
+
+  const A = "assets/pichu-royale/";
+  const games = document.getElementById("games");
+  for (const j of JUEGOS) {
+    const el = document.createElement("article");
+    el.className = "card px-box" + (j.activo ? "" : " locked");
+    el.innerHTML = `
+      <div class="top">
+        <img class="px-sprite" src="${A}enemigos/${j.enemigo}.png" alt="" width="72" height="72" loading="lazy">
+        <div><h3>${j.titulo}</h3><p class="tema">${j.tema}</p></div>
+      </div>
+      <p class="desc">${j.desc}</p>
+      <div class="foot">
+        ${!j.activo
+          ? `<span class="badge">🔒 PRÓXIMAMENTE</span>`
+          : (j.botones || [["", "▶ Jugar"]]).map(([ruta, txt], i) =>
+              `<a class="px-btn${i ? " alt" : ""}" href="juegos/${j.id}/${ruta}">${txt}</a>`).join("")}
+      </div>`;
+    games.appendChild(el);
+  }
+
+  // Héroes desde el manifest del banco de recursos (única fuente de nombres)
+  fetch(A + "manifest.json").then(r => r.json()).then(m => {
+    const box = document.getElementById("heroes");
+    for (const h of m.heroes) {
+      const el = document.createElement("div");
+      el.className = "heroe px-box";
+      el.title = `${h.nombre} (${h.periodo}) — ${h.habilidad}: ${h.efecto_propuesto}`;
+      el.innerHTML = `<img class="px-sprite" src="${A}${h.imagen}" alt="${h.nombre}" width="256" height="256" loading="lazy">
+        <b>${h.nombre.split(" de ")[0]}</b><span>${h.especialidad}</span>`;
+      box.appendChild(el);
+    }
+  }).catch(() => {});
+</script>
+</body>
+</html>

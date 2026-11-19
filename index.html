@@ -3,122 +3,360 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#211736">
-<title>πCHU ROYALE — La rebelión de los números</title>
-<link rel="icon" href="assets/pichu-royale/iconos/corona.png">
+<meta name="theme-color" content="#0c1424">
+<meta name="description" content="GALOIS LEGACY · El legado de los matemáticos. Aventura RPG de Matemáticas de 1.º ESO en pixel art.">
+<title>Galois Legacy</title>
+<link rel="icon" href="assets/galois/identidad/logo-galois-legacy.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Jersey+10&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="shared/pichu-theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared/galois-theme.css">
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
     min-height: 100vh; min-height: 100dvh;
-    background: var(--px-bg);
+    background: var(--gl-noche);
     background-image:
-      linear-gradient(rgba(33,23,54,.86), rgba(22,15,38,.96)),
-      url("assets/pichu-royale/escenarios/mundo_digital.png");
-    background-size: cover; background-position: center; background-attachment: fixed;
-    color: var(--px-crema);
-    font-family: var(--px-font-body);
+      radial-gradient(ellipse at 50% -10%, rgba(154,107,224,.35), transparent 60%),
+      linear-gradient(180deg, #1a1838 0%, var(--gl-noche) 55%);
+    background-attachment: fixed;
+    color: var(--gl-crema);
+    font-family: var(--gl-font);
     font-size: 22px;
+    line-height: 1.25;
     padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
   }
-  main { max-width: 1040px; margin: 0 auto; }
+  main { max-width: 1080px; margin: 0 auto; }
+  [hidden] { display: none !important; }
+  p { margin: 0; }
 
-  header.hero { text-align: center; padding: 8px 0 20px; }
-  header.hero img.logo { width: min(320px, 78vw); height: auto; display: block; margin: 0 auto 8px; border: 4px solid var(--px-negro); box-shadow: 4px 4px 0 var(--px-negro); }
-  header.hero h1 { font-family: var(--px-font-arcade); font-weight: 400; text-transform: none; font-size: clamp(18px, 5vw, 30px); margin: 12px 0 6px; }
-  header.hero p.sub { font-family: var(--px-font-title); font-weight: 700; letter-spacing: 1px; font-size: clamp(18px, 4.4vw, 22px); color: var(--px-turquesa); margin: 0; line-height: 1.6; }
+  /* Estrellas del cielo (decorativas, pixeladas) */
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+    background-image:
+      radial-gradient(2px 2px at 12% 18%, #fff8 50%, transparent 51%),
+      radial-gradient(2px 2px at 78% 12%, #fff8 50%, transparent 51%),
+      radial-gradient(2px 2px at 64% 30%, #fff6 50%, transparent 51%),
+      radial-gradient(2px 2px at 30% 8%, #fff6 50%, transparent 51%),
+      radial-gradient(2px 2px at 90% 40%, #fff5 50%, transparent 51%);
+  }
 
-  h2.section { font-size: clamp(24px, 5vw, 28px); margin: 28px 0 14px; }
+  /* ---------- HUD (matemático elegido) ---------- */
+  .hud { display: flex; align-items: center; gap: 10px; padding: 8px 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .hud img { width: 52px; height: 52px; background: var(--gl-noche-2); border: 3px solid var(--gl-negro); }
+  .hud .quien { flex: 1 1 180px; min-width: 0; }
+  .hud .quien b { display: block; font-weight: 400; font-size: 24px; color: var(--gl-oro); }
+  .hud .quien span { font-size: 18px; color: var(--gl-texto-suave); }
+  .hud nav { display: flex; gap: 8px; flex-wrap: wrap; }
+  .hud nav .gl-btn { font-size: 20px; padding: 6px 12px 8px; }
 
-  .games { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 18px; }
-  .card { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-  .card .top { display: flex; gap: 12px; align-items: center; }
-  .card .top img { width: 72px; height: 72px; flex: none; background: var(--px-bg-deep); border: 4px solid var(--px-negro); }
-  .card h3 { font-family: var(--px-font-title); font-weight: 700; font-size: 26px; line-height: 1.5; margin: 0; color: var(--px-dorado); }
-  .card .tema { font-size: 19px; color: var(--px-turquesa); margin: 4px 0 0; }
-  .card p.desc { margin: 0; line-height: 1.35; }
-  .card .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-  .card a.px-btn { text-decoration: none; display: inline-flex; align-items: center; }
-  .card a.px-btn.alt { background: var(--px-crema); box-shadow: inset -4px -4px 0 #cdbb98, inset 4px 4px 0 #fff, 0 4px 0 var(--px-negro); }
-  .card.locked { opacity: .62; }
-  .card.locked .top img { filter: grayscale(.7) brightness(.8); }
-  .badge { font-family: var(--px-font-title); font-weight: 700; font-size: 17px; padding: 6px 8px; background: var(--px-bg-deep); border: 3px solid var(--px-negro); color: var(--px-lavanda); }
+  /* ---------- Pantalla de inicio ---------- */
+  #inicio { text-align: center; padding-top: 2vh; }
+  #inicio .logo { width: min(760px, 100%); height: auto; display: block; margin: 0 auto; }
+  #inicio .sub { font-size: clamp(22px, 5vw, 32px); margin: 14px 0 10px; }
+  #inicio .lema { font-size: clamp(20px, 4.4vw, 26px); color: var(--gl-oro-claro); letter-spacing: 2px; text-transform: uppercase; margin: 6px 0 22px; }
+  #inicio .lema span + span::before { content: " · "; color: var(--gl-violeta); }
+  .acciones { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 26px; }
+  .acciones .gl-btn { font-size: 28px; padding: 12px 22px 14px; }
+  .intro { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 16px; text-align: left; }
+  .intro .gl-box { padding: 16px 18px 18px; }
+  .intro h2 { margin: 0 0 8px; font-size: 26px; }
+  .intro p { color: var(--gl-crema); font-size: 21px; }
+  .equipo { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; margin-top: 12px; }
+  .equipo img { width: 48px; height: 48px; background: var(--gl-noche-2); border: 3px solid var(--gl-negro); }
 
-  .heroes { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 12px; }
-  .heroe { padding: 8px; text-align: center; }
-  .heroe img { width: 100%; height: auto; aspect-ratio: 1; display: block; }
-  .heroe b { display: block; font-size: 19px; line-height: 1.15; margin-top: 4px; }
-  .heroe span { display: block; font-size: 16px; color: var(--px-turquesa); }
+  /* ---------- Selección de matemático ---------- */
+  .cabecera { text-align: center; margin: 4px 0 18px; }
+  .cabecera .gl-cinta { font-size: clamp(22px, 5vw, 30px); }
+  .cabecera p { margin-top: 10px; color: var(--gl-texto-suave); }
+  .seleccion { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+  .rejilla { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .ficha {
+    font: inherit; color: inherit; cursor: pointer; padding: 8px 6px 10px; text-align: center;
+    background: var(--gl-panel); border: 4px solid var(--gl-negro);
+    box-shadow: inset 0 0 0 2px var(--gl-panel-2), 4px 4px 0 var(--gl-negro);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ficha img { width: 100%; height: auto; aspect-ratio: 1; display: block; background: var(--gl-noche-2); }
+  .ficha b { display: block; font-weight: 400; font-size: 21px; margin-top: 4px; color: var(--gl-crema); }
+  .ficha:hover { box-shadow: inset 0 0 0 2px var(--gl-oro-osc), 4px 4px 0 var(--gl-negro); }
+  .ficha[aria-pressed="true"] { background: var(--gl-panel-2); box-shadow: inset 0 0 0 3px var(--gl-oro), 4px 4px 0 var(--gl-negro); }
+  .ficha[aria-pressed="true"] b { color: var(--gl-oro); }
+  .aliados-t { margin: 18px 0 8px; font-size: 22px; color: var(--gl-texto-suave); }
+  .rejilla.aliados .ficha { opacity: .92; }
+  .detalle { padding: 16px 18px 18px; position: sticky; top: 12px; }
+  .detalle .retrato { display: flex; gap: 14px; align-items: center; }
+  .detalle .retrato img { width: 112px; height: 112px; flex: none; background: var(--gl-noche-2); border: 4px solid var(--gl-negro); }
+  .detalle h2 { margin: 0; font-size: 30px; }
+  .detalle .meta { color: var(--gl-texto-suave); font-size: 19px; }
+  .detalle .aporte { margin: 14px 0; font-size: 21px; }
+  .habilidad { background: var(--gl-noche-2); border: 3px solid var(--gl-violeta-osc); padding: 10px 12px; }
+  .habilidad b { font-weight: 400; color: var(--gl-violeta); font-size: 23px; display: block; }
+  .habilidad small { display: block; color: var(--gl-texto-suave); font-size: 17px; margin-top: 4px; }
+  .detalle .gl-btn { width: 100%; margin-top: 14px; font-size: 26px; }
 
-  footer { text-align: center; font-size: 18px; color: var(--px-lavanda); margin-top: 32px; }
+  /* ---------- Mapa ---------- */
+  .mapa-wrap { padding: 10px; }
+  .mapa { position: relative; width: 100%; aspect-ratio: 192 / 120; background: #1e4c92; overflow: hidden; }
+  .mapa > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .marca {
+    position: absolute; transform: translate(-50%, -50%);
+    min-width: 48px; min-height: 48px; padding: 0 8px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    font: inherit; font-size: 28px; line-height: 1; color: #fff; text-shadow: 2px 2px 0 var(--gl-negro);
+    background: var(--gl-azul-osc); border: 4px solid var(--gl-negro); border-radius: 0;
+    box-shadow: inset 0 0 0 2px var(--gl-oro), 3px 3px 0 var(--gl-negro);
+    cursor: pointer; text-decoration: none; -webkit-tap-highlight-color: transparent;
+  }
+  .marca .nom { font-size: 18px; display: none; white-space: nowrap; }
+  .marca.inicio { background: var(--gl-oro); color: var(--gl-negro); text-shadow: none; }
+  .marca.bloq { background: #3a3f52; box-shadow: inset 0 0 0 2px #707792, 3px 3px 0 var(--gl-negro); color: #c8cbe0; }
+  .marca[aria-current="true"] { box-shadow: inset 0 0 0 3px var(--gl-oro-claro), 0 0 0 4px var(--gl-oro), 3px 3px 0 var(--gl-negro); }
+  .marca.inicio .heroe-mini { width: 32px; height: 32px; }
+  @media (min-width: 760px) { .marca .nom { display: inline; } }
+  @keyframes latido { 50% { transform: translate(-50%, calc(-50% - 4px)); } }
+  .marca:not(.bloq):not(.inicio) { animation: latido 1.2s steps(2) infinite; }
+  .marca:hover, .marca:focus-visible { animation-play-state: paused; z-index: 2; }
+
+  .reinos { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 16px; margin-top: 18px; }
+  .reino { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; scroll-margin-top: 16px; }
+  .reino .top { display: flex; gap: 12px; align-items: center; }
+  .reino .sim { width: 56px; height: 56px; flex: none; display: grid; place-items: center; font-size: 36px; color: #fff; text-shadow: 2px 2px 0 var(--gl-negro); background: var(--gl-azul-osc); border: 4px solid var(--gl-negro); box-shadow: inset 0 0 0 2px var(--gl-oro); }
+  .reino h3 { margin: 0; font-weight: 400; font-size: 27px; color: var(--gl-oro); line-height: 1.1; }
+  .reino .tema { font-size: 19px; color: var(--gl-azul); }
+  .reino .enem { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 18px; color: var(--gl-texto-suave); }
+  .reino .enem img { width: 44px; height: 44px; background: var(--gl-noche-2); border: 3px solid var(--gl-negro); }
+  .reino .foot { margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+  .reino .foot .gl-btn:nth-child(2) { background: var(--gl-crema); box-shadow: inset -4px -4px 0 #cdbb98, inset 4px 4px 0 #fff, 0 4px 0 var(--gl-negro); }
+  .reino.bloq { opacity: .7; }
+  .reino.bloq .sim { background: #3a3f52; box-shadow: inset 0 0 0 2px #707792; }
+  .reino.marcado { box-shadow: inset 0 0 0 3px var(--gl-oro), 4px 4px 0 var(--gl-negro); }
+  .candado { font-size: 19px; padding: 6px 10px; background: var(--gl-noche-2); border: 3px solid var(--gl-negro); color: var(--gl-texto-suave); }
+
+  .sym { font-family: "Times New Roman", Georgia, serif; font-size: 1.05em; }
+  footer { text-align: center; font-size: 18px; color: var(--gl-texto-suave); margin-top: 32px; }
+  footer a { color: var(--gl-azul); }
+
+  @media (max-width: 760px) {
+    .seleccion { grid-template-columns: 1fr; }
+    .detalle { position: static; order: -1; }
+    .rejilla { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+    .ficha { padding: 4px 3px 6px; border-width: 3px; }
+    .ficha b { font-size: 17px; }
+    .detalle .retrato img { width: 88px; height: 88px; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <header class="hero">
-    <img class="logo px-sprite" src="assets/pichu-royale/identidad/logo_pichu_royale.png" alt="Logo de πCHU ROYALE" width="392" height="313">
-    <h1 class="px-title">πCHU ROYALE</h1>
-    <p class="sub">LA REBELIÓN DE LOS NÚMEROS · MATEMÁTICAS 1.º ESO</p>
+  <!-- HUD: visible en selección y mapa -->
+  <header class="hud gl-box" id="hud" hidden>
+    <img class="gl-sprite" id="hudImg" src="" alt="" width="52" height="52">
+    <div class="quien"><b id="hudNombre"></b><span id="hudHab"></span></div>
+    <nav aria-label="Navegación">
+      <a class="gl-btn azul" href="#mapa">Mapa</a>
+      <a class="gl-btn azul" href="#heroes">Matemático</a>
+      <a class="gl-btn azul" href="#inicio">Inicio</a>
+    </nav>
   </header>
 
-  <h2 class="section px-title">▶ ELIGE TU MISIÓN</h2>
-  <section class="games" id="games" aria-label="Juegos"></section>
+  <!-- ===================== PANTALLA DE INICIO ===================== -->
+  <section id="inicio" data-pantalla aria-labelledby="tInicio">
+    <h1 id="tInicio" style="margin:0">
+      <img class="logo gl-sprite" src="assets/galois/identidad/logo-galois-legacy.svg" alt="Galois Legacy" width="882" height="414">
+    </h1>
+    <p class="sub"><span class="gl-cinta">El legado de los matemáticos</span></p>
+    <p class="lema" id="lema"></p>
+    <div class="acciones">
+      <a class="gl-btn" href="#heroes" id="btnEmpezar">▶ Comenzar aventura</a>
+      <a class="gl-btn verde" href="#mapa" id="btnContinuar" hidden>Continuar</a>
+    </div>
+    <div class="intro">
+      <article class="gl-box">
+        <h2 class="gl-titulo">La historia</h2>
+        <p>El mundo de Gaussoria se ha fragmentado y ha perdido los símbolos del saber matemático. Una fuerza oscura amenaza sus reinos. Explora el mapa, resuelve desafíos y derrota a los guardianes para recuperar cada símbolo.</p>
+      </article>
+      <article class="gl-box">
+        <h2 class="gl-titulo">Los protagonistas</h2>
+        <p>Viaja con Galois y otros grandes matemáticos. Cada uno tiene una habilidad inspirada en lo que aportó a las matemáticas.</p>
+        <div class="equipo" id="equipo"></div>
+      </article>
+    </div>
+  </section>
 
-  <h2 class="section px-title">★ HÉROES MATEMÁTICOS</h2>
-  <section class="heroes" id="heroes" aria-label="Héroes"></section>
+  <!-- ===================== SELECCIÓN DE MATEMÁTICO ===================== -->
+  <section id="heroes" data-pantalla hidden aria-labelledby="tHeroes">
+    <div class="cabecera">
+      <h1 id="tHeroes" style="margin:0"><span class="gl-cinta">Elige a tu matemático</span></h1>
+      <p>Pulsa un retrato para conocer su historia y su habilidad.</p>
+    </div>
+    <div class="seleccion">
+      <div>
+        <div class="rejilla" id="rejilla" role="group" aria-label="Matemáticos"></div>
+        <p class="aliados-t">Más aliados</p>
+        <div class="rejilla aliados" id="rejillaAliados" role="group" aria-label="Más aliados"></div>
+      </div>
+      <aside class="detalle gl-box" id="detalle" aria-live="polite">
+        <div class="retrato">
+          <img class="gl-sprite" id="dImg" src="" alt="" width="112" height="112">
+          <div><h2 class="gl-titulo" id="dNombre"></h2><p class="meta" id="dMeta"></p></div>
+        </div>
+        <p class="aporte" id="dAporte"></p>
+        <div class="habilidad">
+          <b id="dHab"></b>
+          <span id="dEfecto"></span>
+          <small>Habilidad en diseño: todavía no actúa dentro de los juegos.</small>
+        </div>
+        <button class="gl-btn" id="btnElegir" type="button">Viajar con este matemático ▶</button>
+      </aside>
+    </div>
+  </section>
 
-  <footer>πCHU ROYALE · pichu-lab</footer>
+  <!-- ===================== MAPA DE GAUSSORIA ===================== -->
+  <section id="mapa" data-pantalla hidden aria-labelledby="tMapa">
+    <div class="cabecera">
+      <h1 id="tMapa" style="margin:0"><span class="gl-cinta">El mundo: Gaussoria</span></h1>
+      <p>Elige un reino en el mapa o en la lista.</p>
+    </div>
+    <div class="mapa-wrap gl-box">
+      <div class="mapa" id="mapaBox">
+        <img class="gl-sprite" src="assets/galois/mapa/gaussoria.png" alt="Mapa de Gaussoria: una isla con glaciares y un volcán al norte, un bosque al oeste, minas de cristal al este, una ciudadela en el centro y ruinas al sur." width="192" height="120">
+      </div>
+    </div>
+    <div class="reinos" id="reinos"></div>
+  </section>
+
+  <footer>
+    GALOIS LEGACY · pichu-lab · Matemáticas 1.º ESO ·
+    <a href="pichu-royale.html">Portada anterior (<span class="sym">π</span>CHU ROYALE)</a>
+  </footer>
 </main>
 
+<script src="shared/galois-data.js"></script>
 <script>
-  // Catálogo de juegos. Cada juego es un módulo independiente en /juegos/<id>/
-  // Para añadir un juego: copiar su carpeta y añadir una entrada aquí.
-  const JUEGOS = [
-    { id: "integer-ninja", titulo: "Integer Ninja", tema: "Números enteros", enemigo: "negatron",
-      desc: "Corta frutas con números enteros, alcanza objetivos exactos y derrota al Rey de los Signos.", activo: true },
-    { id: "divisibilidad", titulo: "Reino de la divisibilidad", tema: "Divisibilidad", enemigo: "primox",
-      desc: "Divisores, primos, factorización, MCD y mcm. Elige el modo fácil (una pregunta cada vez) o el duelo de cartas.",
-      activo: true, botones: [["facil.html", "▶ Modo fácil"], ["", "⚔ Duelo de cartas"]] },
-    { id: "fracciones", titulo: "Laboratorio πCHU", tema: "Fracciones", enemigo: "denominadoron",
-      desc: "Fracciones con Biología y Geología: colorea, mide en la probeta, simplifica y resuelve problemas de la Tierra, la célula y los seres vivos.", activo: true }
-  ];
+(function () {
+  'use strict';
+  var D = window.GALOIS;
+  var ENEMIGOS = { negatron: 'Negatrón', parentesis_maldito: 'Paréntesis Maldito', multiplax: 'Múltiplax',
+                   primox: 'Prímox', denominadoron: 'Denominadorón', simplifract: 'Simplifract' };
+  var TODOS = D.heroes.concat(D.aliados);
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  // Jersey 10 dibuja π como Π: los símbolos matemáticos usan una fuente con serifa
+  var sym = function (s) { return esc(s).replace(/[πℤ]/g, '<span class="sym">$&</span>'); };
 
-  const A = "assets/pichu-royale/";
-  const games = document.getElementById("games");
-  for (const j of JUEGOS) {
-    const el = document.createElement("article");
-    el.className = "card px-box" + (j.activo ? "" : " locked");
-    el.innerHTML = `
-      <div class="top">
-        <img class="px-sprite" src="${A}enemigos/${j.enemigo}.png" alt="" width="72" height="72" loading="lazy">
-        <div><h3>${j.titulo}</h3><p class="tema">${j.tema}</p></div>
-      </div>
-      <p class="desc">${j.desc}</p>
-      <div class="foot">
-        ${!j.activo
-          ? `<span class="badge">🔒 PRÓXIMAMENTE</span>`
-          : (j.botones || [["", "▶ Jugar"]]).map(([ruta, txt], i) =>
-              `<a class="px-btn${i ? " alt" : ""}" href="juegos/${j.id}/${ruta}">${txt}</a>`).join("")}
-      </div>`;
-    games.appendChild(el);
+  // Preferencia del navegador (opcional: si no hay almacenamiento, todo funciona igual)
+  var CLAVE = 'galoisLegacy.heroe';
+  function leer() { try { return localStorage.getItem(CLAVE); } catch (e) { return null; } }
+  function guardar(v) { try { localStorage.setItem(CLAVE, v); } catch (e) {} }
+
+  var elegido = TODOS.find(function (h) { return h.id === leer(); }) || null;
+  var visto = elegido || D.heroes[0];
+
+  // ---------- Inicio ----------
+  $('lema').innerHTML = D.lema.map(function (p) { return '<span>' + esc(p) + '</span>'; }).join('');
+  $('equipo').innerHTML = D.heroes.map(function (h) {
+    return '<img class="gl-sprite" src="' + h.imagen + '" alt="' + esc(h.nombre) + '" title="' + esc(h.nombre) + '" width="56" height="56" loading="lazy">';
+  }).join('');
+
+  // ---------- Selección ----------
+  function ficha(h) {
+    return '<button type="button" class="ficha" data-id="' + h.id + '" aria-pressed="false">' +
+      '<img class="gl-sprite" src="' + h.imagen + '" alt="" width="256" height="256" loading="lazy"><b>' + esc(h.corto) + '</b></button>';
+  }
+  $('rejilla').innerHTML = D.heroes.map(ficha).join('');
+  $('rejillaAliados').innerHTML = D.aliados.map(ficha).join('');
+
+  function mostrar(h) {
+    visto = h;
+    $('dImg').src = h.imagen; $('dImg').alt = h.nombre;
+    $('dNombre').textContent = h.nombre;
+    $('dMeta').textContent = h.periodo + ' · ' + h.origen;
+    $('dAporte').innerHTML = sym(h.aporte);
+    $('dHab').textContent = '✦ ' + h.habilidad;
+    $('dEfecto').textContent = h.efecto;
+    $('btnElegir').textContent = (elegido && elegido.id === h.id ? 'Seguir con ' : 'Viajar con ') + h.corto + ' ▶';
+    document.querySelectorAll('.ficha').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.id === h.id)); });
+  }
+  document.querySelector('.seleccion').addEventListener('click', function (e) {
+    var b = e.target.closest('.ficha'); if (!b) return;
+    mostrar(TODOS.find(function (h) { return h.id === b.dataset.id; }));
+    if (matchMedia('(max-width: 760px)').matches) $('detalle').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('btnElegir').addEventListener('click', function () {
+    elegido = visto; guardar(elegido.id); pintarHud(); location.hash = '#mapa';
+  });
+
+  // ---------- HUD ----------
+  function pintarHud() {
+    var h = elegido || D.heroes[0];
+    $('hudImg').src = h.imagen; $('hudImg').alt = h.nombre;
+    $('hudNombre').textContent = elegido ? h.nombre : 'Aún no has elegido matemático';
+    $('hudHab').textContent = elegido ? '✦ ' + h.habilidad : 'Elige uno para empezar';
+    $('btnContinuar').hidden = !elegido;
+    if (elegido) $('btnContinuar').textContent = 'Continuar con ' + elegido.corto;
+    var mini = document.querySelector('.marca.inicio img');
+    if (mini) { mini.src = h.imagen; mini.alt = ''; }
   }
 
-  // Héroes desde el manifest del banco de recursos (única fuente de nombres)
-  fetch(A + "manifest.json").then(r => r.json()).then(m => {
-    const box = document.getElementById("heroes");
-    for (const h of m.heroes) {
-      const el = document.createElement("div");
-      el.className = "heroe px-box";
-      el.title = `${h.nombre} (${h.periodo}) — ${h.habilidad}: ${h.efecto_propuesto}`;
-      el.innerHTML = `<img class="px-sprite" src="${A}${h.imagen}" alt="${h.nombre}" width="256" height="256" loading="lazy">
-        <b>${h.nombre.split(" de ")[0]}</b><span>${h.especialidad}</span>`;
-      box.appendChild(el);
-    }
-  }).catch(() => {});
+  // ---------- Mapa y reinos ----------
+  var mapa = $('mapaBox'), lista = $('reinos');
+  D.reinos.forEach(function (r) {
+    var clase = 'marca' + (r.tipo === 'inicio' ? ' inicio' : '') + (r.bloqueado ? ' bloq' : '');
+    var dentro = r.tipo === 'inicio'
+      ? '<img class="gl-sprite heroe-mini" src="" alt="" width="32" height="32"><span class="nom">' + esc(r.nombre) + '</span>'
+      : '<span aria-hidden="true">' + sym(r.simbolo) + '</span><span class="nom">' + sym(r.nombre) + (r.bloqueado ? ' 🔒' : '') + '</span>';
+    var m = document.createElement(r.tipo === 'inicio' ? 'a' : 'button');
+    m.className = clase;
+    if (r.tipo === 'inicio') { m.href = '#heroes'; } else { m.type = 'button'; m.dataset.reino = r.id; }
+    m.style.left = r.x + '%'; m.style.top = r.y + '%';
+    m.setAttribute('aria-label', r.nombre + (r.bloqueado ? ' (bloqueado)' : '') + (r.tipo === 'inicio' ? ': cambiar de matemático' : ''));
+    m.innerHTML = dentro;
+    mapa.appendChild(m);
+
+    if (r.tipo === 'inicio') return;
+    var c = document.createElement('article');
+    c.className = 'reino gl-box' + (r.bloqueado ? ' bloq' : '');
+    c.id = 'reino-' + r.id;
+    var enem = (r.enemigos || []).map(function (e) {
+      return '<img class="gl-sprite" src="assets/pichu-royale/enemigos/' + e + '.png" alt="" title="' + ENEMIGOS[e] + '" width="44" height="44" loading="lazy">';
+    }).join('');
+    var nombres = (r.enemigos || []).map(function (e) { return ENEMIGOS[e]; }).join(' y ');
+    c.innerHTML =
+      '<div class="top"><div class="sim" aria-hidden="true">' + sym(r.simbolo) + '</div>' +
+      '<div><h3>' + sym(r.nombre) + '</h3>' + (r.tema ? '<span class="tema">' + esc(r.tema) + '</span>' : '') + '</div></div>' +
+      '<p>' + esc(r.desc) + '</p>' +
+      (enem ? '<div class="enem">' + enem + '<span>' + esc(nombres) + (r.jefe ? ' · Jefe: ' + esc(r.jefe) : '') + '</span></div>' : '') +
+      '<div class="foot">' + (r.bloqueado
+        ? '<span class="candado">🔒 Por descubrir</span>'
+        : r.juegos.map(function (j) { return '<a class="gl-btn" href="' + j.ruta + '">' + esc(j.texto) + '</a>'; }).join('')) +
+      '</div>';
+    lista.appendChild(c);
+  });
+  mapa.addEventListener('click', function (e) {
+    var b = e.target.closest('button.marca'); if (!b) return;
+    document.querySelectorAll('.marca').forEach(function (x) { x.removeAttribute('aria-current'); });
+    document.querySelectorAll('.reino').forEach(function (x) { x.classList.remove('marcado'); });
+    b.setAttribute('aria-current', 'true');
+    var c = $('reino-' + b.dataset.reino);
+    c.classList.add('marcado');
+    c.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    var enlace = c.querySelector('a.gl-btn'); if (enlace) enlace.focus({ preventScroll: true });
+  });
+
+  // ---------- Pantallas (por #hash: el botón «atrás» del navegador funciona) ----------
+  function ir() {
+    var id = (location.hash || '#inicio').slice(1);
+    if (!document.querySelector('[data-pantalla]#' + CSS.escape(id))) id = 'inicio';
+    document.querySelectorAll('[data-pantalla]').forEach(function (s) { s.hidden = s.id !== id; });
+    $('hud').hidden = id === 'inicio';
+    if (id === 'heroes') mostrar(visto);
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', ir);
+  pintarHud(); ir();
+})();
 </script>
 </body>
 </html>
