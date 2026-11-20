@@ -825,32 +825,82 @@
     return { cx: cx, cy: Math.round(pie - 15 * sy), y0: Math.round(pie - 31 * sy), x0: Math.round(cx - 15 * sx), w: Math.round(30 * sx) };
   }
 
+  var FASES_JEFE = [
+    { tinte: '#bb893c', metal: '#eabc61', luz: '#fff0b4', sombra: '#815238', aura: '#847357', cuernos: 0, motas: 5 },
+    { tinte: '#e05429', metal: '#ec7846', luz: '#ffdb8b', sombra: '#793542', aura: '#cf573f', cuernos: 10, motas: 12 },
+    { tinte: '#7139b4', metal: '#a271eb', luz: '#e9c9ff', sombra: '#4d276e', aura: '#9857da', cuernos: 15, motas: 21 }
+  ];
+
+  function coronaJefe(b, G, fase, F) {
+    var x = G.cx, y = 11;
+    // La corona sigue la parte más alta del cuerpo, dejando espacio para sus puntas.
+    for (var j = Math.max(2, G.y0 - 5); j < G.cy; j++) {
+      if (b.get(x - 3, j) || b.get(x, j) || b.get(x + 3, j)) { y = j; break; }
+    }
+    y = Math.max(fase === 3 ? 11 : 8, y + 1);
+    if (F.cuernos) {
+      [-1, 1].forEach(function (d) {
+        var hombro = x + d * 6, punta = x + d * F.cuernos, alto = fase === 3 ? 11 : 7;
+        poligono(b, [[hombro, y + 3], [hombro + d * 4, y - 1], [punta + d * 3, y - alto + 6], [punta, y - alto], [punta, y - 1], [hombro, y + 6]], F.sombra);
+        b.line(hombro, y + 2, punta, y - alto, F.metal, 2);
+        b.line(hombro + d * 2, y - 2, punta, y - alto, F.luz);
+        if (fase === 3) b.line(hombro + d * 4, y + 2, punta + d * 4, y - 3, F.metal, 2);
+      });
+    }
+    poligono(b, [[x - 8, y - 5], [x - 5, y - 2], [x, y - 7], [x + 5, y - 2], [x + 8, y - 5], [x + 7, y + 3], [x - 7, y + 3]], F.metal);
+    b.rect(x - 7, y + 2, 15, 1, F.sombra);
+    b.line(x - 7, y - 1, x - 5, y + 1, F.luz);
+    b.ellipse(x, y, 2, 2, F.sombra); b.set(x - 1, y - 1, F.luz);
+    b.set(x + 5, y + 1, F.luz);
+  }
+
+  function auraJefe(b, G, fase, F, f) {
+    var pulso = [0, 1, 2, 1][f % 4], cx = G.cx, cy = 34;
+    for (var i = 0; i < F.motas; i++) {
+      var a = (i + f * .42) / F.motas * Math.PI * 2;
+      var rx = 26 - i % 3 + pulso, ry = 22 - i % 4 + pulso;
+      var x = cx + Math.cos(a) * rx, y = cy + Math.sin(a) * ry;
+      b.set(x, y, i % 3 ? F.aura : F.luz);
+      if (fase > 1) b.set(x - Math.sin(a), y + Math.cos(a), F.sombra);
+      if (fase === 3 && i % 4 === 0) {
+        b.line(x, y - 2, x, y + 2, F.aura);
+        b.set(x, y, F.luz);
+      }
+    }
+    if (fase > 1) {
+      for (var k = 0; k < 54; k++) {
+        if ((k + f * 2) % 11 > (fase === 3 ? 6 : 3)) continue;
+        var angulo = k * Math.PI * 2 / 54;
+        b.set(cx + Math.cos(angulo) * (29 + pulso), cy + Math.sin(angulo) * 26, F.sombra);
+      }
+    }
+  }
+
   function dibujarEnemigo(id, anim, f, opt) {
     opt = opt || {};
     if (!enemigos[id]) id = 'primox';
     var E = Object.assign({}, enemigos[id]);
     var fase = opt.fase || 1, jefe = !!opt.jefe;
-    if (jefe && fase === 2) E.c = mix(E.c, '#ff3a2a', .35);
-    if (jefe && fase === 3) E.c = mix(E.c, '#2a0a3a', .45);
+    var F = FASES_JEFE[fase - 1] || FASES_JEFE[0];
+    if (jefe) {
+      E.c = mix(E.c, F.tinte, fase === 1 ? .24 : .72);
+      if (E.c2) E.c2 = mix(E.c2, F.sombra, .65);
+    }
     var S = jefe ? 64 : 40, base = S - 3;
     var b = new Buf(S, S), q = poseEnemigo(anim, f);
-    var G = colocarEnemigo(b, cuerpoEnemigo(id, E, q, f), q, base, jefe ? 1.43 : .94);
-    if (jefe) {
-      var cx = G.cx, cy = G.y0;
-      b.rect(cx - 7, cy + 2, 15, 3, '#f2c14e');
-      [-7, -3, 1, 5].forEach(function (d, i) { b.rect(cx + d, cy - (i % 2 ? 2 : 0), 3, 3, '#f2c14e'); });
-      b.set(cx - 2, cy + 3, '#d83a3a'); b.set(cx + 2, cy + 3, '#3a8ad8');
-      if (fase >= 2) {
-        b.line(G.x0, cy + 7, G.x0 - 4, cy - 2, '#ffefe0', 2);
-        b.line(G.x0 + G.w, cy + 7, G.x0 + G.w + 4, cy - 2, '#ffefe0', 2);
-      }
+    if (jefe && anim === 'idle') {
+      q.sy = [1, .97, .92, .97][f];
+      q.sx = [1, 1.03, 1.07, 1.03][f];
+      q.ojos = fase > 1 ? 'furia' : 'open';
     }
+    var G = colocarEnemigo(b, cuerpoEnemigo(id, E, q, f), q, base, jefe ? 1.43 : .94);
+    if (jefe) coronaJefe(b, G, fase, F);
     b.outline();
-    if (jefe && fase >= 2) {
-      for (var i = 0; i < 14; i++) {
-        var a = i / 14 * Math.PI * 2 + f * .4, rr = S / 2 - 3 - (i % 3);
-        b.set(S / 2 + Math.cos(a) * rr, S / 2 + 2 + Math.sin(a) * rr * .8, fase === 3 ? '#c06aff' : '#ff8a3a');
-      }
+    if (jefe && anim !== 'defeat') {
+      var aura = new Buf(S, S);
+      auraJefe(aura, G, fase, F, f);
+      aura.paste(b, 0, 0);
+      b = aura;
     }
     if (q.proyectil !== null) {
       var tok = E.ataque[f % E.ataque.length];
