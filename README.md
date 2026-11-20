@@ -9,11 +9,17 @@ Los juegos se copian desde `Aula-de-Matematicas` (que no se modifica) y aquí so
 ## Estructura
 
 ```
-index.html                 Inicio, selección de matemático y mapa de Gaussoria
+index.html                 Inicio, selección de matemático y mapa de la Campiña
+aventura/                  RPG jugable: 10 mundos, 50 aventuras, combates y jefes
+coleccion/                 Álbum de 60 cartas, ilustraciones (arte.js) y recompensas (bridge.js)
+pruebas/                   node pruebas/retos.test.js · node pruebas/e2e.js
+herramientas/              Revisión y exportación de hojas de sprites
 pichu-royale.html          Portada anterior (πCHU ROYALE), conservada
 shared/galois-theme.css    Tema GALOIS LEGACY
 shared/galois-data.js      Matemáticos, habilidades y reinos (fuente única)
-assets/galois/             Logotipo, sprites nuevos (Galois, Euler, Fermat) y mapa
+assets/galois/             Logotipo, retratos, mapa y hojas de sprites animados (sprites/)
+shared/galois-sprites.js   Motor de sprites pixel art (héroes y enemigos animados)
+shared/galois-escenarios.js Tiles y monumentos sevillanos
 shared/pichu-theme.css     Tema común (paleta, fuentes Jersey 10 y Press Start 2P, botones)
 assets/pichu-royale/       Banco de recursos (héroes, enemigos, iconos, escenarios, logo, manifest.json)
 juegos/<juego>/            Cada juego es un módulo independiente

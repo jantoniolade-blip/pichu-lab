@@ -154,5 +154,4 @@
 
 ## Cómo se desbloquean
 
-Ganar cinco retos matemáticos diferentes desbloquea cinco cartas. Una victoria excelente tras esos cinco retos concede la carta legendaria. Actualmente se registran victorias de Enteros, Fracciones y Divisibilidad (modo fácil); los demás mundos esperan a sus minijuegos.
-
+Cada aventura superada en `aventura/` (o cada reto distinto de los minijuegos de Divisibilidad, Enteros y Fracciones) descubre **al azar** una de las cinco cartas normales de su mundo que aún no se tengan. La sexta, legendaria, se gana venciendo al jefe del mundo con como mucho un error (o, en los minijuegos, con una victoria excelente tras cinco retos distintos). Repetir un reto no da más cartas. Las ilustraciones pixel art se generan en `coleccion/arte.js`.

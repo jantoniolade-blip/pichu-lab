@@ -95,6 +95,9 @@
   .habilidad b { font-weight: 400; color: var(--gl-violeta); font-size: 23px; display: block; }
   .habilidad small { display: block; color: var(--gl-texto-suave); font-size: 17px; margin-top: 4px; }
   .detalle .gl-btn { width: 100%; margin-top: 14px; font-size: 26px; }
+  .anima { display: flex; align-items: flex-end; gap: 10px; margin-top: 10px; }
+  .anima canvas { width: 96px; height: 132px; image-rendering: pixelated; background: linear-gradient(#24375a 70%, #2f7d33 70%); border: 3px solid var(--gl-negro); }
+  .anima small { color: var(--gl-texto-suave); font-size: 17px; }
 
   /* ---------- Mapa ---------- */
   .mapa-wrap { padding: 10px; }
@@ -155,6 +158,7 @@
     <img class="gl-sprite" id="hudImg" src="" alt="" width="52" height="52">
     <div class="quien"><b id="hudNombre"></b><span id="hudHab"></span></div>
     <nav aria-label="Navegación">
+      <a class="gl-btn" href="aventura/index.html">⚔ Aventura</a>
       <a class="gl-btn azul" href="#mapa">Mapa</a>
       <a class="gl-btn azul" href="coleccion/index.html">🃏 Mis cartas</a>
       <a class="gl-btn azul" href="#heroes">Matemático</a>
@@ -172,6 +176,7 @@
     <div class="acciones">
       <a class="gl-btn" href="#heroes" id="btnEmpezar">▶ Comenzar aventura</a>
       <a class="gl-btn verde" href="#mapa" id="btnContinuar" hidden>Continuar</a>
+      <a class="gl-btn azul" href="aventura/index.html">⚔ Aventura</a>
       <a class="gl-btn azul" href="coleccion/index.html">🃏 Álbum sevillano</a>
     </div>
     <div class="intro">
@@ -204,11 +209,12 @@
           <img class="gl-sprite" id="dImg" src="" alt="" width="112" height="112">
           <div><h2 class="gl-titulo" id="dNombre"></h2><p class="meta" id="dMeta"></p></div>
         </div>
+        <div class="anima"><canvas id="dAnim" width="64" height="88" aria-label="Animación del personaje"></canvas><small id="dAnimN"></small></div>
         <p class="aporte" id="dAporte"></p>
         <div class="habilidad">
           <b id="dHab"></b>
           <span id="dEfecto"></span>
-          <small>Habilidad en diseño: todavía no actúa dentro de los juegos.</small>
+          <small>Actúa en los combates de la Aventura, una vez por combate.</small>
         </div>
         <button class="gl-btn" id="btnElegir" type="button">Viajar con este matemático ▶</button>
       </aside>
@@ -238,6 +244,7 @@
 <script src="shared/galois-data.js"></script>
 <script src="coleccion/datos.js"></script>
 <script src="shared/galois-campina.js"></script>
+<script src="shared/galois-sprites.js"></script>
 <script>
 (function () {
   'use strict';
@@ -287,6 +294,20 @@
     mostrar(TODOS.find(function (h) { return h.id === b.dataset.id; }));
     if (matchMedia('(max-width: 760px)').matches) $('detalle').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+  // Vista previa animada del sprite (fotogramas reales del motor de sprites)
+  (function () {
+    var S = window.GaloisSprites, c = $('dAnim'); if (!S || !c) return;
+    var x = c.getContext('2d'), seq = [['idle', 'down', 'En reposo'], ['walk', 'right', 'Caminando'], ['run', 'left', 'Corriendo'], ['attack', 'right', 'Atacando'], ['cast', 'down', 'Habilidad'], ['jump', 'down', 'Saltando'], ['victory', 'down', 'Victoria']], k = 0, t0 = performance.now();
+    function paso(now) {
+      var h = S.heroes[visto.id] ? visto.id : null; if (!h) { c.hidden = true; $('dAnimN').textContent = ''; requestAnimationFrame(paso); return; }
+      c.hidden = false; var s = seq[k], A = S.ANIM_HEROE[s[0]], t = (now - t0) / 1000, dur = Math.max(1.6, A.n / A.fps * 2);
+      if (t > dur) { k = (k + 1) % seq.length; t0 = now; t = 0; }
+      x.clearRect(0, 0, 64, 88); x.imageSmoothingEnabled = false; S.pintar(x, S.hojaHeroe(h), s[0], s[1], S.indice(S.hojaHeroe(h), s[0], t), 32, 84, 2);
+      $('dAnimN').textContent = s[2];
+      requestAnimationFrame(paso);
+    }
+    requestAnimationFrame(paso);
+  })();
   $('btnElegir').addEventListener('click', function () {
     elegido = visto; guardar(elegido.id); pintarHud(); location.hash = '#mapa';
   });
@@ -309,7 +330,7 @@
     var clase = 'marca' + (r.tipo === 'inicio' ? ' inicio' : '') + (r.bloqueado ? ' bloq' : '');
     var dentro = r.tipo === 'inicio'
       ? '<img class="gl-sprite heroe-mini" src="" alt="" width="32" height="32"><span class="nom">' + esc(r.nombre) + '</span>'
-      : '<span aria-hidden="true">' + sym(r.simbolo) + '</span><span class="nom">' + sym(r.nombre) + (r.bloqueado ? ' 🔒' : '') + '</span>';
+      : '<span aria-hidden="true">' + sym(r.simbolo) + '</span><span class="nom">' + sym(r.nombre.split(' · ').pop()) + (r.bloqueado ? ' 🔒' : '') + '</span>';
     var m = document.createElement(r.tipo === 'inicio' ? 'a' : 'button');
     m.className = clase;
     if (r.tipo === 'inicio') { m.href = '#heroes'; } else { m.type = 'button'; m.dataset.reino = r.id; }
@@ -330,7 +351,7 @@
       '<div class="top"><div class="sim" aria-hidden="true">' + sym(r.simbolo) + '</div>' +
       '<div><h3>' + sym(r.nombre) + '</h3>' + (r.tema ? '<span class="tema">' + esc(r.tema) + '</span>' : '') + '</div></div>' +
       '<p>' + esc(r.desc) + '</p>' +
-      (enem ? '<div class="enem">' + enem + '<span>' + esc(nombres) + (r.jefe ? ' · Jefe: ' + esc(r.jefe) : '') + '</span></div>' : '') +
+      (enem ? '<div class="enem">' + enem + '<span>' + esc(nombres) + (r.jefe ? ' · Jefe: ' + esc(ENEMIGOS[r.jefe] || r.jefe) : '') + '</span></div>' : '') +
       '<div class="foot">' + (r.bloqueado
         ? '<span class="candado">🔒 Por descubrir</span>'
         : r.juegos.map(function (j) { return '<a class="gl-btn" href="' + j.ruta + '">' + esc(j.texto) + '</a>'; }).join('')) +

@@ -80,3 +80,34 @@ La nueva capa de mundo `shared/galois-campina.js` transforma Gaussoria en 10 rei
 [🃏 Abrir el álbum de 60 cartas](coleccion/index.html) · [Ver el catálogo y las 50 aventuras](coleccion/CATALOGO_60_CARTAS.md) · [Guía de integración para Claude](coleccion/GUIA_PARA_CLAUDE.md).
 
 El progreso es cosmético, separado de la evaluación y asociado a un alias local del navegador; se puede importar/exportar en JSON. Los iconos de las cartas son SVG originales generados desde `coleccion/album.js` (no se han importado retratos, insignias ni imágenes oficiales).
+
+
+## Revisión de noviembre de 2026 · RPG jugable de la Campiña
+
+Trabajo hecho en la rama `claude/galois-legacy-rpg-9nanbv` (creada desde `dev`; `main` sin tocar).
+
+### Qué hay implementado
+
+| Fase | Contenido | Archivos |
+|---|---|---|
+| A · Auditoría | Se conservan los tres juegos (sin tocar preguntas, motores ni correcciones), el banco de recursos, la colección de 60 cartas y su puente. | — |
+| B · Recursos gráficos | Motor de sprites 16-bit: 11 matemáticos × 9 animaciones (reposo 4, caminar 8, correr 8, saltar 6, atacar 7, habilidad 8, daño 3, victoria 6, derrota 5 fotogramas) × 4 direcciones. 20 enemigos con reposo, movimiento, ataque propio de su concepto, daño y derrota; jefes en 3 fases (tinte, cuernos, aura). Tiles animados y 23 monumentos y edificios. Hojas PNG exportadas. | `shared/galois-sprites.js`, `shared/galois-escenarios.js`, `assets/galois/sprites/` (PNG + `atlas.json`), `herramientas/sprites.html`, `herramientas/exportar-sprites.js` |
+| C · Álbum | Ilustración pixel art original para las 60 cartas, reverso común, marcos por rareza, brillo legendario, volteo al descubrir, ficha con anverso/reverso, filtro por rareza, panel de nivel, monedas, insignias y logros. Exportar/importar incluye el progreso. | `coleccion/arte.js`, `coleccion/album.js`, `coleccion/estilo.css`, `coleccion/bridge.js` |
+| D · Mundos jugables | Las **50 aventuras de los 10 mundos son jugables**: mapa explorable por mundo (Fuentes de Andalucía con mapa propio y el IES Alarifes Ruiz Florindo como punto de partida), vecinos, fragmentos, cofres del saber, tienda de pociones, combates, construcción de monumentos y jefes en tres fases (descubrir, resolver, explicar/transferir). Retos generados según la biblia, con 3 dificultades, pistas y explicación tras cada error. | `aventura/` (`index.html`, `aventura.css`, `motor.js`, `mundos.js`, `retos.js`) |
+| E · Integración | Botón «⚔ Aventura» en portada y en cada mundo; mapa general de la Campiña dentro de la aventura con desbloqueo progresivo; habilidades de los matemáticos activas en combate; recompensas (XP, niveles, monedas, insignias, logros, cartas aleatorias) en el mismo guardado por alias. Los minijuegos siguen concediendo cartas con la regla de siempre. | `index.html`, `shared/galois-campina.js`, `shared/galois-data.js` |
+| F · Pruebas | `node pruebas/retos.test.js` (81 000 preguntas: respuesta correcta, distractores distintos y recálculo independiente de 15 tipos de reto) y `node pruebas/e2e.js` (sin errores JS en 7 páginas, todos los objetivos alcanzables en los 10 mapas, partida completa de los 10 mundos, reglas de recompensa). Capturas revisadas en escritorio 1280×800, tableta 1024×768 y móvil 390×844. | `pruebas/` |
+
+### Reglas de recompensa
+
+- Nada se concede por abrir una página ni por parámetros de URL: el motor solo llama a `completarAventura` cuando se han respondido bien todas las preguntas. Con `?prueba=1` (pruebas automáticas) no se guarda ninguna recompensa.
+- Cada aventura superada por primera vez: XP, monedas y una carta al azar del mundo. Jefe con ≤ 1 error: carta legendaria. Repetir: poca XP y ninguna carta.
+- Fallar nunca quita monedas ni cartas; en Explorador cada fallo cuesta medio corazón. La pregunta fallada se sustituye por otra parecida.
+- Las recompensas no cambian notas. Modo docente (código `ALARIFES` en Ajustes): abre todos los mundos para revisarlos, sin conceder recompensas.
+
+### Pendiente (honestamente)
+
+- Los mundos 2-10 comparten una plantilla de mapa (cambian monumentos, terreno, vecinos y objetivos); solo Fuentes de Andalucía tiene un mapa diseñado a mano.
+- Los sprites son pixel art generado por código: coherentes y animados, pero sencillos. Los retratos del banco πCHU se mantienen en menús.
+- No hay salto/ataque libre en la exploración: los combates son por turnos con preguntas (las animaciones de saltar y correr se usan en la selección y al moverse).
+- Revisar con fuentes oficiales los textos culturales de vecinos y cartas.
+- Sin música (solo efectos sintetizados). Ranking de Integer Ninja: igual que antes.
