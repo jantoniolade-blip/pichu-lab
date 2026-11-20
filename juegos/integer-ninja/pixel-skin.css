@@ -1,30 +1,42 @@
 /* =====================================================================
-   πCHU ROYALE · capa pixel art 16-bit para Integer Ninja
+   GALOIS LEGACY · capa pixel art 16-bit para Integer Ninja
    Se carga DESPUÉS del <style> original y solo sobrescribe aspecto.
-   Paleta: assets/pichu-royale/manifest.json
+   Fase B del plan de GALOIS-LEGACY.md: la paleta pasa de la de
+   πCHU ROYALE (violeta nocturno y turquesa) a la de GALOIS LEGACY
+   (noche, violeta, oro y pergamino), la misma de shared/galois-theme.css.
+   Los nombres de las variables NO cambian: así ninguna de las 100 reglas
+   de abajo ni el CSS original del juego necesitan tocarse.
+   Las letras son locales (assets/fuentes/, licencia OFL): el juego ya no
+   pide nada a Google Fonts.
    ===================================================================== */
+@font-face { font-family: "Pixelify Sans"; font-weight: 400; font-display: swap; src: url("../../assets/fuentes/pixelify-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Pixelify Sans"; font-weight: 700; font-display: swap; src: url("../../assets/fuentes/pixelify-sans-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lato"; font-weight: 400; font-display: swap; src: url("../../assets/fuentes/lato-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lato"; font-weight: 700; font-display: swap; src: url("../../assets/fuentes/lato-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lato"; font-weight: 900; font-display: swap; src: url("../../assets/fuentes/lato-latin-900-normal.woff2") format("woff2"); }
 :root {
-  --espresso: #120b1f;      /* contornos */
-  --espresso-2: #211736;    /* fondo */
-  --salvia: #6bc9c3;        /* turquesa */
-  --salvia-osc: #3e8f8a;
-  --coral: #e46666;
-  --coral-osc: #a63c3c;
-  --crema: #fdf0d6;
-  --crema-2: #d9c8ef;
-  --mostaza: #f8bc49;
-  --tinta: #fdf0d6;
-  --font: 'Jersey 10', 'Lato', system-ui, sans-serif;
+  --espresso: #0F0C20;      /* contornos */
+  --espresso-2: #16122C;    /* fondo: noche */
+  --salvia: #FFE08A;        /* acento claro: oro claro */
+  --salvia-osc: #B97A12;
+  --coral: #E46666;
+  --coral-osc: #A63C3C;
+  --crema: #F3ECD6;         /* pergamino */
+  --crema-2: #E7E0F7;
+  --mostaza: #E8B53A;       /* oro */
+  --tinta: #F3ECD6;
+  --font: 'Lato', system-ui, sans-serif;
   --radius: 0px;
 
-  --px-panel: #3d2a60;
-  --px-card: #4f3878;
-  --px-card-2: #2c1f47;
-  --px-lavanda: #a477d4;
-  --px-muted: #d9c8ef;
-  /* Press Start 2P no dibuja bien Ó/Ú mayúsculas: solo para cifras y logotipos */
-  --px-digits: 'Press Start 2P', ui-monospace, monospace;
-  --px-title: 'Jersey 10', 'Lato', system-ui, sans-serif;
+  --px-panel: #251E4A;
+  --px-card: #4A3290;
+  --px-card-2: #1E1A3A;
+  --px-lavanda: #6A4BB8;
+  --px-muted: #D9C8EF;
+  /* Regla 4 de la marca: los números y los textos pequeños, en Lato (se leen
+     mejor en el móvil); la letra pixel se reserva para títulos y rótulos. */
+  --px-digits: 'Lato', system-ui, sans-serif;
+  --px-title: 'Pixelify Sans', 'Lato', system-ui, sans-serif;
 }
 
 html, body { background: var(--espresso-2); }
@@ -73,8 +85,8 @@ img { image-rendering: pixelated; }
 .hud-btn.glow { background: var(--mostaza); }
 
 /* ---------- Menú ---------- */
-.brand-chip { border-radius: 0; background: var(--px-card); border: 3px solid var(--espresso); box-shadow: 3px 3px 0 var(--espresso); font-family: var(--px-digits); font-weight: 400; font-size: .62rem; letter-spacing: 2px; color: var(--mostaza); padding: 8px 12px; }
-.title { font-family: var(--px-digits); font-weight: 400; line-height: 1.05; }
+.brand-chip { border-radius: 0; background: var(--px-card); border: 3px solid var(--espresso); box-shadow: 3px 3px 0 var(--espresso); font-family: var(--px-title); font-weight: 700; font-size: .85rem; letter-spacing: 2px; color: var(--mostaza); padding: 8px 12px; }
+.title { font-family: var(--px-title); font-weight: 700; line-height: 1.05; }
 .title span { font-size: clamp(1.9rem, 10.5vw, 3.4rem); -webkit-text-stroke: 0; color: var(--crema); text-shadow: 4px 4px 0 var(--px-lavanda), 8px 8px 0 var(--espresso); letter-spacing: 0; }
 .title span + span { color: var(--mostaza); text-shadow: 4px 4px 0 var(--coral-osc), 8px 8px 0 var(--espresso); }
 .subtitle { font-family: var(--px-title); font-weight: 700; font-size: clamp(1rem, 4vw, 1.25rem); line-height: 1.3; color: var(--salvia); text-shadow: 2px 2px 0 var(--espresso); }
@@ -84,7 +96,7 @@ img { image-rendering: pixelated; }
 .menu-buttons .btn { font-size: 1rem; }
 
 /* Cabecera πCHU ROYALE añadida en el menú */
-.px-back { pointer-events: auto; align-self: flex-start; font-family: var(--px-digits); font-size: .6rem; line-height: 1.4; color: var(--crema); text-decoration: none; background: var(--px-card-2); border: 3px solid var(--espresso); box-shadow: 3px 3px 0 var(--espresso); padding: 8px 10px; margin-bottom: 10px; }
+.px-back { pointer-events: auto; align-self: flex-start; font-family: var(--px-title); font-weight: 700; font-size: .95rem; line-height: 1.4; color: var(--crema); text-decoration: none; background: var(--px-card-2); border: 3px solid var(--espresso); box-shadow: 3px 3px 0 var(--espresso); padding: 8px 10px; margin-bottom: 10px; }
 .px-back:focus-visible { outline: 3px dashed var(--mostaza); }
 .px-world { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px 0 2px; background: rgba(18,11,31,.7); border: 3px solid var(--espresso); box-shadow: inset 0 0 0 2px var(--px-lavanda); padding: 6px 10px; }
 .px-world img { width: 52px; height: 52px; image-rendering: pixelated; }
@@ -93,11 +105,11 @@ img { image-rendering: pixelated; }
 
 /* ---------- HUD ---------- */
 .hud-score, .hud-time, .hud-streak { border-radius: 0; background: rgba(18,11,31,.85); border: 3px solid var(--espresso); box-shadow: inset 0 0 0 2px var(--px-lavanda); }
-.hud-score b, .hud-time, .hud-acc b { font-family: var(--px-digits); font-weight: 400; font-size: 1.05rem; line-height: 1.3; }
-.lbl { font-family: var(--px-digits); font-weight: 400; font-size: .5rem; letter-spacing: 1px; }
-.hud-mult { border-radius: 0; border: 3px solid var(--espresso); font-family: var(--px-digits); font-weight: 400; font-size: .8rem; padding: 4px 8px; }
+.hud-score b, .hud-time, .hud-acc b { font-family: var(--px-digits); font-weight: 900; font-size: 1.05rem; line-height: 1.3; }
+.lbl { font-family: var(--px-digits); font-weight: 900; font-size: .68rem; letter-spacing: 1px; text-transform: uppercase; }
+.hud-mult { border-radius: 0; border: 3px solid var(--espresso); font-family: var(--px-digits); font-weight: 900; font-size: .9rem; padding: 4px 8px; }
 .hud-goal { border-radius: 0; background: var(--crema); color: var(--espresso-2); border: 4px solid var(--espresso); box-shadow: inset 0 0 0 2px var(--mostaza), 4px 4px 0 var(--espresso); }
-.goal-kicker { font-family: var(--px-title); font-weight: 700; font-size: .72rem; letter-spacing: 1px; color: #2e6e6a; }
+.goal-kicker { font-family: var(--px-title); font-weight: 700; font-size: .78rem; letter-spacing: 1px; color: #4A3290; }
 .goal-main { font-weight: 700; }
 .hud-time.low { color: var(--coral); }
 .hud-lives { color: var(--coral); text-shadow: 2px 2px 0 var(--espresso); }
@@ -109,7 +121,7 @@ img { image-rendering: pixelated; }
 .boss-bar .bar, .hud-progress .bar { border-radius: 0; border: 3px solid var(--espresso); background: #120b1f; }
 .boss-bar i { background: repeating-linear-gradient(90deg, var(--coral) 0 8px, #ff8a8a 8px 12px); transition: width .4s steps(6); }
 .hud-progress i { background: repeating-linear-gradient(90deg, var(--salvia) 0 8px, #9ff0ea 8px 12px); transition: width .3s steps(4); }
-.hud-progress { font-family: var(--px-digits); font-weight: 400; font-size: .55rem; }
+.hud-progress { font-family: var(--px-digits); font-weight: 700; font-size: .72rem; }
 
 /* ---------- πCHU y bocadillos ---------- */
 .bubble { border-radius: 0; background: var(--crema); color: var(--espresso-2); border: 3px solid var(--espresso); box-shadow: 3px 3px 0 var(--espresso); }
@@ -125,14 +137,14 @@ img { image-rendering: pixelated; }
 }
 .level, .item, .howto-card, .ach, .inbox-item { border: 3px solid var(--espresso); box-shadow: 4px 4px 0 var(--espresso); }
 .level:active { transform: translateY(4px); box-shadow: 0 0 0 var(--espresso); }
-.level .n { border-radius: 0; background: var(--salvia-osc); font-family: var(--px-digits); font-weight: 400; font-size: .9rem; }
+.level .n { border-radius: 0; background: var(--salvia-osc); font-family: var(--px-digits); font-weight: 900; font-size: .9rem; }
 .level.boss .n { background: var(--coral-osc); }
 .level .t small, .result-grid small, .ach small { color: var(--px-muted); }
 .mono { color: var(--salvia); }
 .item.on { background: var(--salvia-osc); }
 .item canvas { border-radius: 0; background: var(--espresso-2); }
 .records div { border-radius: 0; background: var(--px-card-2); border: 3px solid var(--espresso); }
-.records b { font-family: var(--px-digits); font-weight: 400; font-size: .95rem; line-height: 1.6; }
+.records b { font-family: var(--px-digits); font-weight: 900; font-size: .95rem; line-height: 1.6; }
 .stats-box td, .stats-box th { border-bottom-color: var(--px-lavanda); }
 .intro-kicker, .result-kicker { color: var(--mostaza); font-family: var(--px-title); font-weight: 700; font-size: .95rem; line-height: 1.6; }
 .intro-enemy { border-radius: 0; background: var(--px-card-2); border: 3px solid var(--espresso); }
@@ -174,10 +186,10 @@ html, body, button, input, select { font-variant-ligatures: none; font-feature-s
 #sMenu { align-items: flex-start; }
 #sMenu .menu-wrap { margin: auto 0; }
 
-/* Jersey 10 solo tiene un grosor: sin negrita sintética (emborrona los píxeles) */
+/* Pixelify Sans: sin negrita sintética (emborrona los píxeles) */
 html { font-synthesis: none; }
 
-/* Jersey 10 es más estrecha: textos algo mayores */
+/* Pixelify Sans es ancha y Lato pequeña: textos algo mayores */
 body { font-size: 1.12rem; }
 .btn, .menu-buttons .btn { font-size: 1.2rem; }
 .muted, .howto-card p, .level .t small, .intro-body { font-size: 1.08rem; }
