@@ -1,4 +1,4 @@
-/* Galois Legacy · Campiña sevillana. Cartas ilustradas originales. */
+/* Galois Legacy · 10 mundos, 50 aventuras detalladas, 60 cartas culturales. */
 window.GALOIS_CAMPINA={
   "version": 1,
   "fuente": "Diseño original educativo; referencias culturales contrastadas",
@@ -20,34 +20,65 @@ window.GALOIS_CAMPINA={
           "id": "1-1",
           "etapa": 1,
           "nombre": "El cuaderno del maestro",
-          "objetivo": "Naturales, potencias y raíces"
+          "objetivo": "Naturales, potencias y raíces",
+          "tipo": "Exploración",
+          "historia": "Recorre la plaza de Fuentes y ordena los materiales del maestro de obras.",
+          "reto": "Ordena 472 305, 472 053 y 472 350 de menor a mayor.",
+          "mecanica": "Ordenar tarjetas en los almacenes",
+          "carta": "campina-1-1"
         },
         {
           "id": "1-2",
           "etapa": 2,
           "nombre": "Las tejas exponenciales",
-          "objetivo": "Naturales, potencias y raíces"
+          "objetivo": "Naturales, potencias y raíces",
+          "tipo": "Combate matemático",
+          "historia": "Potenciator convierte los ladrillos del arco en torres exponenciales.",
+          "reto": "Calcula 2⁵ y expresa 3⁴ como producto.",
+          "mecanica": "Elegir el cristal con potencia correcta",
+          "carta": "campina-1-2"
         },
         {
           "id": "1-3",
           "etapa": 3,
           "nombre": "El trigo contado",
-          "objetivo": "Naturales, potencias y raíces"
+          "objetivo": "Naturales, potencias y raíces",
+          "tipo": "Construcción",
+          "historia": "Repara un tejado barroco con grupos iguales de tejas.",
+          "reto": "Simplifica 2³·2⁴ usando las propiedades de las potencias.",
+          "mecanica": "Arrastrar bloques y completar la estructura",
+          "carta": "campina-1-3"
         },
         {
           "id": "1-4",
           "etapa": 4,
           "nombre": "La raíz del arco",
-          "objetivo": "Naturales, potencias y raíces"
+          "objetivo": "Naturales, potencias y raíces",
+          "tipo": "Minijefe",
+          "historia": "Los planos del alarife esconden raíces para medir un patio cuadrado.",
+          "reto": "Calcula √144 y √81.",
+          "mecanica": "Descifrar medidas en una cuadrícula",
+          "carta": "campina-1-4"
         },
         {
           "id": "1-5",
           "etapa": 5,
           "nombre": "La bóveda de Monclova",
-          "objetivo": "Naturales, potencias y raíces"
+          "objetivo": "Naturales, potencias y raíces",
+          "tipo": "Jefe",
+          "historia": "Radicósmico bloquea la bóveda del Castillo de la Monclova.",
+          "reto": "Resuelve 3³ + √81 = 36 y justifica el orden de operaciones.",
+          "mecanica": "Combate en tres fases: calcular, explicar y aplicar",
+          "carta": "campina-1-5"
         }
       ],
-      "jefe": "radicosmico"
+      "jefe": "radicosmico",
+      "cartaLegendaria": "campina-1-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 2,
@@ -66,34 +97,65 @@ window.GALOIS_CAMPINA={
           "id": "2-1",
           "etapa": 1,
           "nombre": "Los cuatro portones",
-          "objetivo": "Divisibilidad"
+          "objetivo": "Divisibilidad",
+          "tipo": "Exploración",
+          "historia": "La Puerta de Sevilla solo permite entrar a grupos de tamaños divisibles.",
+          "reto": "Decide si 135 es divisible entre 3, 5 y 9.",
+          "mecanica": "Seleccionar portones correctos",
+          "carta": "campina-2-1"
         },
         {
           "id": "2-2",
           "etapa": 2,
           "nombre": "El número intruso",
-          "objetivo": "Divisibilidad"
+          "objetivo": "Divisibilidad",
+          "tipo": "Combate matemático",
+          "historia": "Múltiplax envía números intrusos por las murallas.",
+          "reto": "Distingue 29 primo de 49 compuesto.",
+          "mecanica": "Clasificar números bajo presión moderada",
+          "carta": "campina-2-2"
         },
         {
           "id": "2-3",
           "etapa": 3,
           "nombre": "La llave de los primos",
-          "objetivo": "Divisibilidad"
+          "objetivo": "Divisibilidad",
+          "tipo": "Construcción",
+          "historia": "Recompón las piedras de la muralla mediante factores primos.",
+          "reto": "Descompón 84=2²·3·7.",
+          "mecanica": "Colocar piedras-factores",
+          "carta": "campina-2-3"
         },
         {
           "id": "2-4",
           "etapa": 4,
           "nombre": "La sala de factores",
-          "objetivo": "Divisibilidad"
+          "objetivo": "Divisibilidad",
+          "tipo": "Minijefe",
+          "historia": "Dos guardias necesitan turnos compartidos para abrir la reja.",
+          "reto": "Calcula MCD(18,24)=6.",
+          "mecanica": "Sincronizar engranajes",
+          "carta": "campina-2-4"
         },
         {
           "id": "2-5",
           "etapa": 5,
           "nombre": "El sello del mcm",
-          "objetivo": "Divisibilidad"
+          "objetivo": "Divisibilidad",
+          "tipo": "Jefe",
+          "historia": "Prímox custodia el último sello del castillo.",
+          "reto": "Calcula mcm(12,18)=36 y distingue máximo común divisor de mínimo común múltiplo.",
+          "mecanica": "Combate con dos elecciones justificadas",
+          "carta": "campina-2-5"
         }
       ],
-      "jefe": "primox"
+      "jefe": "primox",
+      "cartaLegendaria": "campina-2-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 3,
@@ -112,34 +174,65 @@ window.GALOIS_CAMPINA={
           "id": "3-1",
           "etapa": 1,
           "nombre": "Bajo cero en la torre",
-          "objetivo": "Números enteros"
+          "objetivo": "Números enteros",
+          "tipo": "Exploración",
+          "historia": "Un ascensor mágico sube y baja por las torres ecijanas.",
+          "reto": "Compara −7 y −3 en la recta numérica.",
+          "mecanica": "Mover la ficha por plantas positivas y negativas",
+          "carta": "campina-3-1"
         },
         {
           "id": "3-2",
           "etapa": 2,
           "nombre": "El ascensor de signos",
-          "objetivo": "Números enteros"
+          "objetivo": "Números enteros",
+          "tipo": "Combate matemático",
+          "historia": "Negatrón cambia los signos de los pedidos del mercado.",
+          "reto": "Resuelve +4−9=−5.",
+          "mecanica": "Desactivar signos falsos",
+          "carta": "campina-3-2"
         },
         {
           "id": "3-3",
           "etapa": 3,
           "nombre": "Deudas del mercado",
-          "objetivo": "Números enteros"
+          "objetivo": "Números enteros",
+          "tipo": "Construcción",
+          "historia": "Recupera materiales sumando desplazamientos verticales.",
+          "reto": "Calcula −8+13=5.",
+          "mecanica": "Construir la escalera hasta la planta correcta",
+          "carta": "campina-3-3"
         },
         {
           "id": "3-4",
           "etapa": 4,
           "nombre": "Los paréntesis del campanario",
-          "objetivo": "Números enteros"
+          "objetivo": "Números enteros",
+          "tipo": "Minijefe",
+          "historia": "Los paréntesis del campanario alteran las operaciones.",
+          "reto": "Calcula −2·(3−6)=6.",
+          "mecanica": "Ordenar operaciones con signos",
+          "carta": "campina-3-4"
         },
         {
           "id": "3-5",
           "etapa": 5,
           "nombre": "El combate del signo",
-          "objetivo": "Números enteros"
+          "objetivo": "Números enteros",
+          "tipo": "Jefe",
+          "historia": "Paréntesis Maldito transforma el reloj de la torre en una trampa.",
+          "reto": "Resuelve −(3−7)+(−2)²=8 explicando el orden.",
+          "mecanica": "Batalla de tres movimientos: signos, paréntesis y potencias",
+          "carta": "campina-3-5"
         }
       ],
-      "jefe": "parentesis_maldito"
+      "jefe": "parentesis_maldito",
+      "cartaLegendaria": "campina-3-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 4,
@@ -158,34 +251,65 @@ window.GALOIS_CAMPINA={
           "id": "4-1",
           "etapa": 1,
           "nombre": "Cosecha por partes",
-          "objetivo": "Fracciones"
+          "objetivo": "Fracciones",
+          "tipo": "Exploración",
+          "historia": "El olivar se ha dividido en parcelas desiguales.",
+          "reto": "Representa 3/4 coloreando tres de cuatro partes equivalentes.",
+          "mecanica": "Pintar el huerto fraccionado",
+          "carta": "campina-4-1"
         },
         {
           "id": "4-2",
           "etapa": 2,
           "nombre": "Mosaicos equivalentes",
-          "objetivo": "Fracciones"
+          "objetivo": "Fracciones",
+          "tipo": "Combate matemático",
+          "historia": "Denominadorón duplica las parcelas para despistar.",
+          "reto": "Reconoce 6/8 = 3/4.",
+          "mecanica": "Encontrar piezas equivalentes",
+          "carta": "campina-4-2"
         },
         {
           "id": "4-3",
           "etapa": 3,
           "nombre": "El almacén compartido",
-          "objetivo": "Fracciones"
+          "objetivo": "Fracciones",
+          "tipo": "Construcción",
+          "historia": "Reparte recipientes de aceite entre los vecinos de Marchena.",
+          "reto": "Compara 2/3 y 3/5.",
+          "mecanica": "Mover recipientes hasta ordenarlos",
+          "carta": "campina-4-3"
         },
         {
           "id": "4-4",
           "etapa": 4,
           "nombre": "El aceite del olivar",
-          "objetivo": "Fracciones"
+          "objetivo": "Fracciones",
+          "tipo": "Minijefe",
+          "historia": "Una almazara exige combinar cantidades exactas.",
+          "reto": "Resuelve 1/3+1/6=1/2.",
+          "mecanica": "Mezclar fracciones de aceite",
+          "carta": "campina-4-4"
         },
         {
           "id": "4-5",
           "etapa": 5,
           "nombre": "El laberinto de fracciones",
-          "objetivo": "Fracciones"
+          "objetivo": "Fracciones",
+          "tipo": "Jefe",
+          "historia": "Simplifract roba el libro de las cosechas.",
+          "reto": "Calcula (3/4)·(8/9)=2/3 y simplifica.",
+          "mecanica": "Combate de fracciones y explicación de equivalencias",
+          "carta": "campina-4-5"
         }
       ],
-      "jefe": "simplifract"
+      "jefe": "simplifract",
+      "cartaLegendaria": "campina-4-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 5,
@@ -204,34 +328,65 @@ window.GALOIS_CAMPINA={
           "id": "5-1",
           "etapa": 1,
           "nombre": "Los caminos de escala",
-          "objetivo": "Proporcionalidad"
+          "objetivo": "Proporcionalidad",
+          "tipo": "Exploración",
+          "historia": "Dibuja las rutas desde el Cerro de San Cristóbal.",
+          "reto": "Si 3 cuadernos cuestan 6 €, ¿cuánto cuestan 5?",
+          "mecanica": "Completar tabla de proporcionalidad",
+          "carta": "campina-5-1"
         },
         {
           "id": "5-2",
           "etapa": 2,
           "nombre": "El plano del castillo",
-          "objetivo": "Proporcionalidad"
+          "objetivo": "Proporcionalidad",
+          "tipo": "Combate matemático",
+          "historia": "Señor Escala modifica el tamaño de los senderos.",
+          "reto": "Calcula x en 4/6=x/18.",
+          "mecanica": "Reconstruir un plano a escala",
+          "carta": "campina-5-2"
         },
         {
           "id": "5-3",
           "etapa": 3,
           "nombre": "El mercado proporcional",
-          "objetivo": "Proporcionalidad"
+          "objetivo": "Proporcionalidad",
+          "tipo": "Construcción",
+          "historia": "La torre necesita un plano proporcional.",
+          "reto": "En escala 1 cm : 5 km, interpreta 4 cm.",
+          "mecanica": "Tender puentes en el mapa",
+          "carta": "campina-5-3"
         },
         {
           "id": "5-4",
           "etapa": 4,
           "nombre": "La rebaja del mantecado",
-          "objetivo": "Proporcionalidad"
+          "objetivo": "Proporcionalidad",
+          "tipo": "Minijefe",
+          "historia": "Distribuye los mantecados entre dos grupos según su encargo.",
+          "reto": "Reparte 30 unidades en proporción 2:3.",
+          "mecanica": "Distribuir cajas y justificar",
+          "carta": "campina-5-4"
         },
         {
           "id": "5-5",
           "etapa": 5,
           "nombre": "El arco del porcentaje",
-          "objetivo": "Proporcionalidad"
+          "objetivo": "Proporcionalidad",
+          "tipo": "Jefe",
+          "historia": "Porcentajín confunde las rebajas del mercado.",
+          "reto": "Calcula el 25 % de 80 y el precio tras descontarlo.",
+          "mecanica": "Detectar oferta engañosa y recuperar el sello",
+          "carta": "campina-5-5"
         }
       ],
-      "jefe": "porcentajin"
+      "jefe": "porcentajin",
+      "cartaLegendaria": "campina-5-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 6,
@@ -250,34 +405,65 @@ window.GALOIS_CAMPINA={
           "id": "6-1",
           "etapa": 1,
           "nombre": "La x escondida",
-          "objetivo": "Álgebra"
+          "objetivo": "Álgebra",
+          "tipo": "Exploración",
+          "historia": "La antigua Universidad de Osuna guarda pergaminos codificados.",
+          "reto": "Traduce 'el doble de un número más tres' a 2n+3.",
+          "mecanica": "Descifrar inscripciones",
+          "carta": "campina-6-1"
         },
         {
           "id": "6-2",
           "etapa": 2,
           "nombre": "Los versos cifrados",
-          "objetivo": "Álgebra"
+          "objetivo": "Álgebra",
+          "tipo": "Combate matemático",
+          "historia": "Incógnita X esconde el valor de un símbolo.",
+          "reto": "Evalúa 2x+5 para x=4.",
+          "mecanica": "Activar columnas con sustituciones",
+          "carta": "campina-6-2"
         },
         {
           "id": "6-3",
           "etapa": 3,
           "nombre": "Términos semejantes",
-          "objetivo": "Álgebra"
+          "objetivo": "Álgebra",
+          "tipo": "Construcción",
+          "historia": "Reordena las piedras de la cantera por familias de términos.",
+          "reto": "Simplifica 3x+5x−2x=6x.",
+          "mecanica": "Agrupar piezas semejantes",
+          "carta": "campina-6-3"
         },
         {
           "id": "6-4",
           "etapa": 4,
           "nombre": "La cantera algebraica",
-          "objetivo": "Álgebra"
+          "objetivo": "Álgebra",
+          "tipo": "Minijefe",
+          "historia": "Una puerta antigua se abre expandiendo expresiones.",
+          "reto": "Desarrolla 2(x+4)=2x+8.",
+          "mecanica": "Desplegar una estructura por duplicación",
+          "carta": "campina-6-4"
         },
         {
           "id": "6-5",
           "etapa": 5,
           "nombre": "El sello polinómico",
-          "objetivo": "Álgebra"
+          "objetivo": "Álgebra",
+          "tipo": "Jefe",
+          "historia": "Polinomio Mutante transforma los manuscritos.",
+          "reto": "Simplifica 2x+3x−(x−4)=4x+4.",
+          "mecanica": "Resolver una expresión y comprobarla",
+          "carta": "campina-6-5"
         }
       ],
-      "jefe": "polinomio_mutante"
+      "jefe": "polinomio_mutante",
+      "cartaLegendaria": "campina-6-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 7,
@@ -296,34 +482,65 @@ window.GALOIS_CAMPINA={
           "id": "7-1",
           "etapa": 1,
           "nombre": "Las dos orillas",
-          "objetivo": "Ecuaciones"
+          "objetivo": "Ecuaciones",
+          "tipo": "Exploración",
+          "historia": "Cruza Triana comprobando las igualdades de los accesos.",
+          "reto": "Encuentra x en x+3=7.",
+          "mecanica": "Equilibrar dos platillos",
+          "carta": "campina-7-1"
         },
         {
           "id": "7-2",
           "etapa": 2,
           "nombre": "Balanza alfarera",
-          "objetivo": "Ecuaciones"
+          "objetivo": "Ecuaciones",
+          "tipo": "Combate matemático",
+          "historia": "Equilibrius descompensa las pesas de una alfarería.",
+          "reto": "Resuelve x−5=9.",
+          "mecanica": "Aplicar la misma operación a ambos lados",
+          "carta": "campina-7-2"
         },
         {
           "id": "7-3",
           "etapa": 3,
           "nombre": "El peso incógnito",
-          "objetivo": "Ecuaciones"
+          "objetivo": "Ecuaciones",
+          "tipo": "Construcción",
+          "historia": "El puente necesita ajustar dos cables opuestos.",
+          "reto": "Resuelve 3x+2=x+10.",
+          "mecanica": "Mantener iguales ambos lados del puente",
+          "carta": "campina-7-3"
         },
         {
           "id": "7-4",
           "etapa": 4,
           "nombre": "La ecuación del puente",
-          "objetivo": "Ecuaciones"
+          "objetivo": "Ecuaciones",
+          "tipo": "Minijefe",
+          "historia": "Los maestros ceramistas plantean un encargo enigmático.",
+          "reto": "Si el triple de una cantidad es 21, encuentra la cantidad.",
+          "mecanica": "Traducir una historia en ecuación",
+          "carta": "campina-7-4"
         },
         {
           "id": "7-5",
           "etapa": 5,
           "nombre": "El guardián del despeje",
-          "objetivo": "Ecuaciones"
+          "objetivo": "Ecuaciones",
+          "tipo": "Jefe",
+          "historia": "Despejador Oscuro protege el último torno.",
+          "reto": "Resuelve 2(x+3)=18 y comprueba x=6.",
+          "mecanica": "Despeje, sustitución y revisión final",
+          "carta": "campina-7-5"
         }
       ],
-      "jefe": "despejador_oscuro"
+      "jefe": "despejador_oscuro",
+      "cartaLegendaria": "campina-7-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 8,
@@ -342,34 +559,65 @@ window.GALOIS_CAMPINA={
           "id": "8-1",
           "etapa": 1,
           "nombre": "La rueda del molino",
-          "objetivo": "Funciones"
+          "objetivo": "Funciones",
+          "tipo": "Exploración",
+          "historia": "Señala los molinos en un plano de ejes cartesianos.",
+          "reto": "Sitúa A(−2,3) en el cuadrante II.",
+          "mecanica": "Caminar por una cuadrícula de coordenadas",
+          "carta": "campina-8-1"
         },
         {
           "id": "8-2",
           "etapa": 2,
           "nombre": "Puntos del río",
-          "objetivo": "Funciones"
+          "objetivo": "Funciones",
+          "tipo": "Combate matemático",
+          "historia": "Pendientor altera las tablas de la corriente.",
+          "reto": "Si y=2x+1, calcula y para x=3.",
+          "mecanica": "Completar la tabla de caudales",
+          "carta": "campina-8-2"
         },
         {
           "id": "8-3",
           "etapa": 3,
           "nombre": "La subida de la corriente",
-          "objetivo": "Funciones"
+          "objetivo": "Funciones",
+          "tipo": "Construcción",
+          "historia": "Reconstituye la gráfica del movimiento de una rueda.",
+          "reto": "Comprueba que (0,1), (1,3) y (2,5) siguen y=2x+1.",
+          "mecanica": "Trazar puntos sobre el río",
+          "carta": "campina-8-3"
         },
         {
           "id": "8-4",
           "etapa": 4,
           "nombre": "La gráfica secreta",
-          "objetivo": "Funciones"
+          "objetivo": "Funciones",
+          "tipo": "Minijefe",
+          "historia": "La pendiente cambia el sentido del agua.",
+          "reto": "Distingue crecimiento, decrecimiento y constancia en tres gráficas.",
+          "mecanica": "Girar compuertas al leer gráficas",
+          "carta": "campina-8-4"
         },
         {
           "id": "8-5",
           "etapa": 5,
           "nombre": "El desafío del cauce",
-          "objetivo": "Funciones"
+          "objetivo": "Funciones",
+          "tipo": "Jefe",
+          "historia": "Parábola Vórtice retuerce el cauce.",
+          "reto": "Determina si (2,4) pertenece a y=x² y compara dos tablas.",
+          "mecanica": "Batalla de puntos, tablas y representación",
+          "carta": "campina-8-5"
         }
       ],
-      "jefe": "parabola_vortice"
+      "jefe": "parabola_vortice",
+      "cartaLegendaria": "campina-8-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 9,
@@ -388,34 +636,65 @@ window.GALOIS_CAMPINA={
           "id": "9-1",
           "etapa": 1,
           "nombre": "El censo de Itálica",
-          "objetivo": "Estadística"
+          "objetivo": "Estadística",
+          "tipo": "Exploración",
+          "historia": "Los organizadores de Itálica necesitan ordenar datos de asistencia.",
+          "reto": "Ordena 2,3,3,4,8 y reconoce el conjunto de datos.",
+          "mecanica": "Recoger fichas de espectadores",
+          "carta": "campina-9-1"
         },
         {
           "id": "9-2",
           "etapa": 2,
           "nombre": "La media de la arena",
-          "objetivo": "Estadística"
+          "objetivo": "Estadística",
+          "tipo": "Combate matemático",
+          "historia": "Mediana Traviesa cambia los datos para confundir.",
+          "reto": "Calcula la media de 2,3,3,4,8: 4.",
+          "mecanica": "Ajustar el marcador de la media",
+          "carta": "campina-9-2"
         },
         {
           "id": "9-3",
           "etapa": 3,
           "nombre": "Los mosaicos de barras",
-          "objetivo": "Estadística"
+          "objetivo": "Estadística",
+          "tipo": "Construcción",
+          "historia": "Monta un mosaico que represente frecuencias.",
+          "reto": "Representa [1,1,2,3,3,3] en un gráfico de barras.",
+          "mecanica": "Completar una gráfica en el anfiteatro",
+          "carta": "campina-9-3"
         },
         {
           "id": "9-4",
           "etapa": 4,
           "nombre": "El gráfico manipulado",
-          "objetivo": "Estadística"
+          "objetivo": "Estadística",
+          "tipo": "Minijefe",
+          "historia": "Un mensajero presenta un gráfico de escala truncada.",
+          "reto": "Detecta cómo una escala que empieza en 95 exagera diferencias.",
+          "mecanica": "Investigar ejes manipulados",
+          "carta": "campina-9-4"
         },
         {
           "id": "9-5",
           "etapa": 5,
           "nombre": "El debate del anfiteatro",
-          "objetivo": "Estadística"
+          "objetivo": "Estadística",
+          "tipo": "Jefe",
+          "historia": "Gráfico Tramposo controla la votación del anfiteatro.",
+          "reto": "Para [2,2,3,3,10], calcula media=4 y mediana=3.",
+          "mecanica": "Argumentar con medidas y gráficos",
+          "carta": "campina-9-5"
         }
       ],
-      "jefe": "grafico_tramposo"
+      "jefe": "grafico_tramposo",
+      "cartaLegendaria": "campina-9-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     },
     {
       "id": 10,
@@ -434,34 +713,65 @@ window.GALOIS_CAMPINA={
           "id": "10-1",
           "etapa": 1,
           "nombre": "Dados de la muralla",
-          "objetivo": "Probabilidad"
+          "objetivo": "Probabilidad",
+          "tipo": "Exploración",
+          "historia": "En el Real Alcázar aparecen dados con rutas alternativas.",
+          "reto": "Enumera el espacio muestral de un dado de seis caras.",
+          "mecanica": "Elegir puertas del jardín",
+          "carta": "campina-10-1"
         },
         {
           "id": "10-2",
           "etapa": 2,
           "nombre": "La urna de los sucesos",
-          "objetivo": "Probabilidad"
+          "objetivo": "Probabilidad",
+          "tipo": "Combate matemático",
+          "historia": "Dado Caótico inventa resultados imposibles.",
+          "reto": "Clasifica obtener un 7 en un dado normal como imposible.",
+          "mecanica": "Separar seguro, posible e imposible",
+          "carta": "campina-10-2"
         },
         {
           "id": "10-3",
           "etapa": 3,
           "nombre": "Las rutas posibles",
-          "objetivo": "Probabilidad"
+          "objetivo": "Probabilidad",
+          "tipo": "Construcción",
+          "historia": "Los azulejos del patio deben dividirse por posibilidades.",
+          "reto": "Calcula P(par)=3/6=1/2 en un dado equilibrado.",
+          "mecanica": "Distribuir azulejos por casos favorables",
+          "carta": "campina-10-3"
         },
         {
           "id": "10-4",
           "etapa": 4,
           "nombre": "El cálculo de casos",
-          "objetivo": "Probabilidad"
+          "objetivo": "Probabilidad",
+          "tipo": "Minijefe",
+          "historia": "Dos monedas marcan el itinerario del laberinto.",
+          "reto": "Enumera los cuatro resultados de dos lanzamientos de moneda.",
+          "mecanica": "Dibujar árbol de posibilidades",
+          "carta": "campina-10-4"
         },
         {
           "id": "10-5",
           "etapa": 5,
           "nombre": "El laberinto del azar",
-          "objetivo": "Probabilidad"
+          "objetivo": "Probabilidad",
+          "tipo": "Jefe",
+          "historia": "Ruleta Imposible guarda el Compás de los Alarifes.",
+          "reto": "En una bolsa con 3 rojas y 2 azules, calcula P(roja)=3/5.",
+          "mecanica": "Combate final de sucesos y explicación",
+          "carta": "campina-10-5"
         }
       ],
-      "jefe": "ruleta_imposible"
+      "jefe": "ruleta_imposible",
+      "cartaLegendaria": "campina-10-6",
+      "jefeFases": [
+        "Descubrir la regla matemática",
+        "Resolver el desafío",
+        "Explicar y transferir a otro problema"
+      ]
     }
   ],
   "cartas": [
@@ -1079,5 +1389,6 @@ window.GALOIS_CAMPINA={
     "rara": "Rara",
     "epica": "Épica",
     "legendaria": "Legendaria"
-  }
+  },
+  "historiaCentral": "Los planos de los alarifes de Fuentes se han fragmentado en diez piezas del Compás de la Campiña. Cada reino conserva una pieza y seis cartas culturales. Al recuperar las diez piezas y dominar los desafíos, se restaura el archivo de Galois."
 };
