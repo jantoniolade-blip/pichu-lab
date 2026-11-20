@@ -15,7 +15,7 @@
      frame(hoja, anim, dir, t)   -> {sx, sy} del fotograma a dibujar en t (s)
      pintar(ctx, hoja, anim, dir, i, x, y, escala)
    Las hojas son <canvas> que también se exportan como PNG
-   (herramientas/exportar-sprites.mjs).
+   (herramientas/exportar-sprites.js).
    ===================================================================== */
 (function (root) {
   'use strict';
@@ -42,19 +42,28 @@
   Buf.prototype.mirror = function () { var b = new Buf(this.w, this.h); for (var y = 0; y < this.h; y++) for (var x = 0; x < this.w; x++) b.p[y * this.w + (this.w - 1 - x)] = this.p[y * this.w + x]; return b; };
   Buf.prototype.map = function (fn) { for (var i = 0; i < this.p.length; i++) if (this.p[i]) this.p[i] = fn(this.p[i], i); return this; };
   Buf.prototype.paste = function (b, dx, dy) { for (var y = 0; y < b.h; y++) for (var x = 0; x < b.w; x++) { var c = b.p[y * b.w + x]; if (c) this.set(dx + x, dy + y, c); } };
-  /* Gira 90° (cuerpo tumbado en la animación de derrota) */
-  Buf.prototype.tumbar = function (suelo) {
-    var b = new Buf(this.w, this.h);
+  // La caída conserva todos los píxeles de la pose dentro del fotograma.
+  Buf.prototype.tumbar = function (suelo, angulo) {
+    var b = new Buf(this.w, this.h), sin = Math.sin(angulo), cos = Math.cos(angulo);
+    var minX = Infinity, maxX = -Infinity, maxY = -Infinity, puntos = [];
     for (var y = 0; y < this.h; y++) for (var x = 0; x < this.w; x++) {
-      var c = this.p[y * this.w + x]; if (!c) continue;
-      var nx = y - 12, ny = suelo - (x - 8); // cabeza a la izquierda
-      b.set(nx, ny - 14, c);
+      var c = this.get(x, y); if (!c) continue;
+      var nx = x * cos + y * sin, ny = -x * sin + y * cos;
+      minX = Math.min(minX, nx); maxX = Math.max(maxX, nx); maxY = Math.max(maxY, ny);
+      puntos.push([nx, ny, c]);
     }
+    var escala = Math.min(1, (this.w - 4) / (maxX - minX));
+    puntos.forEach(function (q) { b.set((b.w - 1) / 2 + (q[0] - (minX + maxX) / 2) * escala, suelo - (maxY - q[1]) * escala, q[2]); });
     return b;
   };
   Buf.prototype.toCanvas = function (cv, ox, oy) {
     var ctx = cv.getContext('2d');
-    for (var y = 0; y < this.h; y++) for (var x = 0; x < this.w; x++) { var c = this.p[y * this.w + x]; if (c) { ctx.fillStyle = c; ctx.fillRect(ox + x, oy + y, 1, 1); } }
+    for (var y = 0; y < this.h; y++) for (var x = 0; x < this.w;) {
+      var c = this.get(x, y), fin = x + 1;
+      while (fin < this.w && this.get(fin, y) === c) fin++;
+      if (c) { ctx.fillStyle = c; ctx.fillRect(ox + x, oy + y, fin - x, 1); }
+      x = fin;
+    }
   };
 
   /* ---------- Color ---------- */
@@ -88,17 +97,17 @@
      HÉROES
      ===================================================================== */
   var heroes = {
-    galois:        { skin: '#f2c39b', hair: '#5a3622', pelo: 'rizado', coat: '#b8323a', shirt: '#f4efe6', pants: '#24305e', shoes: '#2a1d1d', acc: '#24305e', cape: '#1f2c5c', magia: '#7fd8ff' },
+    galois:        { skin: '#f2c39b', hair: '#5a3622', pelo: 'rizado', coat: '#b8323a', shirt: '#f4efe6', pants: '#24305e', shoes: '#2a1d1d', acc: '#24305e', cape: '#1f2c5c', corte: 'levita', magia: '#7fd8ff' },
     gauss:         { skin: '#efc6a6', hair: '#e8e4dc', pelo: 'corto', hat: 'boina', hatC: '#1d1f2b', coat: '#2a2c38', shirt: '#f2f2f2', pants: '#2c2d3a', shoes: '#181820', acc: '#c9a44a', magia: '#ffd86b' },
-    euler:         { skin: '#f0c4a0', hair: '#cfc6b8', pelo: 'corto', hat: 'turbante', hatC: '#efe2c4', hatB: '#8a5a32', coat: '#7a4b2a', shirt: '#f2ead8', pants: '#4a3424', shoes: '#2a1d1d', acc: '#d8b45a', magia: '#9df07a' },
+    euler:         { skin: '#f0c4a0', hair: '#cfc6b8', pelo: 'corto', hat: 'cofia', hatC: '#efe2c4', hatB: '#8a5a32', coat: '#7a4b2a', shirt: '#f2ead8', pants: '#4a3424', shoes: '#2a1d1d', acc: '#d8b45a', magia: '#9df07a' },
     emmy_noether:  { skin: '#f1c7a5', hair: '#3b2a20', pelo: 'melena', gafas: true, coat: '#56607a', shirt: '#e8e8f0', vestido: true, shoes: '#22222c', acc: '#a7b4d8', magia: '#c59bff' },
-    hipatia:       { skin: '#d9a27a', hair: '#2b1b14', pelo: 'mono', coat: '#efe9dc', shirt: '#efe9dc', vestido: true, shoes: '#8a5a32', acc: '#d9a441', diadema: '#d9a441', magia: '#ffe9a0' },
-    ada_lovelace:  { skin: '#f3cdb0', hair: '#2c1c18', pelo: 'mono', coat: '#6a3f8f', shirt: '#e9dff5', vestido: true, shoes: '#2a1830', acc: '#e9dff5', magia: '#ff9be0' },
-    fibonacci:     { skin: '#efc19b', hair: '#6b4226', pelo: 'corto', hat: 'gorro', hatC: '#a8322f', coat: '#3f7a3a', shirt: '#e9dcc0', pants: '#7a5a3a', shoes: '#3a2418', acc: '#d9a441', magia: '#b6f56a' },
-    fermat:        { skin: '#f0c6a2', hair: '#3a2a24', pelo: 'largo', coat: '#1c1a24', shirt: '#f4f1e8', cuello: '#f4f1e8', pants: '#1c1a24', shoes: '#120e14', acc: '#8a2b3a', magia: '#ff7a6a' },
-    sophie_germain:{ skin: '#f2c8aa', hair: '#7a4a2a', pelo: 'rizos', coat: '#3c6fb4', shirt: '#f2efe8', vestido: true, shoes: '#22222c', acc: '#f2efe8', magia: '#8fd7ff' },
-    ramanujan:     { skin: '#a8714f', hair: '#1a1414', pelo: 'corto', coat: '#ece7da', shirt: '#ffffff', pants: '#3a3a46', shoes: '#1c1414', acc: '#7a5a3a', magia: '#ffb45a' },
-    al_juarismi:   { skin: '#c48a5f', hair: '#2a2020', pelo: 'corto', hat: 'turbante', hatC: '#f4f1ea', hatB: '#2a7a7a', barba: '#2a2020', coat: '#2a7a7a', shirt: '#f4f1ea', vestido: true, shoes: '#3a2418', acc: '#d9a441', magia: '#6af5e0' }
+    hipatia:       { skin: '#d9a27a', hair: '#2b1b14', pelo: 'mono', coat: '#efe9dc', shirt: '#efe9dc', vestido: true, shoes: '#8a5a32', acc: '#d9a441', diadema: '#d9a441', corte: 'tunica', magia: '#ffe9a0' },
+    ada_lovelace:  { skin: '#f3cdb0', hair: '#2c1c18', pelo: 'rizos', diadema: '#d9a441', corte: 'encaje', coat: '#6a3f8f', shirt: '#e9dff5', vestido: true, shoes: '#2a1830', acc: '#e9dff5', magia: '#ff9be0' },
+    fibonacci:     { skin: '#efc19b', hair: '#6b4226', pelo: 'corto', hat: 'capucha', hatC: '#ac3c37', cape: '#a8322f', coat: '#3f7a3a', shirt: '#e9dcc0', pants: '#7a5a3a', shoes: '#3a2418', acc: '#d9a441', magia: '#b6f56a' },
+    fermat:        { skin: '#f0c6a2', hair: '#3a2a24', pelo: 'largo', coat: '#1c1a24', shirt: '#f4f1e8', cuello: '#f4f1e8', corte: 'levita', bigote: true, pants: '#1c1a24', shoes: '#120e14', acc: '#8a2b3a', magia: '#ff7a6a' },
+    sophie_germain:{ skin: '#f2c8aa', hair: '#7a4a2a', pelo: 'rizos', diadema: '#76bee9', corte: 'imperio', coat: '#3c6fb4', shirt: '#f2efe8', vestido: true, shoes: '#22222c', acc: '#f2efe8', magia: '#8fd7ff' },
+    ramanujan:     { skin: '#a8714f', hair: '#1a1414', pelo: 'corto', coat: '#313949', shirt: '#bac7dd', pants: '#252c39', shoes: '#1c1414', acc: '#7a5a3a', magia: '#ffb45a' },
+    al_juarismi:   { skin: '#c48a5f', hair: '#2a2020', pelo: 'corto', hat: 'turbante', hatC: '#f4f1ea', hatB: '#d6be93', corte: 'tunica', barba: '#2a2020', coat: '#2a7a7a', shirt: '#f4f1ea', vestido: true, shoes: '#3a2418', acc: '#d9a441', magia: '#6af5e0' }
   };
 
   var ANIM_HEROE = {
@@ -135,18 +144,22 @@
           p.hR = [0, -Math.round(1.5 * k * s) + (anim === 'run' ? -2 : 0)];
         }
         p.by = Math.abs(s) > .7 ? 1 : 0;
-        if (anim === 'run') { p.by -= (f % 4 === 1 || f % 4 === 2) ? 1 : 0; p.boca = 'o'; }
+        p.tela = anim === 'run' ? [2, 3, 4, 4, 3, 2, 3, 4][f] : [0, 1, 1, 0, 0, 1, 1, 0][f];
+        if (anim === 'run') { p.by = [1, 0, -1, 0][f % 4]; p.aire = p.by < 0; p.boca = 'o'; }
         break;
       case 'jump':
-        var J = [[2, 0, 1, 0], [-3, -2, -2, 0], [-7, -4, -8, 1], [-9, -4, -9, 1], [-5, -1, -4, 2], [2, 0, 1, 2]][f];
-        p.by = J[0]; p.aire = true; p.fL = [lado ? -1 : 1 * (J[1] < -2 ? 1 : 0), J[1]]; p.fR = [lado ? 1 : -(J[1] < -2 ? 1 : 0), J[1]];
-        if (J[3] === 2) { p.hL = [-3, -4]; p.hR = [3, -4]; } else if (J[3] === 1) { p.hL = [-1, J[2]]; p.hR = [1, J[2]]; } else { p.hL = [-1, J[2]]; p.hR = [1, J[2]]; }
+        var J = [[2, 0, 2], [-2, 0, 0], [-6, -3, -6], [-8, -4, -9], [-4, -2, -5], [2, 0, 1]][f];
+        p.by = J[0]; p.aire = J[0] < 0;
+        p.fL = [lado && p.aire ? -2 : 0, J[1]]; p.fR = [p.aire ? 2 : 0, J[1]];
+        p.hL = [-1, J[2]]; p.hR = [1, J[2]];
+        p.tela = [0, -1, -2, 0, 3, 2][f];
         if (f === 5) { p.hL = [-2, 0]; p.hR = [2, 0]; }
         p.boca = f >= 2 && f <= 3 ? 'o' : 'n';
         break;
       case 'attack':
         var A = lado ? [[0, -1], [5, -6], [2, -11], [-7, -6], [-8, -3], [-4, -1], [0, 0]][f] : [[0, -2], [1, -12], [2, -13], [-6, -4], [-8, 0], [-3, -1], [0, 0]][f];
         if (lado) p.hL = A; else p.hR = A;
+        p.tela = [0, -1, -2, 1, 3, 2, 0][f];
         p.arma = 'compas'; if (f === 3 || f === 4) p.fx.push({ t: 'tajo', f: f - 3 });
         p.bx = lado ? (f === 3 || f === 4 ? -1 : f === 1 ? 1 : 0) : 0; p.by = f === 3 ? 1 : 0; p.boca = f >= 3 && f <= 4 ? 'o' : 'n';
         if (lado) { p.fL = [f >= 3 && f <= 4 ? -2 : 0, 0]; }
@@ -174,55 +187,178 @@
         p.ojos = 'closed'; p.boca = 'o';
         if (f === 0) { p.bx = 1; p.hL = [-2, -1]; p.hR = [2, -1]; }
         if (f === 1) { p.by = 4; p.fL = [-2, -2]; p.fR = [2, -2]; p.hL = [0, 2]; p.hR = [0, 2]; }
-        if (f === 2) { p.by = 5; p.fL = [-2, -2]; p.fR = [2, -2]; p.hL = [0, 3]; p.hR = [0, 3]; p.cabeza = 1; }
-        if (f >= 3) { p.tumbado = true; p.ojos = 'x'; }
+        if (f === 2) { p.tumbado = Math.PI / 5; p.hL = [-2, -1]; p.hR = [2, -1]; }
+        if (f >= 3) { p.tumbado = Math.PI / 2; p.ojos = 'x'; }
         if (f === 4) p.fx.push({ t: 'mareo' });
         break;
     }
     return p;
   }
 
-  function brazo(b, sx, sy, hx, hy, C, ropa, piel) {
-    b.line(sx, sy, hx, hy, ropa, 2);
-    b.rect(hx, hy + 1, 2, 2, piel);
+  function brazo(b, sx, sy, hx, hy, ropa, piel) {
+    var ex = Math.round((sx + hx) / 2), ey = Math.round((sy + hy) / 2) + (hy < sy ? 2 : 0);
+    b.line(sx, sy, ex, ey, dark(ropa, .28), 3);
+    b.line(ex, ey, hx, hy, dark(ropa, .28), 3);
+    b.line(sx, sy, ex, ey, ropa, 2);
+    b.line(ex, ey, hx, hy, ropa, 2);
+    b.set(sx, sy, light(ropa, .25));
+    b.rect(hx, hy + 1, 3, 2, dark(piel, .22));
+    b.rect(hx, hy + 1, 2, 1, piel);
+    b.set(hx, hy + 1, light(piel, .29));
   }
   function pierna(b, hx, hy, fx, fy, ropa, zap, dir) {
-    b.line(hx, hy, fx, fy, ropa, 3);
-    if (dir === 'side') b.rect(fx - 1, fy + 1, 4, 2, zap); else b.rect(fx - (dir === 'L' ? 1 : 0), fy + 1, 4, 2, zap);
+    b.line(hx, hy, fx, fy, dark(ropa, .27), 3);
+    b.line(hx, hy, fx, fy, ropa, 2);
+    b.line(hx, hy + 1, (hx + fx) / 2, (hy + fy) / 2, light(ropa, .2));
+    var punta = fx - (dir === 'R' ? 0 : 1);
+    b.rect(punta, fy + 1, 4, 2, dark(zap, .26));
+    b.rect(punta, fy + 1, 3, 1, light(zap, .24));
+    b.set(punta + 3, fy + 1, zap);
   }
 
-  function pelo(b, P, vista, x0, y0) {
-    var H = P.hair, Hs = dark(P.hair, .25), st = P.pelo;
-    if (vista === 'up') {
-      b.rect(x0, y0 - 1, 12, 11, H); b.rect(x0 + 1, y0 + 9, 10, 1, Hs);
-      if (st === 'largo' || st === 'rizos' || st === 'melena') b.rect(x0, y0 + 9, 12, st === 'melena' ? 2 : 5, H);
-      if (st === 'mono') { b.rect(x0 + 3, y0 - 3, 6, 4, H); b.rect(x0 + 4, y0 - 3, 4, 1, light(H, .2)); }
-      if (st === 'rizado' || st === 'rizos') for (var i = 0; i < 12; i += 2) b.set(x0 + i, y0 - 2, H);
-      return;
+  function pelo(b, P, vista, x, y, tela) {
+    var c = P.hair, sombra = dark(c, .35), brillo = light(c, .28);
+    var st = P.pelo, espalda = vista === 'up', lado = vista === 'side';
+    var longitud = st === 'largo' ? 12 : st === 'rizos' ? 11 : st === 'melena' ? 9 : 5;
+    b.rect(x + 2, y - 2, 8, 5, c);
+    b.rect(x, y, 12, 3, c);
+    if (espalda) {
+      b.rect(x, y + 2, 12, 7, c);
+      b.rect(x + 3, y + 9, 8, 1, sombra);
+      b.line(x + 2, y + 2, x + 2, y + 6, brillo);
+      b.line(x + 9, y + 2, x + 9, y + 8, sombra);
+    } else {
+      b.line(x + 1, y + 2, x + 5, y + 3, sombra);
+      b.rect(x + (lado ? 7 : 10), y + 2, lado ? 5 : 2, 3, sombra);
+      if (!lado) b.rect(x, y + 2, 2, 3, c);
     }
-    if (vista === 'side') {
-      b.rect(x0, y0 - 1, 11, 4, H); b.rect(x0 + 6, y0, 5, 7, H); b.rect(x0 + 1, y0 + 3, 3, 1, H);
-      if (st === 'largo' || st === 'rizos') b.rect(x0 + 7, y0 + 6, 4, 7, H);
-      if (st === 'melena') b.rect(x0 + 6, y0 + 6, 5, 3, H);
-      if (st === 'mono') { b.rect(x0 + 8, y0 - 2, 4, 4, H); }
-      if (st === 'rizado' || st === 'rizos') { b.set(x0 + 2, y0 - 2, H); b.set(x0 + 5, y0 - 2, H); b.set(x0 + 8, y0 - 2, H); b.set(x0 + 11, y0 + 2, H); }
-      b.rect(x0 + 6, y0 + 2, 5, 1, Hs);
-      return;
+    if (longitud > 5) {
+      var deriva = Math.round((tela || 0) / 2);
+      b.line(x + 10, y + 3, x + 10 + deriva, y + longitud, sombra, 2);
+      b.line(x + 10, y + 3, x + 10 + deriva, y + longitud - 1, c);
+      if (!lado) b.line(x, y + 3, x - deriva, y + longitud - 1, c, 2);
     }
-    // frontal
-    b.rect(x0, y0 - 1, 12, 4, H); b.rect(x0, y0 + 2, 2, 4, H); b.rect(x0 + 10, y0 + 2, 2, 4, H);
-    b.rect(x0 + 2, y0 + 3, 3, 1, H); b.rect(x0 + 7, y0 + 3, 2, 1, H); b.rect(x0 + 1, y0 + 2, 10, 1, Hs);
-    if (st === 'largo' || st === 'rizos') { b.rect(x0 - 1, y0 + 2, 2, 11, H); b.rect(x0 + 11, y0 + 2, 2, 11, H); }
-    if (st === 'melena') { b.rect(x0 - 1, y0 + 2, 2, 8, H); b.rect(x0 + 11, y0 + 2, 2, 8, H); }
-    if (st === 'mono') { b.rect(x0 + 3, y0 - 3, 6, 3, H); b.rect(x0 + 4, y0 - 3, 4, 1, light(H, .2)); }
-    if (st === 'rizado' || st === 'rizos') { for (var j = 0; j < 12; j += 2) b.set(x0 + j, y0 - 2, H); b.set(x0 - 1, y0 + 1, H); b.set(x0 + 12, y0 + 1, H); }
+    if (st === 'mono') {
+      b.ellipse(x + (lado ? 10 : 6), y - (espalda ? 2 : 3), 4, 3, sombra);
+      b.ellipse(x + (lado ? 9 : 5), y - (espalda ? 3 : 4), 3, 2, c);
+    }
+    if (st === 'rizado' || st === 'rizos') {
+      for (var i = 0; i < 4; i++) {
+        b.ellipse(x + 1 + i * 3, y - (i === 1 ? 2 : 1), 2, 2, i === 3 ? sombra : c);
+        b.set(x + i * 3, y - (i === 1 ? 3 : 2), brillo);
+      }
+    } else {
+      b.line(x + 2, y, x + 5, y - 1, brillo);
+      b.set(x + 7, y - 1, brillo);
+    }
+    if (P.diadema) {
+      b.line(x + 1, y + 1, x + (lado ? 9 : 10), y - 1, P.diadema);
+      b.set(x + 3, y, light(P.diadema, .56));
+    }
   }
-  function sombrero(b, P, vista, x0, y0) {
+
+  function sombrero(b, P, vista, x, y) {
     if (!P.hat) return;
-    var C = P.hatC, Cs = dark(C, .25);
-    if (P.hat === 'boina') { b.rect(x0 - 1, y0 - 2, 14, 3, C); b.rect(x0 + 1, y0 - 4, 10, 2, C); b.rect(x0 - 1, y0, 14, 1, Cs); if (vista === 'side') b.rect(x0 - 2, y0 - 1, 3, 1, C); }
-    if (P.hat === 'turbante') { b.rect(x0 - 1, y0 - 4, 14, 6, C); b.rect(x0, y0 - 5, 12, 1, C); b.rect(x0 - 1, y0 - 1, 14, 1, P.hatB); b.line(x0 + 1, y0 - 4, x0 + 9, y0 - 2, Cs, 1); if (vista === 'up') b.rect(x0 + 3, y0 + 1, 6, 1, Cs); }
-    if (P.hat === 'gorro') { b.rect(x0 - 1, y0 - 3, 14, 4, C); b.rect(x0 + 2, y0 - 5, 9, 2, C); b.rect(x0 - 1, y0, 14, 1, Cs); if (vista !== 'down') b.rect(vista === 'side' ? x0 + 10 : x0 + 4, y0 + 1, 3, 5, C); }
+    var c = P.hatC, sombra = dark(c, .34), brillo = light(c, .3);
+    switch (P.hat) {
+      case 'boina':
+        b.ellipse(x + 6, y - 2, 8, 4, sombra);
+        b.ellipse(x + 5, y - 3, 7, 3, c);
+        b.line(x, y - 3, x + 6, y - 5, brillo);
+        b.rect(x + (vista === 'side' ? -3 : 0), y, 12, 1, sombra);
+        break;
+      case 'cofia':
+        b.ellipse(x + 6, y - 1, 8, 5, sombra);
+        b.ellipse(x + 5, y - 2, 7, 4, c);
+        b.line(x, y - 2, x + 3, y - 5, brillo);
+        b.line(x + 5, y - 4, x + 8, y - 2, sombra);
+        b.rect(x, y + 1, 13, 1, light(c, .18));
+        break;
+      case 'turbante':
+        b.ellipse(x + 6, y - 2, 8, 5, c);
+        b.line(x - 1, y, x + 10, y - 5, sombra, 2);
+        b.line(x - 1, y - 1, x + 9, y - 6, brillo);
+        b.line(x + 1, y + 1, x + 12, y - 3, P.hatB);
+        b.rect(x + (vista === 'side' ? 10 : 0), y + 2, 2, 8, sombra);
+        break;
+      case 'capucha':
+        b.ellipse(x + 6, y, 8, 6, c);
+        b.rect(x - 1, y + 1, 2, 8, sombra);
+        b.rect(x + 11, y + 1, 2, 9, sombra);
+        if (vista !== 'up') {
+          b.ellipse(x + 6, y + 3, 5, 3, sombra);
+          b.rect(x + 2, y + 4, 8, 2, P.skin);
+        }
+        b.line(x - 1, y - 1, x + 5, y - 5, brillo);
+        break;
+      default:
+        b.ellipse(x + 6, y - 2, 7, 4, sombra);
+        b.ellipse(x + 5, y - 3, 6, 3, c);
+        b.rect(x, y, 12, 1, brillo);
+    }
+  }
+
+  function ojo(b, x, y, estado, piel) {
+    var tinta = '#24162e';
+    if (estado === 'open') {
+      b.rect(x, y, 2, 2, tinta);
+      b.set(x, y, '#ffeed5');
+      b.set(x - 1, y - 1, dark(piel, .48));
+      b.set(x, y - 1, dark(piel, .48));
+    } else if (estado === 'closed') b.rect(x, y + 1, 2, 1, tinta);
+    else {
+      b.line(x - 1, y, x + 1, y + 2, tinta);
+      b.line(x + 1, y, x - 1, y + 2, tinta);
+    }
+  }
+
+  function lente(b, x, y) {
+    var c = '#2a2438';
+    b.rect(x, y - 1, 2, 1, c);
+    b.rect(x, y + 2, 2, 1, c);
+    b.rect(x - 1, y, 1, 2, c);
+    b.rect(x + 2, y, 1, 2, c);
+  }
+
+  function capa(b, x, y, w, c, tela) {
+    var sombra = dark(c, .35), luz = light(c, .3);
+    for (var i = 0; i < 14; i++) {
+      var vuelo = Math.round(tela * i / 13);
+      b.rect(x + Math.min(vuelo, 0), y + i, w + Math.max(vuelo, 0) + (i >> 2), 1, i === 13 ? sombra : c);
+      b.set(x + Math.min(vuelo, 0), y + i, luz);
+      if (i > 3) b.set(x + w - 2 + vuelo, y + i, sombra);
+    }
+  }
+
+  function ropaHeroe(b, P, x, y, w, vista) {
+    var luz = light(P.coat, .28), sombra = dark(P.coat, .32);
+    if (P.corte === 'levita') {
+      b.line(x + 1, y + 6, x, y + 13, sombra, 2);
+      b.line(x + w - 2, y + 6, x + w - 2, y + 12, P.coat, 2);
+      b.line(x + 1, y + 8, x + 1, y + 11, luz);
+    }
+    if (P.vestido) {
+      b.line(x + 2, y + 8, x, y + 14, luz);
+      b.line(x + w - 4, y + 8, x + w - 2, y + 14, sombra);
+      b.line(x + w - 2, y + 8, x + w, y + 14, P.coat);
+    }
+    if (vista === 'up') {
+      b.line(x + 1, y + 2, x + w - 2, y + 2, luz);
+      return;
+    }
+    if (P.corte === 'tunica') {
+      b.line(x + 1, y, x + w - 2, y + 5, sombra, 2);
+      b.line(x + 1, y, x + w - 2, y + 5, P.acc);
+      b.set(x + 1, y + 1, light(P.acc, .43));
+    } else if (P.corte === 'encaje' || P.corte === 'imperio') {
+      b.line(x + 1, y + 3, x + w - 2, y + 3, P.shirt);
+      b.rect(x + 2, y + 5, w - 4, 1, luz);
+      b.set(x + (w >> 1), y + 3, P.acc);
+    } else {
+      b.line(x + 2, y + 2, x + 4, y + 5, luz);
+      b.line(x + w - 2, y + 2, x + w - 4, y + 5, sombra);
+      b.set(x + (w >> 1), y + 6, P.acc);
+    }
   }
 
   function dibujarHeroe(P, anim, f, dir) {
@@ -237,9 +373,9 @@
     if (vista === 'side') {
       // brazo lejano, pierna lejana, capa, pierna cercana, torso, cabeza, brazo cercano
       var shx = 16 + bx, shy = 14 + by + o;
-      brazo(b, shx + 1, shy, 17 + bx + p.hR[0], 19 + by + o + p.hR[1], null, coatS, skinS);
+      brazo(b, shx + 1, shy, 17 + bx + p.hR[0], 19 + by + o + p.hR[1], coatS, skinS);
       if (!P.vestido) pierna(b, 16 + bx, 21 + by + o, 16 + p.fR[0] + bx, fy0 - 1 + p.fR[1] + afL, dark(pants, .25), dark(shoes, .2), 'side');
-      if (P.cape) { var fl = anim === 'run' ? 3 : anim === 'walk' ? 1 : 0; b.rect(19 + bx, 13 + by + o, 3, 12, P.cape); b.rect(22 + bx, 16 + by + o, fl, 9 - fl, P.cape); }
+      if (P.cape) capa(b, 18 + bx, 13 + by + o, 4, P.cape, p.tela || 0);
       if (!P.vestido) pierna(b, 15 + bx, 21 + by + o, 15 + p.fL[0] + bx, fy0 - 1 + p.fL[1] + afL, pants, shoes, 'side');
       else {
         for (var r = 0; r < 9; r++) b.rect(12 + bx - (r >> 2), 20 + r + by + o, 9 + (r >> 1), 1, r === 8 ? coatS : coat);
@@ -248,18 +384,21 @@
       b.rect(12 + bx, 13 + by + o, 8, 9, coat); b.rect(19 + bx, 13 + by + o, 1, 9, coatS); b.rect(12 + bx, 13 + by + o, 1, 9, coatL);
       b.rect(12 + bx, 13 + by + o, 3, 3, P.shirt); if (P.cuello) b.rect(12 + bx, 13 + by + o, 5, 2, P.cuello);
       if (!P.vestido) b.rect(12 + bx, 20 + by + o, 8, 1, coatS);
+      ropaHeroe(b, P, 12 + bx, 13 + by + o, 8, vista);
       var hx = 10 + bx, hy = 3 + by + o + p.cabeza;
       b.rect(hx, hy, 11, 10, skin); b.clear(hx, hy); b.clear(hx, hy + 9); b.clear(hx + 10, hy + 9);
       b.set(hx - 1, hy + 6, skin); // nariz
       b.rect(hx + 6, hy + 5, 2, 2, skinS); // oreja
-      pelo(b, P, 'side', hx, hy); sombrero(b, P, 'side', hx, hy);
+      b.rect(hx + 2, hy + 3, 3, 2, light(skin, .32));
+      b.line(hx + 5, hy + 9, hx + 10, hy + 6, skinS);
+      pelo(b, P, 'side', hx, hy, p.tela); sombrero(b, P, 'side', hx, hy);
       if (P.barba) b.rect(hx + 1, hy + 7, 6, 3, P.barba);
       var ex = hx + 2, ey = hy + 5;
-      if (p.ojos === 'open') b.rect(ex, ey, 1, 2, '#24162e'); else if (p.ojos === 'closed') b.set(ex, ey + 1, '#24162e'); else { b.set(ex, ey, '#24162e'); b.set(ex + 1, ey + 1, '#24162e'); b.set(ex, ey + 2, '#24162e'); }
-      if (P.gafas) { b.rect(ex - 1, ey - 1, 3, 1, '#2a2a3a'); b.rect(ex + 2, ey, 4, 1, '#2a2a3a'); }
-      b.set(hx + 1, hy + 8, p.boca === 'o' ? '#6a2a3a' : skinS); if (p.boca === 'sonrisa') b.set(hx + 2, hy + 8, '#6a2a3a');
-      if (P.diadema) b.rect(hx, hy + 1, 7, 1, P.diadema);
-      brazo(b, shx - 1, shy, 15 + bx + p.hL[0], 19 + by + o + p.hL[1], null, coatL, skin);
+      ojo(b, ex, ey, p.ojos, skin);
+      if (P.gafas) { lente(b, ex, ey); b.rect(ex + 2, ey, 4, 1, '#2a2438'); }
+      if (P.bigote) b.rect(hx + 1, hy + 7, 4, 1, P.hair);
+      b.rect(hx + 1, hy + 8, p.boca === 'n' ? 1 : 2, 1, P.barba ? light(P.barba, .25) : '#8a4c4c');
+      brazo(b, shx - 1, shy, 15 + bx + p.hL[0], 19 + by + o + p.hL[1], coatL, skin);
       if (p.arma) arma(b, 15 + bx + p.hL[0], 19 + by + o + p.hL[1], shx - 1, shy, P);
     } else {
       var back = vista === 'up';
@@ -282,36 +421,39 @@
         if (P.cape) b.rect(11 + bx, 13 + by + o, 10, 1, P.cape);
         b.set(15 + bx, 17 + by + o, P.acc); b.set(16 + bx, 19 + by + o, P.acc);
         if (!P.vestido) b.rect(11 + bx, 20 + by + o, 10, 1, coatS); else b.rect(11 + bx, 19 + by + o, 10, 1, P.acc);
-      } else if (P.cape) { b.rect(10 + bx, 13 + by + o, 12, 13, P.cape); b.rect(10 + bx, 25 + by + o, 12, 1, dark(P.cape, .3)); b.rect(15 + bx, 14 + by + o, 1, 11, dark(P.cape, .15)); }
+      }
+      ropaHeroe(b, P, 11 + bx, 13 + by + o, 10, vista);
+      if (back && P.cape) capa(b, 10 + bx, 13 + by + o, 10, P.cape, p.tela || 0);
       // cabeza
       var hx2 = 10 + bx, hy2 = 3 + by + o + p.cabeza;
       b.rect(hx2, hy2, 12, 10, skin); b.clear(hx2, hy2); b.clear(hx2 + 11, hy2); b.clear(hx2, hy2 + 9); b.clear(hx2 + 11, hy2 + 9);
       b.rect(hx2 + 1, hy2 + 9, 10, 1, skinS);
-      pelo(b, P, back ? 'up' : 'down', hx2, hy2); sombrero(b, P, back ? 'up' : 'down', hx2, hy2);
+      b.rect(hx2 + 2, hy2 + 3, 4, 2, light(skin, .27));
+      b.rect(hx2 + 10, hy2 + 4, 2, 4, skinS);
+      pelo(b, P, back ? 'up' : 'down', hx2, hy2, p.tela); sombrero(b, P, back ? 'up' : 'down', hx2, hy2);
       if (!back) {
         if (P.barba) b.rect(hx2 + 2, hy2 + 7, 8, 3, P.barba);
         var e1 = hx2 + 3, e2 = hx2 + 8, ey2 = hy2 + 5;
-        [e1, e2].forEach(function (ex) {
-          if (p.ojos === 'open') { b.rect(ex, ey2, 1, 2, '#24162e'); }
-          else if (p.ojos === 'closed') b.rect(ex - 1 + (ex === e2 ? 1 : 0), ey2 + 1, 2, 1, '#24162e');
-          else { b.set(ex - 1, ey2, '#24162e'); b.set(ex + 1, ey2, '#24162e'); b.set(ex, ey2 + 1, '#24162e'); }
-        });
-        if (P.gafas) { b.rect(e1 - 1, ey2 - 1, 3, 1, '#2a2a3a'); b.rect(e2 - 1, ey2 - 1, 3, 1, '#2a2a3a'); b.rect(e1 + 2, ey2, 3, 1, '#2a2a3a'); }
+        ojo(b, e1, ey2, p.ojos, skin); ojo(b, e2, ey2, p.ojos, skin);
+        if (P.gafas) { lente(b, e1, ey2); lente(b, e2, ey2); b.set(e1 + 3, ey2, '#2a2438'); }
+        b.set(hx2 + 5, hy2 + 6, light(skin, .4));
+        b.set(hx2 + 6, hy2 + 7, skinS);
+        if (P.bigote) { b.rect(hx2 + 4, hy2 + 7, 4, 1, P.hair); }
+        if (P.barba) b.rect(hx2 + 4, hy2 + 8, 4, 1, light(P.barba, .25));
         b.set(hx2 + 2, hy2 + 7, mix(skin, '#ff6a7a', .35)); b.set(hx2 + 9, hy2 + 7, mix(skin, '#ff6a7a', .35));
         if (!P.barba) { if (p.boca === 'o') b.rect(hx2 + 5, hy2 + 7, 2, 2, '#6a2a3a'); else if (p.boca === 'sonrisa') { b.rect(hx2 + 5, hy2 + 8, 2, 1, '#6a2a3a'); b.set(hx2 + 4, hy2 + 7, '#6a2a3a'); b.set(hx2 + 7, hy2 + 7, '#6a2a3a'); } else b.rect(hx2 + 5, hy2 + 8, 2, 1, skinS); }
-        if (P.diadema) b.rect(hx2 + 1, hy2 + 1, 10, 1, P.diadema);
       }
       // brazos
       var lHx = 9 + bx + p.hL[0], lHy = 19 + by + o + p.hL[1], rHx = 21 + bx + p.hR[0], rHy = 19 + by + o + p.hR[1];
-      brazo(b, sLx, sy, lHx, lHy, null, back ? coatS : coatL, skin);
-      brazo(b, sRx, sy, rHx, rHy, null, coatS, skin);
+      brazo(b, sLx, sy, lHx, lHy, back ? coatS : coatL, skin);
+      brazo(b, sRx, sy, rHx, rHy, coatS, skin);
       if (p.arma) arma(b, rHx, rHy, sRx, sy, P);
     }
+    if (p.tumbado) b = b.tumbar(41, p.tumbado);
     b.outline();
     // efectos (sin contorno, encima)
     p.fx.forEach(function (e) { efecto(b, e, P, lado, bx, by); });
     if (p.tint) b.map(function (c) { return c === OUT ? (p.tint === '#ffffff' ? '#ffffff' : dark(p.tint, .5)) : mix(c, p.tint, .65); });
-    if (p.tumbado) b = b.tumbar(42);
     if (dir === 'right') b = b.mirror();
     return b;
   }
@@ -347,12 +489,13 @@
 
   var cacheH = {};
   function hojaHeroe(id, paleta) {
-    if (cacheH[id]) return cacheH[id];
+    var clave = paleta ? id + ':' + JSON.stringify(paleta) : id;
+    if (cacheH[clave]) return cacheH[clave];
     var P = paleta || heroes[id] || heroes.galois, names = Object.keys(ANIM_HEROE);
     var maxN = 8, filas = {}, row = 0;
     var cv = document.createElement('canvas'); cv.width = FW * maxN; cv.height = FH * names.length * DIRS.length;
     names.forEach(function (a) { DIRS.forEach(function (d) { filas[a + '-' + d] = row; for (var f = 0; f < ANIM_HEROE[a].n; f++) dibujarHeroe(P, a, f, d).toCanvas(cv, f * FW, row * FH); row++; }); });
-    return (cacheH[id] = { canvas: cv, fw: FW, fh: FH, filas: filas, anims: ANIM_HEROE, pie: 42 });
+    return (cacheH[clave] = { canvas: cv, fw: FW, fh: FH, filas: filas, anims: ANIM_HEROE, pie: 42 });
   }
 
   /* =====================================================================
