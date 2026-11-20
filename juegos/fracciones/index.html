@@ -309,6 +309,8 @@ textarea, .tin { width: 100%; font: inherit; border: 2px solid var(--tinta); bor
   </section>
 </div>
 
+<script src="../../coleccion/datos.js"></script>
+<script src="../../coleccion/bridge.js"></script>
 <script>
 (function () {
   'use strict';
@@ -896,6 +898,7 @@ textarea, .tin { width: 100%; font: inherit; border: 2px solid var(--tinta); bor
   function finishStation(win) {
     const S = cur.S, eff = cur.errors + cur.bigHints;
     const st = win ? (eff <= 1 ? 3 : eff <= 3 ? 2 : 1) : 0;
+    if (win && window.GaloisColeccion) window.GaloisColeccion.registrarResultado({ mundo: 4, reto: 'estacion-' + S.id, superado: true, excelencia: st === 3 });
     if (win) { const prev = me()[S.id]; me()[S.id] = { stars: Math.max(prev ? prev.stars : 0, st), date: new Date().toISOString().slice(0, 10) }; persist(); }
     $('#rKick').textContent = `ESTACIÓN ${S.id} · ${S.topic.toUpperCase()}`;
     $('#rTitle').textContent = win ? (st === 3 ? '¡Trabajo de científica o científico!' : '¡Estación superada!') : 'Te has quedado sin reactivos';
