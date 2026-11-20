@@ -23,8 +23,29 @@
     ',': { dibujar: function (b, x, y) { hierba(b, x, y, true); } },
     ':': { dibujar: function (b, x, y) { b.rect(0, 0, T, T, '#d8b479'); for (var i = 0; i < 9; i++) b.set(hash(x, y, i) * 16, hash(y, x, i) * 16, i % 3 ? '#c39c62' : '#e8cc96'); } },
     '=': { dibujar: function (b, x, y) { b.rect(0, 0, T, T, '#cfc3b0'); for (var j = 0; j < 4; j++) for (var i = 0; i < 4; i++) { var o = j % 2 ? 2 : 0; b.rect(i * 4 + o, j * 4, 3, 3, hash(x * 4 + i, y * 4 + j, 1) > .5 ? '#ddd3c2' : '#c2b5a0'); } } },
-    '~': { anim: 2, dibujar: function (b, x, y, f) { b.rect(0, 0, T, T, '#3a7fd0'); for (var i = 0; i < 4; i++) { var wx = (i * 5 + f * 3 + (x * 7 % 5)) % 16, wy = 3 + i * 4; b.rect(wx, wy, 4, 1, '#7ab8f0'); b.set(wx + 4, wy - 1, '#a8d4f8'); } } , solido: true },
-    'w': { anim: 2, dibujar: function (b, x, y, f) { b.rect(0, 0, T, T, '#c9a446'); for (var i = 0; i < 6; i++) { var sx = 1 + i * 3 - (f && i % 2 ? 1 : 0); b.rect(sx, 4, 1, 12, '#b08a32'); b.rect(sx - (f ? 1 : 0), 1 + (i % 2) * 2, 2, 4, '#f0cc5a'); b.set(sx - (f ? 1 : 0), 1 + (i % 2) * 2, '#fff09a'); } } },
+    '~': { anim: 2, solido: true, dibujar: function (b, x, y, f) {
+      b.rect(0, 0, T, T, '#346eb5');
+      for (var i = 0; i < 4; i++) {
+        var huella = hash(x, y, i), wx = Math.floor((i * 5 + f * 2 + huella * 5) % T), wy = 2 + i * 4;
+        for (var j = 0; j < 8; j++) {
+          b.set((wx + j) % T, wy + 1, j < 6 ? '#285a9d' : '#3979be');
+          if (j < 6) b.set((wx + j) % T, wy, j < 2 ? '#73b3de' : '#508dcb');
+        }
+        if (huella > .42) b.set((wx + 1) % T, wy, '#aad6ed');
+      }
+    } },
+    'w': { anim: 2, dibujar: function (b, x, y, f) {
+      b.rect(0, 0, T, T, '#ab833d');
+      for (var i = 0; i < 6; i++) {
+        var tallo = 1 + i * 3, punta = tallo - (f && i % 2 ? 1 : 0);
+        var altura = 2 + Math.floor(hash(x * 6 + i, y, 4) * 5);
+        b.line(tallo, 15, punta, altura, '#d1aa50');
+        b.line(tallo, 11, tallo + 1, 8, '#8f6e38');
+        b.rect(punta, altura, 2, 4, '#e5bb5d');
+        b.rect(punta, altura + 1, 1, 2, '#f7d687');
+        b.set(punta + 1, altura + 3, '#b98a41');
+      }
+    } },
     'c': { dibujar: function (b, x, y) { b.rect(0, 0, T, T, '#8a5a36'); for (var j = 0; j < 4; j++) b.rect(0, j * 4 + 1, T, 1, '#6e4426'); for (var i = 0; i < 5; i++) b.set(hash(x, y, i) * 16, hash(y, x, i) * 16, '#5aa34a'); } },
     's': { dibujar: function (b, x, y) { b.rect(0, 0, T, T, '#e8d29a'); for (var i = 0; i < 6; i++) b.set(hash(x, y, i) * 16, hash(y, x, i) * 16, '#d4ba7e'); } },
     'x': { dibujar: function (b, x, y) { b.rect(0, 0, T, T, '#e8dcc0'); for (var j = 0; j < 8; j++) for (var i = 0; i < 8; i++) { var k = (i + j + x + y) % 4; b.rect(i * 2, j * 2, 2, 2, ['#c85a3a', '#e8dcc0', '#2a4a7a', '#d9a441'][(i * j + k) % 4 === 0 ? 0 : k]); } } },
@@ -56,7 +77,16 @@
 
   /* ---------- Monumentos y edificios ---------- */
   function tejado(b, x, y, w, h, c) { for (var j = 0; j < h; j++) { b.rect(x - (h - j), y + j, w + 2 * (h - j), 1, j % 2 ? c : light(c, .12)); } for (var i = x - h; i < x + w + h; i += 3) b.line(i, y + h - 1, i, y + h - 1, dark(c, .2)); }
-  function tejas(b, x, y, w, h, c) { b.rect(x, y, w, h, c); for (var j = 0; j < h; j += 2) for (var i = (j % 4 ? 1 : 0); i < w; i += 3) b.set(x + i, y + j + 1, dark(c, .25)); b.rect(x, y + h - 1, w, 1, dark(c, .35)); }
+  function tejas(b, x, y, w, h, c) {
+    var luz = light(c, .23), sombra = dark(c, .26), alero = dark(c, .4);
+    b.rect(x, y, w, h, c);
+    for (var j = 0; j < h - 1; j++) for (var i = 0; i < w; i++) {
+      var modulo = (i + (j % 4 >= 2 ? 2 : 0)) % 4;
+      if (j === 0 || modulo === 0) b.set(x + i, y + j, luz);
+      else if (modulo === 3 || (j % 2 && modulo === 2)) b.set(x + i, y + j, sombra);
+    }
+    b.rect(x, y + h - 1, w, 1, alero);
+  }
   function ventana(b, x, y, w, h, reja) { b.rect(x, y, w, h, '#2a2a3a'); b.rect(x, y, w, 1, '#4a4a5a'); if (reja) { for (var i = 1; i < w; i += 2) b.rect(x + i, y, 1, h, '#1a1a22'); b.rect(x - 1, y + h, w + 2, 1, '#1a1a22'); } }
   function puertaArco(b, cx, base, w, h, c) { b.rect(cx - w / 2, base - h + w / 2, w, h - w / 2, c); b.ellipse(cx, base - h + w / 2, w / 2, w / 2, c); }
   function almenas(b, x, y, w, c) { for (var i = 0; i < w; i += 4) b.rect(x + i, y - 3, 3, 3, c); }
