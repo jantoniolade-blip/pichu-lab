@@ -19,6 +19,7 @@
   var NOMBRE_ENEMIGO = { potenciator: 'Potenciator', radicosmico: 'Radicósmico', multiplax: 'Múltiplax', primox: 'Prímox', negatron: 'Negatrón', parentesis_maldito: 'Paréntesis Maldito', denominadoron: 'Denominadorón', simplifract: 'Simplifract', senor_escala: 'Señor Escala', porcentajin: 'Porcentajín', incognita_x: 'Incógnita X', polinomio_mutante: 'Polinomio Mutante', equilibrius: 'Equilibrius', despejador_oscuro: 'Despejador Oscuro', pendientor: 'Pendientor', parabola_vortice: 'Parábola Vórtice', mediana_traviesa: 'Mediana Traviesa', grafico_tramposo: 'Gráfico Tramposo', dado_caotico: 'Dado Caótico', ruleta_imposible: 'Ruleta Imposible' };
   var HABILIDAD = { galois: 'eliminar', sophie_germain: 'eliminar', al_juarismi: 'eliminar', gauss: 'doble', fibonacci: 'doble', hipatia: 'escudo', euler: 'pista', emmy_noether: 'pista', ada_lovelace: 'pista', ramanujan: 'pista', fermat: 'pista' };
   var DESC_HAB = { eliminar: 'descarta una respuesta incorrecta', doble: 'tu próximo acierto vale doble', escudo: 'el próximo fallo no te quita vida', pista: 'muestra una pista del reto' };
+  var MUS = window.GaloisMusica || { tocar: function () {}, fase: function () {}, parar: function () {}, activar: function () {}, activa: function () { return false; }, volumen: function () { return 0; } };
   var DIF = { explorador: 0, aventurero: 1, maestro: 2 };
   var FASES = ['', 'Descubrir la regla', 'Resolver el desafío', 'Explicar y transferir'];
 
@@ -89,7 +90,7 @@
     fragmentos = def.fragmentos.map(function (p, i) { return { i: i, x: p[0] * T + 8, y: p[1] * T + 10 }; });
     G.jug.x = def.inicio[0] * T + 8; G.jug.y = def.inicio[1] * T + 14; G.jug.dir = 'up';
     prepararEnemigos();
-    G.modo = 'mapa';
+    G.modo = 'mapa'; MUS.tocar('mundo', { mundo: id });
     $('campina').hidden = true; $('hud').hidden = false; $('controles').hidden = !tactilVisible();
     actualizarHUD();
     var e = pendiente(id);
@@ -266,7 +267,7 @@
       hA: 'idle', hT: 0, eA: 'idle', eT: 0, proy: [], textos: [], sacudir: 0,
       escudo: false, doble: false, habUsada: false, pistasUsadas: 0, ent: enem, terminado: false
     };
-    G.modo = 'batalla'; G.teclas = {}; G.tactil.dx = G.tactil.dy = 0;
+    G.modo = 'batalla'; G.teclas = {}; MUS.tocar(etapa === 5 ? 'jefe' : tipo === 'combate' ? 'combate' : 'reto', { mundo: W.id }); G.tactil.dx = G.tactil.dy = 0;
     $('controles').hidden = true; $('hud').hidden = true; $('aviso').hidden = true; $('reto').hidden = false;
     var titulo = cofre ? 'Cofre del saber' : 'Aventura ' + etapa + ' · ' + wd.aventuras[etapa - 1].nombre;
     $('rTitulo').textContent = titulo;
@@ -365,7 +366,7 @@
     PRUEBA && (window.__GL.ultima = ok);
   }
   function cambiarFase(f) {
-    var B = G.batalla; B.fase = f; B.hojaE = S.hojaEnemigo(B.enemigoId, { jefe: true, fase: f });
+    var B = G.batalla; B.fase = f; MUS.fase(f); B.hojaE = S.hojaEnemigo(B.enemigoId, { jefe: true, fase: f });
     B.sacudir = .6; B.textos.push({ txt: 'FASE ' + f + ': ' + FASES[f].toUpperCase(), t: G.t, lado: 'c' }); animE('attack'); SFX.mal();
   }
   $('rHab').onclick = function () {
@@ -381,17 +382,17 @@
   $('rHuir').onclick = function () { cerrarReto(); mostrarAviso('Has salido del reto', 'Puedes volver a intentarlo cuando quieras.'); };
 
   function derrota() {
-    var B = G.batalla; B.terminado = true; animH('defeat');
+    var B = G.batalla; B.terminado = true; MUS.tocar('derrota'); animH('defeat');
     $('rOpciones').innerHTML = ''; $('rExpl').hidden = false; $('rExpl').className = 'expl mal';
     $('rExpl').innerHTML = '<b>¡Ánimo, ' + esc(heroe().corto) + '!</b> Te has quedado sin vida, pero no pierdes nada: ni monedas ni cartas. Repasa las explicaciones y vuelve a intentarlo.' + '<button type="button" id="rSeguir">Reintentar ▶</button> <button type="button" id="rSalir" class="sec">Volver al mapa</button>';
     $('rSeguir').onclick = function () { var e = B.etapa, en = B.ent, cf = B.cofre; cerrarReto(); if (cf) iniciarAventura(0, null, null, cf); else iniciarAventura(e, en, B.tipo === 'exploracion' ? vecinoMision() : null); };
     $('rSalir').onclick = cerrarReto;
   }
-  function cerrarReto() { $('reto').hidden = true; $('hud').hidden = false; G.batalla = null; G.modo = 'mapa'; $('controles').hidden = !tactilVisible(); prepararEnemigos(); empujarJugador(); actualizarHUD(); }
+  function cerrarReto() { $('reto').hidden = true; $('hud').hidden = false; MUS.tocar('mundo', { mundo: W.id }); G.batalla = null; G.modo = 'mapa'; $('controles').hidden = !tactilVisible(); prepararEnemigos(); empujarJugador(); actualizarHUD(); }
   function empujarJugador() { var J = G.jug; for (var r = 0; r < 60; r += 4) { var ok = enemigos.every(function (e) { return Math.hypot(e.x - J.x, e.y - J.y) > 26; }); if (ok) return; J.y += 4; if (!libre(J.x, J.y)) J.y -= 8; } }
 
   function victoria() {
-    var B = G.batalla; B.terminado = true; SFX.victoria(); animH('victory'); if (B.enemigoId) animE('defeat');
+    var B = G.batalla; B.terminado = true; MUS.tocar('victoria'); animH('victory'); if (B.enemigoId) animE('defeat');
     $('rOpciones').innerHTML = ''; $('rFase').textContent = '';
     var res = null;
     if (B.cofre) {
@@ -425,7 +426,7 @@
     G.cofreInt = setInterval(function () { x2.clearRect(0, 0, 64, 64); x2.drawImage(E.objeto('cofre', Math.min(3, fr), leg ? 'legendaria' : (r.cartas && r.cartas.some(function (c) { return c.rareza === 'epica'; }) ? 'epica' : '')), 0, 0, 64, 64); if (++fr > 3) clearInterval(G.cofreInt); }, REDUCIDO ? 0 : 180);
     $('pSeguir').focus({ preventScroll: true });
   }
-  $('pSeguir').onclick = function () { $('premio').hidden = true; $('hud').hidden = false; G.batalla = null; G.modo = 'mapa'; $('controles').hidden = !tactilVisible(); prepararEnemigos(); empujarJugador(); actualizarHUD(); var e = pendiente(W.id); mostrarAviso(e ? 'Siguiente: aventura ' + e : '¡Mundo completado!', e ? W.datos.aventuras[e - 1].nombre : 'Sal por el camino del sur para volver a la Campiña.'); };
+  $('pSeguir').onclick = function () { $('premio').hidden = true; $('hud').hidden = false; MUS.tocar('mundo', { mundo: W.id }); G.batalla = null; G.modo = 'mapa'; $('controles').hidden = !tactilVisible(); prepararEnemigos(); empujarJugador(); actualizarHUD(); var e = pendiente(W.id); mostrarAviso(e ? 'Siguiente: aventura ' + e : '¡Mundo completado!', e ? W.datos.aventuras[e - 1].nombre : 'Sal por el camino del sur para volver a la Campiña.'); };
 
   /* =====================================================================
      DIBUJO
@@ -524,7 +525,7 @@
     }
   }
   function abrirCampina() {
-    G.modo = 'campina'; $('hud').hidden = true; $('controles').hidden = true; $('campina').hidden = false;
+    G.modo = 'campina'; MUS.tocar('campina'); $('hud').hidden = true; $('controles').hidden = true; $('campina').hidden = false;
     var cont = $('cMarcas'); cont.innerHTML = '';
     D.mundos.forEach(function (w) {
       var ok = desbloqueado(w.id), p = pendiente(w.id), n = 5 - (p === 0 ? 0 : 6 - p) ;
@@ -566,12 +567,14 @@
     } else if (cual === 'ajustes') {
       cuerpo.innerHTML = '<h2>Ajustes</h2><h3>Matemático</h3><div class="heroes" id="aHeroes"></div>' +
         '<h3>Dificultad</h3><div class="difs">' + [['explorador', 'Explorador', '3 opciones, pistas ilimitadas, los fallos quitan medio corazón'], ['aventurero', 'Aventurero', '4 opciones, 2 pistas por reto'], ['maestro', 'Maestro', 'escribes las respuestas numéricas, sin pistas']].map(function (d) { return '<label><input type="radio" name="dif" value="' + d[0] + '"' + (G.dif === d[0] ? ' checked' : '') + '> <b>' + d[1] + '</b> <small>' + d[2] + '</small></label>'; }).join('') + '</div>' +
-        '<h3>Opciones</h3><label><input type="checkbox" id="aSon"' + (G.sonido ? ' checked' : '') + '> Sonido</label> <label><input type="checkbox" id="aTac"' + (tactilVisible() ? ' checked' : '') + '> Controles táctiles en pantalla</label>' +
+        '<h3>Opciones</h3><label><input type="checkbox" id="aMus"' + (MUS.activa() ? ' checked' : '') + '> Música</label> <label>Volumen <input type="range" id="aVol" min="0" max="1" step="0.05" value="' + MUS.volumen() + '"></label><br><label><input type="checkbox" id="aSon"' + (G.sonido ? ' checked' : '') + '> Efectos de sonido</label> <label><input type="checkbox" id="aTac"' + (tactilVisible() ? ' checked' : '') + '> Controles táctiles en pantalla</label>' +
         '<h3>Perfil</h3><p>Alias: <b>' + esc(C.activo()) + '</b>. Cambia de alias o exporta tu progreso desde el <a href="../coleccion/index.html">álbum</a>.</p>' +
         '<details><summary>Modo docente</summary><p>Permite abrir todos los mundos para revisarlos en clase. No concede cartas ni recompensas: hay que superar las aventuras igualmente.</p><input id="aCod" placeholder="Código docente" autocomplete="off"> <button type="button" id="aDoc">' + (docente() ? 'Desactivar' : 'Activar') + '</button> <span id="aDocMsg"></span></details>';
       var hs = heroesTodos(); $('aHeroes').innerHTML = hs.map(function (x) { return '<button type="button" data-h="' + x.id + '" aria-pressed="' + (x.id === G.heroeId) + '"><canvas width="32" height="44"></canvas><b>' + esc(x.corto) + '</b></button>'; }).join('');
       $('aHeroes').querySelectorAll('button').forEach(function (b) { var c2 = b.querySelector('canvas').getContext('2d'); S.pintar(c2, S.hojaHeroe(b.dataset.h), 'idle', 'down', 0, 16, 42, 1); b.onclick = function () { G.heroeId = b.dataset.h; try { localStorage.setItem('galoisLegacy.heroe', G.heroeId); } catch (e2) {} C.rpg.preferencias({ heroe: G.heroeId }); abrirMenu('ajustes'); actualizarHUD(); }; });
       cuerpo.querySelectorAll('[name=dif]').forEach(function (r) { r.onchange = function () { G.dif = r.value; C.rpg.preferencias({ dificultad: G.dif }); }; });
+      $('aMus').onchange = function () { MUS.activar(this.checked); pintarBotonMusica(); };
+      $('aVol').oninput = function () { MUS.volumen(this.value); };
       $('aSon').onchange = function () { G.sonido = this.checked; try { localStorage.setItem('galoisLegacy.sonido', G.sonido ? '1' : '0'); } catch (e2) {} };
       $('aTac').onchange = function () { try { localStorage.setItem('galoisLegacy.tactil', this.checked ? '1' : '0'); } catch (e2) {} };
       $('aDoc').onclick = function () { try { if (docente()) { localStorage.removeItem('galoisLegacy.docente'); $('aDocMsg').textContent = 'Desactivado.'; } else if ($('aCod').value.trim().toUpperCase() === 'ALARIFES') { localStorage.setItem('galoisLegacy.docente', '1'); $('aDocMsg').textContent = 'Todos los mundos abiertos.'; } else $('aDocMsg').textContent = 'Código incorrecto.'; } catch (e2) {} };
@@ -586,6 +589,9 @@
   $('bAjustes').onclick = function () { abrirMenu('ajustes'); };
   $('bInv').onclick = function () { abrirMenu('inventario'); };
   $('bCampina').onclick = function () { abrirCampina(); };
+  function pintarBotonMusica() { ['bMusica', 'cMusica'].forEach(function (id) { var b = $(id); if (!b) return; b.setAttribute('aria-pressed', String(MUS.activa())); b.title = MUS.activa() ? 'Silenciar música' : 'Activar música'; b.firstChild.textContent = MUS.activa() ? '🎵' : '🔇'; }); }
+  ['bMusica', 'cMusica'].forEach(function (id) { var b = $(id); if (b) b.onclick = function () { MUS.activar(!MUS.activa()); pintarBotonMusica(); }; });
+  pintarBotonMusica();
   $('cAjustes').onclick = function () { abrirMenu('ajustes'); };
   $('cAyuda').onclick = function () { abrirMenu('ayuda'); };
 

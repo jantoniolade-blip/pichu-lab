@@ -140,6 +140,7 @@
   .sym { font-family: "Times New Roman", Georgia, serif; font-size: 1.05em; }
   footer { text-align: center; font-size: 18px; color: var(--gl-texto-suave); margin-top: 32px; }
   footer a { color: var(--gl-azul); }
+  .musica { position: fixed; right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); font-size: 24px; padding: 6px 12px 8px; z-index: 20; }
 
   @media (max-width: 760px) {
     .seleccion { grid-template-columns: 1fr; }
@@ -240,11 +241,13 @@
     <a href="pichu-royale.html">Portada anterior (<span class="sym">π</span>CHU ROYALE)</a>
   </footer>
 </main>
+<button type="button" id="btnMusica" class="gl-btn azul musica" aria-pressed="false" title="Música">🎵</button>
 
 <script src="shared/galois-data.js"></script>
 <script src="coleccion/datos.js"></script>
 <script src="shared/galois-campina.js"></script>
 <script src="shared/galois-sprites.js"></script>
+<script src="shared/galois-musica.js"></script>
 <script>
 (function () {
   'use strict';
@@ -378,6 +381,13 @@
     if (id === 'heroes') mostrar(visto);
     window.scrollTo(0, 0);
   }
+  // Música de la Campiña (empieza con la primera interacción, como exigen los navegadores)
+  var MUS = window.GaloisMusica, bm = $('btnMusica');
+  if (MUS) {
+    var pintaM = function () { bm.textContent = MUS.activa() ? '🎵' : '🔇'; bm.setAttribute('aria-pressed', String(MUS.activa())); bm.title = MUS.activa() ? 'Silenciar música' : 'Activar música'; };
+    MUS.tocar('campina'); pintaM();
+    bm.onclick = function () { MUS.activar(!MUS.activa()); pintaM(); };
+  } else bm.hidden = true;
   window.addEventListener('hashchange', ir);
   pintarHud(); ir();
 })();

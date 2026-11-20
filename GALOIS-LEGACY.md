@@ -110,4 +110,12 @@ Trabajo hecho en la rama `claude/galois-legacy-rpg-9nanbv` (creada desde `dev`; 
 - Los sprites son pixel art generado por código: coherentes y animados, pero sencillos. Los retratos del banco πCHU se mantienen en menús.
 - No hay salto/ataque libre en la exploración: los combates son por turnos con preguntas (las animaciones de saltar y correr se usan en la selección y al moverse).
 - Revisar con fuentes oficiales los textos culturales de vecinos y cartas.
-- Sin música (solo efectos sintetizados). Ranking de Integer Ninja: igual que antes.
+- Ranking de Integer Ninja: igual que antes.
+
+### Música (`shared/galois-musica.js`)
+
+Chiptune original sintetizado con Web Audio, sin archivos de audio ni melodías de terceros. Las melodías se componen por reglas (motivo de dos compases en forma A A′ B A″ sobre progresiones de acordes) con una semilla fija, así que cada pista suena siempre igual:
+
+- **Campiña** (mapa general y portada), **un tema propio para cada mundo** (escala, tempo y carácter distintos; Écija, Triana y Sevilla con modo frigio andaluz, cadencia andaluza y palmas), **reto** (versión tranquila del tema del mundo), **combate**, **jefe** (se acelera y se intensifica en cada fase), **victoria** y **derrota**.
+- Botón 🎵 en el HUD, en el mapa de la Campiña y en la portada; en Ajustes, música y volumen por separado de los efectos. Se recuerda en el navegador.
+- Empieza con el primer toque o tecla (los navegadores no permiten sonar antes) y se pausa si se cambia de pestaña.

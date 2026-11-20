@@ -110,6 +110,17 @@ const ok = (c, m) => { console.log((c ? '✓ ' : '✗ ') + m); if (!c) fallos++;
     ok(r.mini, 'los minijuegos siguen concediendo una carta por reto distinto');
     await ctx.close();
   }
+  // 5. música: cada pista suena (render sin conexión) y no rompe la aventura
+  {
+    const p = await b.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+    await p.goto(raiz + 'aventura/index.html?prueba=1'); await p.waitForTimeout(300);
+    const niveles = await p.evaluate(async () => { const out = {}; for (const [n, op] of [['campina'], ['mundo', { mundo: 1 }], ['mundo', { mundo: 7 }], ['reto', { mundo: 3 }], ['combate'], ['jefe', { fase: 3 }], ['victoria'], ['derrota']]) out[n + (op && op.mundo || '')] = await GaloisMusica._renderizar(n, op, 3); return out; });
+    Object.entries(niveles).forEach(([n, v]) => ok(v.rms > .005 && v.pico < 1.5, 'música «' + n + '» suena (RMS ' + v.rms.toFixed(3) + ')'));
+    const distintas = await p.evaluate(() => { const a = GaloisMusica._pista('mundo', { mundo: 1 }).mel.join(), c = GaloisMusica._pista('mundo', { mundo: 2 }).mel.join(); return a !== c; });
+    ok(distintas, 'cada mundo tiene su propia melodía');
+    ok(errs.length === 0, 'música sin errores JS');
+    await p.close();
+  }
   await b.close();
   console.log(fallos ? `✗ ${fallos} comprobaciones fallidas` : '✓ Todas las comprobaciones superadas');
   process.exit(fallos ? 1 : 0);
