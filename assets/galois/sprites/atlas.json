@@ -1,0 +1,4211 @@
+{
+ "generador": "shared/galois-sprites.js",
+ "nota": "Fotogramas por fila: animación-dirección. Columnas: fotogramas.",
+ "heroes": {
+  "galois": {
+   "imagen": "heroes/galois.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "gauss": {
+   "imagen": "heroes/gauss.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "euler": {
+   "imagen": "heroes/euler.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "emmy_noether": {
+   "imagen": "heroes/emmy_noether.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "hipatia": {
+   "imagen": "heroes/hipatia.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "ada_lovelace": {
+   "imagen": "heroes/ada_lovelace.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "fibonacci": {
+   "imagen": "heroes/fibonacci.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "fermat": {
+   "imagen": "heroes/fermat.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "sophie_germain": {
+   "imagen": "heroes/sophie_germain.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "ramanujan": {
+   "imagen": "heroes/ramanujan.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  },
+  "al_juarismi": {
+   "imagen": "heroes/al_juarismi.png",
+   "fw": 32,
+   "fh": 44,
+   "pie": 42,
+   "filas": {
+    "idle-down": 0,
+    "idle-left": 1,
+    "idle-right": 2,
+    "idle-up": 3,
+    "walk-down": 4,
+    "walk-left": 5,
+    "walk-right": 6,
+    "walk-up": 7,
+    "run-down": 8,
+    "run-left": 9,
+    "run-right": 10,
+    "run-up": 11,
+    "jump-down": 12,
+    "jump-left": 13,
+    "jump-right": 14,
+    "jump-up": 15,
+    "attack-down": 16,
+    "attack-left": 17,
+    "attack-right": 18,
+    "attack-up": 19,
+    "cast-down": 20,
+    "cast-left": 21,
+    "cast-right": 22,
+    "cast-up": 23,
+    "hurt-down": 24,
+    "hurt-left": 25,
+    "hurt-right": 26,
+    "hurt-up": 27,
+    "victory-down": 28,
+    "victory-left": 29,
+    "victory-right": 30,
+    "victory-up": 31,
+    "defeat-down": 32,
+    "defeat-left": 33,
+    "defeat-right": 34,
+    "defeat-up": 35
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 4,
+     "loop": true
+    },
+    "walk": {
+     "n": 8,
+     "fps": 10,
+     "loop": true
+    },
+    "run": {
+     "n": 8,
+     "fps": 14,
+     "loop": true
+    },
+    "jump": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "attack": {
+     "n": 7,
+     "fps": 14,
+     "loop": false
+    },
+    "cast": {
+     "n": 8,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "victory": {
+     "n": 6,
+     "fps": 8,
+     "loop": true
+    },
+    "defeat": {
+     "n": 5,
+     "fps": 6,
+     "loop": false
+    }
+   }
+  }
+ },
+ "enemigos": {
+  "potenciator": {
+   "imagen": "enemigos/potenciator.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "radicosmico": {
+   "imagen": "enemigos/radicosmico.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "multiplax": {
+   "imagen": "enemigos/multiplax.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "primox": {
+   "imagen": "enemigos/primox.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "negatron": {
+   "imagen": "enemigos/negatron.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parentesis_maldito": {
+   "imagen": "enemigos/parentesis_maldito.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "denominadoron": {
+   "imagen": "enemigos/denominadoron.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "simplifract": {
+   "imagen": "enemigos/simplifract.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "senor_escala": {
+   "imagen": "enemigos/senor_escala.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "porcentajin": {
+   "imagen": "enemigos/porcentajin.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "incognita_x": {
+   "imagen": "enemigos/incognita_x.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "polinomio_mutante": {
+   "imagen": "enemigos/polinomio_mutante.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "equilibrius": {
+   "imagen": "enemigos/equilibrius.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "despejador_oscuro": {
+   "imagen": "enemigos/despejador_oscuro.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "pendientor": {
+   "imagen": "enemigos/pendientor.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parabola_vortice": {
+   "imagen": "enemigos/parabola_vortice.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "mediana_traviesa": {
+   "imagen": "enemigos/mediana_traviesa.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "grafico_tramposo": {
+   "imagen": "enemigos/grafico_tramposo.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "dado_caotico": {
+   "imagen": "enemigos/dado_caotico.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "ruleta_imposible": {
+   "imagen": "enemigos/ruleta_imposible.png",
+   "fw": 40,
+   "fh": 40,
+   "pie": 37,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  }
+ },
+ "jefes": {
+  "potenciator-fase1": {
+   "imagen": "jefes/potenciator-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "potenciator-fase2": {
+   "imagen": "jefes/potenciator-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "potenciator-fase3": {
+   "imagen": "jefes/potenciator-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "radicosmico-fase1": {
+   "imagen": "jefes/radicosmico-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "radicosmico-fase2": {
+   "imagen": "jefes/radicosmico-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "radicosmico-fase3": {
+   "imagen": "jefes/radicosmico-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "multiplax-fase1": {
+   "imagen": "jefes/multiplax-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "multiplax-fase2": {
+   "imagen": "jefes/multiplax-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "multiplax-fase3": {
+   "imagen": "jefes/multiplax-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "primox-fase1": {
+   "imagen": "jefes/primox-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "primox-fase2": {
+   "imagen": "jefes/primox-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "primox-fase3": {
+   "imagen": "jefes/primox-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "negatron-fase1": {
+   "imagen": "jefes/negatron-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "negatron-fase2": {
+   "imagen": "jefes/negatron-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "negatron-fase3": {
+   "imagen": "jefes/negatron-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parentesis_maldito-fase1": {
+   "imagen": "jefes/parentesis_maldito-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parentesis_maldito-fase2": {
+   "imagen": "jefes/parentesis_maldito-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parentesis_maldito-fase3": {
+   "imagen": "jefes/parentesis_maldito-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "denominadoron-fase1": {
+   "imagen": "jefes/denominadoron-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "denominadoron-fase2": {
+   "imagen": "jefes/denominadoron-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "denominadoron-fase3": {
+   "imagen": "jefes/denominadoron-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "simplifract-fase1": {
+   "imagen": "jefes/simplifract-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "simplifract-fase2": {
+   "imagen": "jefes/simplifract-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "simplifract-fase3": {
+   "imagen": "jefes/simplifract-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "senor_escala-fase1": {
+   "imagen": "jefes/senor_escala-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "senor_escala-fase2": {
+   "imagen": "jefes/senor_escala-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "senor_escala-fase3": {
+   "imagen": "jefes/senor_escala-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "porcentajin-fase1": {
+   "imagen": "jefes/porcentajin-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "porcentajin-fase2": {
+   "imagen": "jefes/porcentajin-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "porcentajin-fase3": {
+   "imagen": "jefes/porcentajin-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "incognita_x-fase1": {
+   "imagen": "jefes/incognita_x-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "incognita_x-fase2": {
+   "imagen": "jefes/incognita_x-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "incognita_x-fase3": {
+   "imagen": "jefes/incognita_x-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "polinomio_mutante-fase1": {
+   "imagen": "jefes/polinomio_mutante-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "polinomio_mutante-fase2": {
+   "imagen": "jefes/polinomio_mutante-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "polinomio_mutante-fase3": {
+   "imagen": "jefes/polinomio_mutante-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "equilibrius-fase1": {
+   "imagen": "jefes/equilibrius-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "equilibrius-fase2": {
+   "imagen": "jefes/equilibrius-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "equilibrius-fase3": {
+   "imagen": "jefes/equilibrius-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "despejador_oscuro-fase1": {
+   "imagen": "jefes/despejador_oscuro-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "despejador_oscuro-fase2": {
+   "imagen": "jefes/despejador_oscuro-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "despejador_oscuro-fase3": {
+   "imagen": "jefes/despejador_oscuro-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "pendientor-fase1": {
+   "imagen": "jefes/pendientor-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "pendientor-fase2": {
+   "imagen": "jefes/pendientor-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "pendientor-fase3": {
+   "imagen": "jefes/pendientor-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parabola_vortice-fase1": {
+   "imagen": "jefes/parabola_vortice-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parabola_vortice-fase2": {
+   "imagen": "jefes/parabola_vortice-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "parabola_vortice-fase3": {
+   "imagen": "jefes/parabola_vortice-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "mediana_traviesa-fase1": {
+   "imagen": "jefes/mediana_traviesa-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "mediana_traviesa-fase2": {
+   "imagen": "jefes/mediana_traviesa-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "mediana_traviesa-fase3": {
+   "imagen": "jefes/mediana_traviesa-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "grafico_tramposo-fase1": {
+   "imagen": "jefes/grafico_tramposo-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "grafico_tramposo-fase2": {
+   "imagen": "jefes/grafico_tramposo-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "grafico_tramposo-fase3": {
+   "imagen": "jefes/grafico_tramposo-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "dado_caotico-fase1": {
+   "imagen": "jefes/dado_caotico-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "dado_caotico-fase2": {
+   "imagen": "jefes/dado_caotico-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "dado_caotico-fase3": {
+   "imagen": "jefes/dado_caotico-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "ruleta_imposible-fase1": {
+   "imagen": "jefes/ruleta_imposible-fase1.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "ruleta_imposible-fase2": {
+   "imagen": "jefes/ruleta_imposible-fase2.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  },
+  "ruleta_imposible-fase3": {
+   "imagen": "jefes/ruleta_imposible-fase3.png",
+   "fw": 64,
+   "fh": 64,
+   "pie": 61,
+   "filas": {
+    "idle-left": 0,
+    "move-left": 1,
+    "attack-left": 2,
+    "hurt-left": 3,
+    "defeat-left": 4
+   },
+   "anims": {
+    "idle": {
+     "n": 4,
+     "fps": 5,
+     "loop": true
+    },
+    "move": {
+     "n": 4,
+     "fps": 8,
+     "loop": true
+    },
+    "attack": {
+     "n": 6,
+     "fps": 10,
+     "loop": false
+    },
+    "hurt": {
+     "n": 3,
+     "fps": 9,
+     "loop": false
+    },
+    "defeat": {
+     "n": 6,
+     "fps": 8,
+     "loop": false
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,6 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Cartas · revisión</title>
+<style>body{background:#141024;color:#fff;font:12px system-ui;margin:8px}div{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}img{width:100%;image-rendering:pixelated}</style></head>
+<body><div id="g"></div>
+<script src="../coleccion/datos.js"></script><script src="../shared/galois-sprites.js"></script><script src="../shared/galois-escenarios.js"></script><script src="../coleccion/arte.js"></script>
+<script>var g=document.getElementById('g');for(var w=1;w<=10;w++)GALOIS_CAMPINA.cartas.filter(c=>c.mundo===w).forEach(c=>{g.innerHTML+='<figure style="margin:0"><img src="'+GaloisArte.carta(c)+'"><figcaption>'+c.nombre+'</figcaption></figure>'});g.innerHTML+='<figure style="margin:0"><img src="'+GaloisArte.reverso(3)+'"></figure>';</script>
+</body></html>

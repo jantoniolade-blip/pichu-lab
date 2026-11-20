@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hojas de sprites · Galois Legacy</title>
+<style>
+body{margin:0;padding:16px;background:#141024;color:#fbf0d6;font:16px system-ui,sans-serif}
+h1,h2{font-weight:600}h2{margin:24px 0 6px;color:#f2c14e}
+canvas{image-rendering:pixelated;background:#2a3a4a;display:block;max-width:100%}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.vivo{display:flex;flex-wrap:wrap;gap:6px}
+.vivo figure{margin:0;text-align:center;font-size:12px}
+label{margin-right:12px}
+</style></head>
+<body>
+<h1>Hojas de sprites de Galois Legacy</h1>
+<p>Generadas por <code>shared/galois-sprites.js</code>. Filas: animación × dirección (abajo, izquierda, derecha, arriba). Las mismas hojas se exportan a PNG en <code>assets/galois/sprites/</code>.</p>
+<p><label>Escala <input id="k" type="range" min="1" max="4" value="2"></label><label>Héroe <select id="h"></select></label></p>
+<h2>Monumentos y tiles</h2><div class="row" id="edif"></div><h2>Animación en vivo</h2><div class="vivo" id="vivo"></div>
+<h2>Hoja completa del héroe</h2><div id="hoja"></div>
+<h2>Enemigos (idle · move · attack · hurt · defeat)</h2><div class="row" id="enem"></div>
+<h2>Jefe en sus tres fases</h2><div class="row" id="jefes"></div>
+<script src="../shared/galois-sprites.js"></script>
+<script src="../shared/galois-escenarios.js"></script>
+<script>
+var S=GaloisSprites,$=function(i){return document.getElementById(i)};
+Object.keys(S.heroes).forEach(function(id){$('h').innerHTML+='<option>'+id+'</option>'});
+function sheet(cv,k){var c=document.createElement('canvas');c.width=cv.width*k;c.height=cv.height*k;var x=c.getContext('2d');x.imageSmoothingEnabled=false;x.drawImage(cv,0,0,c.width,c.height);return c}
+var vivos=[];
+function render(){var k=+$('k').value,id=$('h').value;$('hoja').innerHTML='';$('hoja').appendChild(sheet(S.hojaHeroe(id).canvas,k));
+ $('vivo').innerHTML='';vivos=[];Object.keys(S.ANIM_HEROE).forEach(function(a){S.DIRS.forEach(function(d){var f=document.createElement('figure');var c=document.createElement('canvas');c.width=32*k;c.height=44*k;f.appendChild(c);f.appendChild(document.createTextNode(a+' '+d));$('vivo').appendChild(f);vivos.push({c:c,a:a,d:d,k:k,h:S.hojaHeroe(id)})})})}
+$('h').onchange=render;$('k').oninput=function(){render();renderE()};
+function renderE(){var k=+$('k').value;$('enem').innerHTML='';Object.keys(S.enemigos).forEach(function(e){var f=document.createElement('figure');f.style.margin=0;f.appendChild(sheet(S.hojaEnemigo(e).canvas,k));f.appendChild(document.createTextNode(e));$('enem').appendChild(f)});
+ $('jefes').innerHTML='';[1,2,3].forEach(function(fa){$('jefes').appendChild(sheet(S.hojaEnemigo('primox',{jefe:true,fase:fa}).canvas,k))})}
+var t0=performance.now();(function loop(){var t=(performance.now()-t0)/1000;vivos.forEach(function(v){var x=v.c.getContext('2d');x.imageSmoothingEnabled=false;x.clearRect(0,0,v.c.width,v.c.height);var A=S.ANIM_HEROE[v.a];var i=Math.floor(t*A.fps)%(A.loop?A.n:A.n+4);if(i>=A.n)i=A.n-1;S.pintar(x,v.h,v.a,v.d,i,16*v.k,42*v.k,v.k)});requestAnimationFrame(loop)})();
+function renderEd(){var k=+$('k').value,E=GaloisEscenarios;$('edif').innerHTML='';Object.keys(E.EDIF).forEach(function(t){var f=document.createElement('figure');f.style.margin=0;f.appendChild(sheet(E.edificio(t).canvas,k));f.appendChild(document.createTextNode(t));$('edif').appendChild(f)});
+ var tc=document.createElement('canvas'),ks=Object.keys(E.TILES);tc.width=ks.length*16;tc.height=16+32;var x=tc.getContext('2d');ks.forEach(function(c,i){x.drawImage(E.tile(c,i,0,0),i*16,0)});
+ ['maestra','alarife','abuela','agricultor','alumna','alumno','guardia','alfarero','molinera','romano','jardinero','pastelera'].forEach(function(v,i){S.pintar(x,E.hojaVecino(v),'idle','down',0,i*16+8,48,0.5)});
+ $('edif').appendChild(sheet(tc,k));
+ [0,1,2,3].forEach(function(f){$('edif').appendChild(sheet(E.objeto('cofre',f,'legendaria'),k))})}
+render();renderE();renderEd();
+</script>
+</body></html>
