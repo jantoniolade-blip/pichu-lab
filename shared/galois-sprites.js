@@ -35,9 +35,13 @@
     for (var y = -ry; y <= ry; y++) for (var x = -rx; x <= rx; x++) if ((x * x) / (rx * rx + .01) + (y * y) / (ry * ry + .01) <= 1.02) this.set(cx + x, cy + y, c);
   };
   Buf.prototype.outline = function (c) {
-    var o = [], w = this.w, h = this.h;
-    for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) if (!this.get(x, y) && (this.get(x - 1, y) || this.get(x + 1, y) || this.get(x, y - 1) || this.get(x, y + 1))) o.push(y * w + x);
-    for (var i = 0; i < o.length; i++) this.p[o[i]] = c || OUT;
+    var w = this.w, h = this.h, p = this.p, borde = c || OUT;
+    var huecos = [];
+    for (var y = 0, i = 0; y < h; y++) for (var x = 0; x < w; x++, i++) {
+      if (!p[i] && ((x > 0 && p[i - 1]) || (x + 1 < w && p[i + 1]) ||
+          (y > 0 && p[i - w]) || (y + 1 < h && p[i + w]))) huecos.push(i);
+    }
+    for (var j = 0; j < huecos.length; j++) p[huecos[j]] = borde;
   };
   Buf.prototype.mirror = function () { var b = new Buf(this.w, this.h); for (var y = 0; y < this.h; y++) for (var x = 0; x < this.w; x++) b.p[y * this.w + (this.w - 1 - x)] = this.p[y * this.w + x]; return b; };
   Buf.prototype.map = function (fn) { for (var i = 0; i < this.p.length; i++) if (this.p[i]) this.p[i] = fn(this.p[i], i); return this; };
@@ -70,8 +74,17 @@
   function hex(c) { c = c.replace('#', ''); if (c.length === 3) c = c.split('').map(function (k) { return k + k; }).join(''); return [parseInt(c.slice(0, 2), 16), parseInt(c.slice(2, 4), 16), parseInt(c.slice(4, 6), 16)]; }
   function rgb(a) { return '#' + a.map(function (v) { v = Math.max(0, Math.min(255, Math.round(v))); return (v < 16 ? '0' : '') + v.toString(16); }).join(''); }
   function mix(a, b, t) { var x = hex(a), y = hex(b); return rgb([x[0] + (y[0] - x[0]) * t, x[1] + (y[1] - x[1]) * t, x[2] + (y[2] - x[2]) * t]); }
-  function dark(c, t) { return mix(c, '#140a1e', t == null ? .3 : t); }
-  function light(c, t) { return mix(c, '#fff8e6', t == null ? .3 : t); }
+  var sombras = Object.create(null), luces = Object.create(null);
+  function dark(c, t) {
+    t = t == null ? .3 : t;
+    var clave = c + ':' + t;
+    return sombras[clave] || (sombras[clave] = mix(c, '#140a1e', t));
+  }
+  function light(c, t) {
+    t = t == null ? .3 : t;
+    var clave = c + ':' + t;
+    return luces[clave] || (luces[clave] = mix(c, '#fff8e6', t));
+  }
   function hash(x, y, s) { var h = (x * 374761393 + y * 668265263 + (s || 0) * 982451653) | 0; h = (h ^ (h >>> 13)) * 1274126177 | 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
 
   /* ---------- Fuente de 3×5 para símbolos de los enemigos ---------- */
@@ -492,45 +505,40 @@
   }
 
   // Una sola escritura en Canvas por hoja. Las paletas del generador son HEX.
-  function hojaCanvas(w, h) {
-    var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
-    var ctx = cv.getContext('2d'), datos = ctx.createImageData(w, h);
-    var colores = Object.create(null);
-    return {
-      canvas: cv,
-      pegar: function (b, dx, dy) {
-        for (var y = 0; y < b.h; y++) for (var x = 0; x < b.w; x++) {
-          var c = b.p[y * b.w + x]; if (!c) continue;
-          var rgb = colores[c] || (colores[c] = hex(c));
-          var pos = ((dy + y) * w + dx + x) * 4;
-          datos.data[pos] = rgb[0]; datos.data[pos + 1] = rgb[1];
-          datos.data[pos + 2] = rgb[2]; datos.data[pos + 3] = 255;
-        }
-      },
-      terminar: function () { ctx.putImageData(datos, 0, 0); }
-    };
-  }
-
   var cacheH = Object.create(null);
   function hojaHeroe(id, paleta) {
     var clave = paleta ? id + ':' + JSON.stringify(paleta) : id;
     if (cacheH[clave]) return cacheH[clave];
     var P = paleta || heroes[id] || heroes.galois, names = Object.keys(ANIM_HEROE);
-    var filas = {}, row = 0, hoja = hojaCanvas(FW * 8, FH * names.length * DIRS.length);
+    var filas = {}, row = 0, w = FW * 8, h = FH * names.length * DIRS.length;
+    var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+    var ctx = cv.getContext('2d');
+    var datos = paleta ? null : ctx.createImageData(w, h), colores = Object.create(null);
     names.forEach(function (a) {
+      var izquierda = [];
       DIRS.forEach(function (d) {
         filas[a + '-' + d] = row;
         for (var f = 0; f < ANIM_HEROE[a].n; f++) {
-          // Las ilustraciones externas pueden usar colores CSS en sus paletas.
-          var b = dibujarHeroe(P, a, f, d);
-          if (paleta) b.toCanvas(hoja.canvas, f * FW, row * FH);
-          else hoja.pegar(b, f * FW, row * FH);
+          var b = d === 'right' ? izquierda[f].mirror() : dibujarHeroe(P, a, f, d);
+          if (d === 'left') izquierda[f] = b;
+          if (paleta) b.toCanvas(cv, f * FW, row * FH);
+          else {
+            for (var y = 0; y < FH; y++) {
+              var pos = ((row * FH + y) * w + f * FW) * 4;
+              for (var x = 0; x < FW; x++, pos += 4) {
+                var c = b.p[y * FW + x]; if (!c) continue;
+                var rgb = colores[c] || (colores[c] = hex(c));
+                datos.data[pos] = rgb[0]; datos.data[pos + 1] = rgb[1];
+                datos.data[pos + 2] = rgb[2]; datos.data[pos + 3] = 255;
+              }
+            }
+          }
         }
         row++;
       });
     });
-    if (!paleta) hoja.terminar();
-    return (cacheH[clave] = { canvas: hoja.canvas, fw: FW, fh: FH, filas: filas, anims: ANIM_HEROE, pie: 42 });
+    if (datos) ctx.putImageData(datos, 0, 0);
+    return (cacheH[clave] = { canvas: cv, fw: FW, fh: FH, filas: filas, anims: ANIM_HEROE, pie: 42 });
   }
 
   /* =====================================================================
