@@ -3139,6 +3139,10 @@ legend { font-weight: 900; color: var(--salvia-osc); padding: 0 6px; }
       Online.enqueue({ action: 'score', alias: save.alias, mode: g.mode, level: g.level ? g.level.id : '', score: g.score, targets: g.stats.targets, decOk: g.stats.decOk, decErr: g.stats.decErr, stars }, (r) => { if (r && r.puesto) { g.rankPos = r.puesto; const el = $('#rRank'); if (el && game === g) { el.textContent = `🏆 Puesto ${r.puesto} en el ranking de la clase`; el.classList.remove('hidden'); } } });
     }
     persist();
+    // El álbum premia únicamente aventuras superadas, sin tocar puntuaciones.
+    if (win && g.mode === 'adventure' && g.level && window.GaloisColeccion) {
+      window.GaloisColeccion.registrarResultado({ mundo: 3, reto: 'nivel-' + g.level.id, superado: true, excelencia: stars >= 3 });
+    }
     // pantalla de resultados
     setTimeout(() => {
       showResults(win, reason, { coins, xp, record, stars });
@@ -3860,5 +3864,7 @@ legend { font-weight: 900; color: var(--salvia-osc); padding: 0 6px; }
   };
 })();
 </script>
+<script src="../../coleccion/datos.js"></script>
+<script src="../../coleccion/bridge.js"></script>
 </body>
 </html>
