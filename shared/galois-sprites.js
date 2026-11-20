@@ -25,7 +25,17 @@
   function Buf(w, h) { this.w = w; this.h = h; this.p = new Array(w * h).fill(null); }
   Buf.prototype.set = function (x, y, c) { x = Math.round(x); y = Math.round(y); if (c && x >= 0 && y >= 0 && x < this.w && y < this.h) this.p[y * this.w + x] = c; };
   Buf.prototype.get = function (x, y) { return (x < 0 || y < 0 || x >= this.w || y >= this.h) ? null : this.p[y * this.w + x]; };
-  Buf.prototype.rect = function (x, y, w, h, c) { for (var j = 0; j < h; j++) for (var i = 0; i < w; i++) this.set(x + i, y + j, c); };
+  Buf.prototype.rect = function (x, y, w, h, c) {
+    if (!c) return;
+    x = Math.round(x); y = Math.round(y);
+    var ini = Math.max(0, x), fin = Math.min(this.w, x + Math.ceil(w));
+    if (fin <= ini) return;
+    var fondo = Math.min(this.h, y + Math.ceil(h));
+    for (var j = Math.max(0, y); j < fondo; j++) {
+      var fila = j * this.w;
+      this.p.fill(c, fila + ini, fila + fin);
+    }
+  };
   Buf.prototype.clear = function (x, y) { x = Math.round(x); y = Math.round(y); if (x >= 0 && y >= 0 && x < this.w && y < this.h) this.p[y * this.w + x] = null; };
   Buf.prototype.line = function (x0, y0, x1, y1, c, t) {
     t = t || 1; var dx = x1 - x0, dy = y1 - y0, n = Math.max(Math.abs(dx), Math.abs(dy), 1);
@@ -49,15 +59,21 @@
   // La caída conserva todos los píxeles de la pose dentro del fotograma.
   Buf.prototype.tumbar = function (suelo, angulo) {
     var b = new Buf(this.w, this.h), sin = Math.sin(angulo), cos = Math.cos(angulo);
-    var minX = Infinity, maxX = -Infinity, maxY = -Infinity, puntos = [];
+    var minX = Infinity, maxX = -Infinity, maxY = -Infinity;
     for (var y = 0; y < this.h; y++) for (var x = 0; x < this.w; x++) {
       var c = this.get(x, y); if (!c) continue;
       var nx = x * cos + y * sin, ny = -x * sin + y * cos;
       minX = Math.min(minX, nx); maxX = Math.max(maxX, nx); maxY = Math.max(maxY, ny);
-      puntos.push([nx, ny, c]);
     }
     var escala = Math.min(1, (this.w - 4) / (maxX - minX));
-    puntos.forEach(function (q) { b.set((b.w - 1) / 2 + (q[0] - (minX + maxX) / 2) * escala, suelo - (maxY - q[1]) * escala, q[2]); });
+    var centro = (minX + maxX) / 2;
+    // Muestrear desde el destino evita agujeros entre píxeles al girar.
+    for (var fy = 0; fy <= suelo; fy++) for (var fx = 0; fx < b.w; fx++) {
+      var rx = centro + (fx - (b.w - 1) / 2) / escala;
+      var ry = maxY + (fy - suelo) / escala;
+      var color = this.get(Math.round(rx * cos - ry * sin), Math.round(rx * sin + ry * cos));
+      if (color) b.p[fy * b.w + fx] = color;
+    }
     return b;
   };
   Buf.prototype.toCanvas = function (cv, ox, oy) {
