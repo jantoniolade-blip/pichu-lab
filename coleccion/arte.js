@@ -75,6 +75,9 @@
       for (var r = 0; r < 3; r++) for (var c = 0; c < 9 - r * 2; c++) { var x = cx - (8 - r * 2) * 3 + c * 6, y3 = 92 - r * 7; b.rect(x, y3, 2, 6, '#f4efe0'); b.set(x, y3 - 1, '#ffd84a'); b.set(x + 1, y3 - 2, '#ff9a3a'); }
       if (o.nieve) for (var n = 0; n < 18; n++) b.set(hash(n, 4, 1) * AW, hash(4, n, 2) * 100, '#ffffff');
       b.rect(10, 94, 92, 8, '#c8a24a'); b.rect(10, 94, 92, 1, '#ffe28a'); for (var m = 14; m < 100; m += 10) b.rect(m, 96, 4, 4, '#8a6a2a');
+      // Vecinos a ambos lados de la calle, de espaldas al lector.
+      b.paste(S.dibujarHeroe(E.VECINOS.abuela, 'idle', 0, 'up'), -10, 81);
+      b.paste(S.dibujarHeroe(E.VECINOS.alfarero, 'idle', 0, 'up'), 89, 81);
     },
     futbol: function (b, o) {
       cieloDe(b, o.cielo || 'noche', 7);
