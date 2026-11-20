@@ -156,6 +156,7 @@
     <div class="quien"><b id="hudNombre"></b><span id="hudHab"></span></div>
     <nav aria-label="Navegación">
       <a class="gl-btn azul" href="#mapa">Mapa</a>
+      <a class="gl-btn azul" href="coleccion/index.html">🃏 Mis cartas</a>
       <a class="gl-btn azul" href="#heroes">Matemático</a>
       <a class="gl-btn azul" href="#inicio">Inicio</a>
     </nav>
@@ -166,16 +167,17 @@
     <h1 id="tInicio" style="margin:0">
       <img class="logo gl-sprite" src="assets/galois/identidad/logo-galois-legacy.svg" alt="Galois Legacy" width="882" height="414">
     </h1>
-    <p class="sub"><span class="gl-cinta">El legado de los matemáticos</span></p>
+    <p class="sub"><span class="gl-cinta">El legado de la Campiña Sevillana</span></p>
     <p class="lema" id="lema"></p>
     <div class="acciones">
       <a class="gl-btn" href="#heroes" id="btnEmpezar">▶ Comenzar aventura</a>
       <a class="gl-btn verde" href="#mapa" id="btnContinuar" hidden>Continuar</a>
+      <a class="gl-btn azul" href="coleccion/index.html">🃏 Álbum sevillano</a>
     </div>
     <div class="intro">
       <article class="gl-box">
         <h2 class="gl-titulo">La historia</h2>
-        <p>El mundo de Gaussoria se ha fragmentado y ha perdido los símbolos del saber matemático. Una fuerza oscura amenaza sus reinos. Explora el mapa, resuelve desafíos y derrota a los guardianes para recuperar cada símbolo.</p>
+        <p>El Compás de los Alarifes ha perdido diez piezas por los pueblos de la Campiña y Sevilla. Parte de Fuentes de Andalucía, explora 10 mundos matemáticos y reconstruye sus secretos; cada victoria puede concederte una carta cultural para tu álbum.</p>
       </article>
       <article class="gl-box">
         <h2 class="gl-titulo">Los protagonistas</h2>
@@ -216,12 +218,12 @@
   <!-- ===================== MAPA DE GAUSSORIA ===================== -->
   <section id="mapa" data-pantalla hidden aria-labelledby="tMapa">
     <div class="cabecera">
-      <h1 id="tMapa" style="margin:0"><span class="gl-cinta">El mundo: Gaussoria</span></h1>
+      <h1 id="tMapa" style="margin:0"><span class="gl-cinta">El mundo: la Campiña Sevillana</span></h1>
       <p>Elige un reino en el mapa o en la lista.</p>
     </div>
     <div class="mapa-wrap gl-box">
       <div class="mapa" id="mapaBox">
-        <img class="gl-sprite" src="assets/galois/mapa/gaussoria.png" alt="Mapa de Gaussoria: una isla con glaciares y un volcán al norte, un bosque al oeste, minas de cristal al este, una ciudadela en el centro y ruinas al sur." width="192" height="120">
+        <img class="gl-sprite" src="assets/galois/mapa/campina-sevillana.svg" alt="Mapa narrativo de diez reinos de Matemáticas inspirados en pueblos sevillanos, con caminos entre los campos, castillos y el río." width="192" height="120">
       </div>
     </div>
     <div class="reinos" id="reinos"></div>
@@ -234,12 +236,13 @@
 </main>
 
 <script src="shared/galois-data.js"></script>
+<script src="coleccion/datos.js"></script>
+<script src="shared/galois-campina.js"></script>
 <script>
 (function () {
   'use strict';
   var D = window.GALOIS;
-  var ENEMIGOS = { negatron: 'Negatrón', parentesis_maldito: 'Paréntesis Maldito', multiplax: 'Múltiplax',
-                   primox: 'Prímox', denominadoron: 'Denominadorón', simplifract: 'Simplifract' };
+  var ENEMIGOS = {"potenciator":"Potenciator","radicosmico":"Radicósmico","multiplax":"Múltiplax","primox":"Prímox","negatron":"Negatrón","parentesis_maldito":"Paréntesis Maldito","denominadoron":"Denominadorón","simplifract":"Simplifract","senor_escala":"Señor Escala","porcentajin":"Porcentajín","incognita_x":"Incógnita X","polinomio_mutante":"Polinomio Mutante","equilibrius":"Equilibrius","despejador_oscuro":"Despejador Oscuro","pendientor":"Pendientor","parabola_vortice":"Parábola Vórtice","mediana_traviesa":"Mediana Traviesa","grafico_tramposo":"Gráfico Tramposo","dado_caotico":"Dado Caótico","ruleta_imposible":"Ruleta Imposible"};
   var TODOS = D.heroes.concat(D.aliados);
   var $ = function (id) { return document.getElementById(id); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
