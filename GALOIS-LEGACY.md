@@ -97,6 +97,14 @@ Trabajo hecho en la rama `claude/galois-legacy-rpg-9nanbv` (creada desde `dev`; 
 | E · Integración | Botón «⚔ Aventura» en portada y en cada mundo; mapa general de la Campiña dentro de la aventura con desbloqueo progresivo; habilidades de los matemáticos activas en combate; recompensas (XP, niveles, monedas, insignias, logros, cartas aleatorias) en el mismo guardado por alias. Los minijuegos siguen concediendo cartas con la regla de siempre. | `index.html`, `shared/galois-campina.js`, `shared/galois-data.js` |
 | F · Pruebas | `node pruebas/retos.test.js` (81 000 preguntas: respuesta correcta, distractores distintos y recálculo independiente de 15 tipos de reto) y `node pruebas/e2e.js` (sin errores JS en 7 páginas, todos los objetivos alcanzables en los 10 mapas, partida completa de los 10 mundos, reglas de recompensa). Capturas revisadas en escritorio 1280×800, tableta 1024×768 y móvil 390×844. | `pruebas/` |
 
+### Fase B · Revisión del arte en `codex/sprites-hd`
+
+- Los 11 matemáticos tienen ropa y peinados propios inspirados en los retratos del proyecto, luz superior izquierda, rostro expresivo y pliegues. La carrera, el salto, el golpe y la caída tienen poses de transición. La capa y las puntas del pelo siguen el movimiento con retraso.
+- Los 20 enemigos se dibujan con siluetas basadas en su concepto. El Dado Caótico cambia de cara y perspectiva. Al recibir daño, las criaturas se deforman y, al caer, se dispersan en fragmentos. Los jefes pasan del ocre de la primera fase al cobre de la segunda y al violeta de la última, con cuernos y auras progresivos.
+- Los vecinos heredan el nuevo dibujo en la aventura y en el trigal del álbum. Los pasos de palio incorporan vecinos en primer plano. El trigo, el agua y las cubiertas de teja tienen más textura.
+- La escala y la estructura de las hojas siguen el contrato del juego. El generador reutiliza los tonos, refleja la vista lateral izquierda para componer la derecha y guarda las hojas en caché. El exportador genera 11 hojas de héroe, 20 de enemigo, 60 de jefe y `atlas.json`.
+- [Capturas comparativas de la hoja de Galois, cuatro héroes, los veinte enemigos y un jefe en tres fases](pruebas/capturas/sprites-hd/).
+
 ### Reglas de recompensa
 
 - Nada se concede por abrir una página ni por parámetros de URL: el motor solo llama a `completarAventura` cuando se han respondido bien todas las preguntas. Con `?prueba=1` (pruebas automáticas) no se guarda ninguna recompensa.
@@ -106,7 +114,7 @@ Trabajo hecho en la rama `claude/galois-legacy-rpg-9nanbv` (creada desde `dev`; 
 
 ### Pendiente (honestamente)
 
-- Los sprites son pixel art generado por código: coherentes y animados, pero sencillos. Los retratos del banco πCHU se mantienen en menús.
+- Los retratos del banco πCHU siguen en los menús. La revisión de la Fase B actualiza los sprites generados por código.
 - Textos culturales: revisados y ampliados (noviembre de 2026, `herramientas/textos-cartas.js`), pero conviene que el profesorado los contraste, sobre todo los detalles de Fuentes de Andalucía (Iglesia de San José, Casa Fernández Peñaranda), que se han dejado en términos generales.
 - Ranking de Integer Ninja: igual que antes.
 
