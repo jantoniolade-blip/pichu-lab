@@ -137,6 +137,8 @@
 </main>
 
 <script src="motor.js"></script>
+<script src="../../coleccion/datos.js"></script>
+<script src="../../coleccion/bridge.js"></script>
 <script>
 (function () {
   'use strict';
@@ -273,6 +275,7 @@
     P.fin = true;
     const s = P.ok >= 9 ? 3 : P.ok >= 7 ? 2 : P.ok >= 5 ? 1 : 0;
     const key = cfg.tema + '-' + cfg.nivel;
+    if (window.GaloisColeccion) window.GaloisColeccion.registrarResultado({ mundo: 2, reto: key, superado: P.ok >= 5, excelencia: P.ok >= 9 });
     const nuevo = !(rec[key] >= P.ok);
     if (nuevo) { rec[key] = P.ok; save(); }
     $('#fImg').src = A + 'enemigos/' + P.tema.enemigo + '.png';
