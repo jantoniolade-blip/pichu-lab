@@ -76,14 +76,27 @@
     }
     return b;
   };
+  // Vuelca el búfer en un lienzo de una sola vez: los píxeles se escriben en un
+  // ImageData auxiliar y se componen con drawImage (respeta la transparencia y lo
+  // que ya hubiera debajo). Un color que no sea HEX se pinta aparte con fillRect.
+  var RGBA = Object.create(null), auxiliar = null;
+  function rgbaDe(c) {
+    var v = RGBA[c]; if (v !== undefined) return v;
+    return (RGBA[c] = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i.test(c) ? hex(c) : null);
+  }
   Buf.prototype.toCanvas = function (cv, ox, oy) {
-    var ctx = cv.getContext('2d');
-    for (var y = 0; y < this.h; y++) for (var x = 0; x < this.w;) {
-      var c = this.get(x, y), fin = x + 1;
-      while (fin < this.w && this.get(fin, y) === c) fin++;
-      if (c) { ctx.fillStyle = c; ctx.fillRect(ox + x, oy + y, fin - x, 1); }
-      x = fin;
+    var ctx = cv.getContext('2d'), w = this.w, h = this.h, p = this.p;
+    if (!auxiliar) auxiliar = document.createElement('canvas');
+    if (auxiliar.width !== w || auxiliar.height !== h) { auxiliar.width = w; auxiliar.height = h; }
+    var actx = auxiliar.getContext('2d'), img = actx.createImageData(w, h), d = img.data, raros = null;
+    for (var i = 0, n = w * h; i < n; i++) {
+      var c = p[i]; if (!c) continue;
+      var v = rgbaDe(c); if (!v) { (raros || (raros = [])).push(i); continue; }
+      var k = i * 4; d[k] = v[0]; d[k + 1] = v[1]; d[k + 2] = v[2]; d[k + 3] = 255;
     }
+    actx.putImageData(img, 0, 0);
+    ctx.drawImage(auxiliar, ox, oy);
+    if (raros) for (var r = 0; r < raros.length; r++) { ctx.fillStyle = p[raros[r]]; ctx.fillRect(ox + raros[r] % w, oy + Math.floor(raros[r] / w), 1, 1); }
   };
 
   /* ---------- Color ---------- */
@@ -522,38 +535,42 @@
 
   // Una sola escritura en Canvas por hoja. Las paletas del generador son HEX.
   var cacheH = Object.create(null);
-  function hojaHeroe(id, paleta) {
-    var clave = paleta ? id + ':' + JSON.stringify(paleta) : id;
+  // soloAnims (opcional): lista de animaciones a dibujar; las demás filas quedan
+  // vacías. Los vecinos solo necesitan «idle», y así la hoja cuesta 9 veces menos.
+  function hojaHeroe(id, paleta, soloAnims) {
+    var clave = (paleta ? id + ':' + JSON.stringify(paleta) : id) + (soloAnims ? '|' + soloAnims.join(',') : '');
     if (cacheH[clave]) return cacheH[clave];
     var P = paleta || heroes[id] || heroes.galois, names = Object.keys(ANIM_HEROE);
     var filas = {}, row = 0, w = FW * 8, h = FH * names.length * DIRS.length;
     var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
     var ctx = cv.getContext('2d');
-    var datos = paleta ? null : ctx.createImageData(w, h), colores = Object.create(null);
+    var datos = ctx.createImageData(w, h), aparte = [];
     names.forEach(function (a) {
       var izquierda = [];
       DIRS.forEach(function (d) {
         filas[a + '-' + d] = row;
         for (var f = 0; f < ANIM_HEROE[a].n; f++) {
+          if (soloAnims && soloAnims.indexOf(a) < 0) break;
           var b = d === 'right' ? izquierda[f].mirror() : dibujarHeroe(P, a, f, d);
           if (d === 'left') izquierda[f] = b;
-          if (paleta) b.toCanvas(cv, f * FW, row * FH);
-          else {
-            for (var y = 0; y < FH; y++) {
-              var pos = ((row * FH + y) * w + f * FW) * 4;
-              for (var x = 0; x < FW; x++, pos += 4) {
-                var c = b.p[y * FW + x]; if (!c) continue;
-                var rgb = colores[c] || (colores[c] = hex(c));
-                datos.data[pos] = rgb[0]; datos.data[pos + 1] = rgb[1];
-                datos.data[pos + 2] = rgb[2]; datos.data[pos + 3] = 255;
-              }
+          var raro = false;
+          for (var y = 0; y < FH && !raro; y++) {
+            var pos = ((row * FH + y) * w + f * FW) * 4;
+            for (var x = 0; x < FW; x++, pos += 4) {
+              var c = b.p[y * FW + x]; if (!c) continue;
+              var rgb = rgbaDe(c); if (!rgb) { raro = true; break; }
+              datos.data[pos] = rgb[0]; datos.data[pos + 1] = rgb[1];
+              datos.data[pos + 2] = rgb[2]; datos.data[pos + 3] = 255;
             }
           }
+          // un fotograma con colores no HEX (paletas externas) se pinta aparte
+          if (raro) aparte.push([b, f * FW, row * FH]);
         }
         row++;
       });
     });
-    if (datos) ctx.putImageData(datos, 0, 0);
+    ctx.putImageData(datos, 0, 0);
+    aparte.forEach(function (q) { ctx.clearRect(q[1], q[2], FW, FH); q[0].toCanvas(cv, q[1], q[2]); });
     return (cacheH[clave] = { canvas: cv, fw: FW, fh: FH, filas: filas, anims: ANIM_HEROE, pie: 42 });
   }
 
@@ -648,8 +665,8 @@
         poly([[6, 12], [13, 7], [26, 7], [30, 12], [30, 25], [24, 30], [6, 27]], s);
         poly([[6, 12], [13, 9], [24, 11], [24, 29], [6, 27]], c);
         b.line(7, 13, 7, 24, l); b.line(7, 12, 22, 12, l);
-        b.rect(10, 21, 10, 5, oscuro); glifo('a', 12, 21);
-        gema(26, 7, 7, l); glifo('n', 25, 3, oscuro);
+        b.rect(10, 19, 10, 7, oscuro); glifo('2', 13, 20);
+        gema(26, 7, 7, l); glifo('n', 27, 3, oscuro);
         cara = [15, 14, 4, 'par'];
         break;
       case 'radicosmico':

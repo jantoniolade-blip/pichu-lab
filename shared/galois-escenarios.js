@@ -278,7 +278,7 @@
     jardinero: { skin: '#c8875a', hair: '#e8e4dc', pelo: 'corto', hat: 'boina', hatC: '#2a5a3a', coat: '#3a7a4a', shirt: '#f4efe6', pants: '#5a4a3a', shoes: '#2a1d1d', acc: '#f09a2a', magia: '#fff' },
     pastelera: { skin: '#efc19b', hair: '#5a3a2a', pelo: 'mono', coat: '#f4efe6', shirt: '#f4efe6', vestido: true, shoes: '#5a3a24', acc: '#e0a020', magia: '#fff' }
   };
-  function hojaVecino(id) { return S.hojaHeroe('vecino:' + id, VECINOS[id] || VECINOS.alumno); }
+  function hojaVecino(id) { return S.hojaHeroe('vecino:' + id, VECINOS[id] || VECINOS.alumno, ['idle']); }
 
   root.GaloisEscenarios = { T: T, TILES: TILES, solido: solido, saltable: saltable, tile: tile, EDIF: EDIF, edificio: edificio, objeto: objeto, VECINOS: VECINOS, hojaVecino: hojaVecino };
 })(window);

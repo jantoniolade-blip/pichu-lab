@@ -74,9 +74,12 @@
     W = { def: def, datos: wd, id: id };
     G.mundo = id; G.recogidos = {}; G.hablado = {};
     // capas de tiles (dos fotogramas para agua y trigo)
-    capas = [0, 1].map(function (f) {
+    // la capa 1 solo difiere en los tiles animados (agua y trigo): se copia la 0 y se repintan esos
+    capas = [0, 1].map(function (f, k, arr) {
       var c = document.createElement('canvas'); c.width = MW.W * T; c.height = MW.H * T; var x = c.getContext('2d');
-      for (var j = 0; j < MW.H; j++) for (var i = 0; i < MW.W; i++) x.drawImage(E.tile(def.mapa.t[j][i], i, j, f), i * T, j * T);
+      if (f === 1) x.drawImage(arr.c0, 0, 0);
+      for (var j = 0; j < MW.H; j++) for (var i = 0; i < MW.W; i++) { var ch = def.mapa.t[j][i]; if (f === 0 || (E.TILES[ch] && E.TILES[ch].anim)) x.drawImage(E.tile(ch, i, j, f), i * T, j * T); }
+      if (f === 0) arr.c0 = c;
       return c;
     });
     solidos = []; for (var j = 0; j < MW.H; j++) { solidos.push([]); for (var i = 0; i < MW.W; i++) solidos[j].push(E.solido(def.mapa.t[j][i])); }
