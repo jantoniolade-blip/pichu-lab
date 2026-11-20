@@ -526,154 +526,355 @@
   var ANIM_ENEMIGO = { idle: { n: 4, fps: 5, loop: true }, move: { n: 4, fps: 8, loop: true }, attack: { n: 6, fps: 10, loop: false }, hurt: { n: 3, fps: 9, loop: false }, defeat: { n: 6, fps: 8, loop: false } };
 
   function poseEnemigo(anim, f) {
-    var q = { ox: 0, oy: 0, sx: 1, sy: 1, ojos: 'open', boca: 'n', pies: [0, 0], tint: null, disolver: 0, chispas: false, brazo: 0, proyectil: null };
+    var q = { ox: 0, oy: 0, sx: 1, sy: 1, ojos: 'open', boca: 'n', pies: [0, 0], tint: null, disolver: 0, brazo: 0, proyectil: null };
     if (anim === 'idle') { q.sy = [1, .96, .92, .96][f]; q.sx = [1, 1.02, 1.05, 1.02][f]; if (f === 3) q.ojos = 'closed'; q.brazo = [0, 1, 2, 1][f]; }
     if (anim === 'move') { q.oy = [0, -3, -4, -1][f]; q.sy = [.88, 1.06, 1.04, .94][f]; q.sx = [1.1, .96, .98, 1.04][f]; q.pies = [[0, 0], [-1, 1], [0, 0], [1, -1]][f]; q.brazo = f; }
     if (anim === 'attack') {
-      var A = [[2, 2, 1.12, .84], [5, 0, .92, 1.08], [-6, -1, 1.08, .95], [-8, 0, 1.12, .92], [-3, 0, 1, 1], [0, 0, 1, 1]][f];
+      var A = [[1, 1, 1.05, .9], [3, 1, .92, .85], [-3, -2, 1.11, 1.02], [-4, 0, 1.12, .92], [-2, 0, 1.02, .98], [0, 0, 1, 1]][f];
       q.ox = A[0]; q.oy = A[1]; q.sx = A[2]; q.sy = A[3]; q.boca = f >= 2 && f <= 3 ? 'abierta' : 'n'; q.ojos = 'furia'; q.brazo = f === 1 ? 3 : f >= 2 && f <= 3 ? -2 : 0;
       if (f >= 3 && f <= 4) q.proyectil = f - 3;
     }
     if (anim === 'hurt') { q.tint = ['#ffffff', '#ff5050', null][f]; q.ox = [2, 4, 1][f]; q.sx = [1.12, .94, 1][f]; q.sy = [.86, 1.06, 1][f]; q.ojos = 'closed'; q.boca = 'abierta'; }
     if (anim === 'defeat') {
       q.ojos = 'x'; q.boca = 'abierta'; q.sx = [1.1, .85, .8, .78, .72, .66][f]; q.sy = [.9, 1.15, .82, .78, .72, .66][f];
-      q.oy = [0, -2, 2, 3, 4, 5][f]; q.tint = f === 0 ? '#ffffff' : null; q.disolver = [0, 0, 0, .3, .6, .85][f]; q.chispas = f >= 3;
+      q.oy = [0, -2, 2, 3, 4, 5][f]; q.tint = f === 0 ? '#ffffff' : null; q.disolver = [0, 0, 0, .3, .6, .85][f];
     }
     return q;
   }
 
-  function cuerpoEnemigo(b, E, q, W, H, cx, base, fase) {
-    var c = E.c, cs = dark(c, .32), cl = light(c, .3);
-    var w = Math.round(W * q.sx), h = Math.round(H * q.sy), x0 = Math.round(cx - w / 2 + q.ox), y0 = Math.round(base - h + q.oy);
-    var ecx = x0 + w / 2, ecy = y0 + h / 2;
-    // pies
-    var fcol = dark(c, .55);
-    if (E.forma !== 'espectro' && E.forma !== 'ruleta') { b.rect(Math.round(ecx - w / 4 - 2 + q.pies[0]), base - 2 + q.oy, 4, 3, fcol); b.rect(Math.round(ecx + w / 4 - 2 + q.pies[1]), base - 2 + q.oy, 4, 3, fcol); }
-    switch (E.forma) {
-      case 'bloque':
-        b.rect(x0, y0, w, h - 2, c); b.rect(x0, y0 + h - 4, w, 2, cs); b.rect(x0 + 1, y0 + 1, w - 2, 1, cl); b.clear(x0, y0); b.clear(x0 + w - 1, y0);
-        break;
-      case 'bola':
-        b.ellipse(Math.round(ecx), Math.round(ecy), Math.round(w / 2), Math.round(h / 2) - 1, c);
-        b.ellipse(Math.round(ecx), Math.round(ecy) + Math.round(h / 4), Math.round(w / 2) - 2, Math.round(h / 5), cs);
-        b.ellipse(Math.round(ecx), Math.round(ecy), Math.round(w / 2) - 2, Math.round(h / 2) - 4, c);
-        b.rect(Math.round(ecx - w / 4), y0 + 3, 3, 2, cl);
-        break;
-      case 'espina':
-        var r = Math.round(Math.min(w, h) / 2) - 2;
-        for (var k = 0; k < 10; k++) { var a = k / 10 * Math.PI * 2 + (fase || 0) * .3; b.line(ecx + Math.cos(a) * r, ecy + Math.sin(a) * r, ecx + Math.cos(a) * (r + 4), ecy + Math.sin(a) * (r + 4), k % 2 ? cl : cs, 2); }
-        b.ellipse(Math.round(ecx), Math.round(ecy), r, r, c); b.ellipse(Math.round(ecx) + 1, Math.round(ecy) + 2, r - 2, r - 3, c);
-        b.rect(Math.round(ecx - r / 2), Math.round(ecy - r / 2) - 1, 3, 2, cl);
-        break;
-      case 'iman':
-        var t = Math.max(5, Math.round(w / 4));
-        b.rect(x0, y0 + 4, t, h - 8, c); b.rect(x0 + w - t, y0 + 4, t, h - 8, E.c2);
-        b.ellipse(Math.round(ecx), y0 + h - 7, Math.round(w / 2), 6, c); for (var yy = y0 + h - 13; yy < y0 + h; yy++) for (var xx = Math.round(ecx); xx < x0 + w; xx++) if (b.get(xx, yy) === c) b.set(xx, yy, E.c2);
-        b.ellipse(Math.round(ecx), y0 + h - 8, Math.round(w / 2) - t, 3, null);
-        for (var yy2 = y0 + h - 11; yy2 < y0 + h - 5; yy2++) for (var xx2 = x0 + t; xx2 < x0 + w - t; xx2++) b.clear(xx2, yy2);
-        b.rect(x0, y0, t, 4, '#f2efe6'); b.rect(x0 + w - t, y0, t, 4, '#f2efe6');
-        break;
-      case 'parentesis':
-        for (var s = 0; s < 2; s++) { var px = s ? x0 + w - 7 : x0; for (var j = 0; j < h; j++) { var off = Math.round(Math.sin(j / h * Math.PI) * 4); b.rect(s ? px - off + 4 : px + off - 0, y0 + j, 4, 1, s ? cs : c); } }
-        b.ellipse(Math.round(ecx), Math.round(ecy), Math.round(w / 4), Math.round(h / 4), dark(c, .1));
-        break;
-      case 'espectro':
-        b.ellipse(Math.round(ecx), y0 + Math.round(w / 2), Math.round(w / 2), Math.round(w / 2), c);
-        b.rect(x0, y0 + Math.round(w / 2), w, h - Math.round(w / 2) - 2, c);
-        for (var i = 0; i < w; i++) if ((i + (fase || 0) * 2) % 6 < 3) b.set(x0 + i, y0 + h - 2, c); else b.clear(x0 + i, y0 + h - 3);
-        b.rect(x0 + 2, y0 + 3, w - 4, Math.round(w / 2), dark(c, .55));
-        break;
-      case 'gota':
-        b.ellipse(Math.round(ecx), Math.round(ecy) + 3, Math.round(w / 2), Math.round(h / 2) - 3, c);
-        for (var g = 0; g < 6; g++) b.rect(Math.round(ecx - 3 + g / 2), y0 + g, 6 - g, 1, c);
-        b.rect(x0 + 2, y0 + h - 5, 3, 3, c); b.rect(x0 + w - 5, y0 + h - 4, 3, 2, c);
-        b.rect(Math.round(ecx - w / 4), Math.round(ecy) - 2, 3, 2, cl);
-        break;
-      case 'balanza':
-        b.rect(Math.round(ecx) - 1, y0 + 4, 3, h - 6, cs); b.rect(Math.round(ecx) - 6, y0 + h - 4, 12, 3, cs);
-        var tilt = q.brazo % 2 ? 1 : -1; b.line(x0, y0 + 5 + tilt, x0 + w, y0 + 5 - tilt, c, 2);
-        b.ellipse(x0 + 3, y0 + 13 + tilt, 5, 2, c); b.ellipse(x0 + w - 3, y0 + 13 - tilt, 5, 2, c);
-        b.line(x0 + 3, y0 + 6 + tilt, x0 + 3, y0 + 11 + tilt, cs); b.line(x0 + w - 3, y0 + 6 - tilt, x0 + w - 3, y0 + 11 - tilt, cs);
-        b.ellipse(Math.round(ecx), y0 + 3, 5, 5, c);
-        break;
-      case 'grafica':
-        var bars = [.5, .8, .35, 1], bw = Math.floor((w - 2) / 4);
-        b.rect(x0, y0 + h - 3, w, 2, cs);
-        for (var m = 0; m < 4; m++) { var bh = Math.round((h - 6) * bars[(m + (q.brazo | 0)) % 4]); b.rect(x0 + 1 + m * bw, y0 + h - 3 - bh, bw - 1, bh, m % 2 ? c : cl); }
-        b.rect(x0 + 2, y0 + 3, w - 4, 11, light(c, .55));
-        break;
-      case 'dado':
-        b.rect(x0, y0 + 2, w, h - 4, c); b.rect(x0 + 2, y0, w - 4, h, c); b.rect(x0, y0 + h - 5, w, 3, '#c9c2b4'); b.rect(x0 + 2, y0 + 1, w - 6, 1, '#ffffff');
-        [[.25, .3], [.75, .3], [.25, .7], [.75, .7]].forEach(function (d, i2) { if ((i2 + (fase || 0)) % 4 !== 3 || true) b.rect(Math.round(x0 + w * d[0]) - 1, Math.round(y0 + h * d[1]) + 2, 3, 3, i2 === 0 ? '#d83a3a' : '#2a2030'); });
-        break;
-      case 'ruleta':
-        var R = Math.round(Math.min(w, h) / 2), rot = (q.brazo || 0) * .4;
-        for (var yy3 = -R; yy3 <= R; yy3++) for (var xx3 = -R; xx3 <= R; xx3++) { var d2 = xx3 * xx3 + yy3 * yy3; if (d2 <= R * R) { var an = Math.atan2(yy3, xx3) + rot; var seg = Math.floor(((an / (Math.PI * 2)) + 1) * 8) % 2; b.set(ecx + xx3, ecy + yy3, d2 > (R - 2) * (R - 2) ? '#d9a441' : seg ? E.c : E.c2); } }
-        b.ellipse(Math.round(ecx), Math.round(ecy), 3, 3, '#d9a441');
-        b.rect(Math.round(ecx) - 3, base - 3 + q.oy, 7, 3, '#5a3a24');
-        break;
+  // Siluetas en una cuadrícula local de 36×36. La pose deforma la criatura
+  // completa, incluidos sus rasgos y accesorios, alrededor de su apoyo.
+  function poligono(b, puntos, color) {
+    var minY = Math.min.apply(null, puntos.map(function (p) { return p[1]; }));
+    var maxY = Math.max.apply(null, puntos.map(function (p) { return p[1]; }));
+    for (var y = minY; y <= maxY; y++) {
+      var cortes = [];
+      for (var i = 0; i < puntos.length; i++) {
+        var a = puntos[i], d = puntos[(i + 1) % puntos.length];
+        if ((a[1] > y) !== (d[1] > y)) cortes.push(a[0] + (y - a[1]) * (d[0] - a[0]) / (d[1] - a[1]));
+      }
+      cortes.sort(function (a, d) { return a - d; });
+      for (var j = 0; j < cortes.length; j += 2) {
+        var x = Math.ceil(cortes[j]);
+        b.rect(x, y, Math.floor(cortes[j + 1]) - x + 1, 1, color);
+      }
     }
-    return { x0: x0, y0: y0, w: w, h: h, cx: ecx, cy: ecy };
   }
 
-  function caraEnemigo(b, q, G, E) {
-    var ey = Math.round(G.y0 + Math.max(5, G.h * .22)), ex1 = Math.round(G.cx - 5), ex2 = Math.round(G.cx + 2);
-    if (E.forma === 'grafica') ey = G.y0 + 6;
-    if (E.forma === 'espectro') ey = G.y0 + 6;
-    if (E.forma === 'ruleta') return;
-    var white = '#fffbe8', pup = '#1a1124';
-    [ex1, ex2].forEach(function (ex, i) {
-      if (q.ojos === 'closed') b.rect(ex, ey + 1, 3, 1, pup);
-      else if (q.ojos === 'x') { b.set(ex, ey, pup); b.set(ex + 2, ey, pup); b.set(ex + 1, ey + 1, pup); b.set(ex, ey + 2, pup); b.set(ex + 2, ey + 2, pup); }
-      else { b.rect(ex, ey, 3, 3, white); b.rect(ex + (i ? 0 : 0), ey + 1, 2, 2, E.forma === 'espectro' ? '#ffe04a' : pup); if (E.forma === 'espectro') b.rect(ex, ey, 3, 3, '#ffe04a'); }
-      // cejas enfadadas
-      if (q.ojos !== 'x') { if (i === 0) b.line(ex - 1, ey - 2, ex + 2, ey - 1, pup); else b.line(ex, ey - 1, ex + 3, ey - 2, pup); }
-      if (q.ojos === 'furia') b.set(ex + 1, ey + 1, '#ff3a3a');
+  function cuerpoEnemigo(id, E, q, f) {
+    var b = new Buf(36, 36), c = E.c, l = light(c, .38), s = dark(c, .38);
+    var metal = '#978ea4', blanco = '#fff3d5', oscuro = '#2b2038';
+    var cara = [18, 16, 4, 'par'], giro = f + q.brazo;
+    function poly(p, color) { poligono(b, p, color); }
+    function glifo(t, x, y, color) { texto(b, t, x, y, color || blanco); }
+    function gema(x, y, r, color) {
+      poly([[x, y - r], [x + r, y], [x, y + r + 1], [x - r, y]], dark(color, .35));
+      poly([[x, y - r], [x + 1, y], [x, y + r], [x - r, y]], color);
+      b.line(x - r + 1, y, x, y - r + 1, light(color, .5));
+    }
+    function pata(x, y, d) {
+      b.line(x, y, x + d * 3, 31, s, 3);
+      b.rect(x + d * 3 - 1, 32, 5, 2, oscuro);
+      b.rect(x + d * 3 - 1, 32, 3, 1, l);
+    }
+    function chispa(x, y, color) {
+      b.rect(x - 1, y, 3, 1, color); b.rect(x, y - 1, 1, 3, color);
+      b.set(x, y, blanco);
+    }
+    switch (id) {
+      case 'potenciator':
+        pata(11, 26 + q.pies[0], -1); pata(23, 26 + q.pies[1], 1);
+        b.line(9, 17, 4, 21 + q.brazo, s, 3); b.ellipse(4, 22 + q.brazo, 3, 3, l);
+        b.line(24, 16, 29, 19 - q.brazo, s, 3); b.ellipse(30, 20 - q.brazo, 3, 3, c);
+        poly([[6, 12], [13, 7], [26, 7], [30, 12], [30, 25], [24, 30], [6, 27]], s);
+        poly([[6, 12], [13, 9], [24, 11], [24, 29], [6, 27]], c);
+        b.line(7, 13, 7, 24, l); b.line(7, 12, 22, 12, l);
+        b.rect(10, 21, 10, 5, oscuro); glifo('a', 12, 21);
+        gema(26, 7, 7, l); glifo('n', 25, 3, oscuro);
+        cara = [15, 14, 4, 'par'];
+        break;
+      case 'radicosmico':
+        poly([[4, 18], [9, 17], [14, 24], [20, 5], [33, 5], [32, 11], [23, 11], [16, 32], [12, 32]], s);
+        b.line(5, 18, 9, 19, l, 2); b.line(9, 19, 14, 28, c, 2);
+        b.line(14, 27, 21, 7, c, 3); b.rect(21, 5, 12, 2, l);
+        gema(24, 19 + (f % 2), 7, c);
+        chispa(8, 11, l); chispa(30, 26, l);
+        cara = [24, 17 + (f % 2), 0, 'ojo'];
+        break;
+      case 'multiplax':
+        for (var i = 0; i < 4; i++) {
+          var derecha = i % 2, abajo = i > 1;
+          var x = derecha ? 30 : 4, y = (abajo ? 31 : 7) + (derecha ? -q.brazo : q.brazo);
+          b.line(16, 18, x, y, s, 4); b.ellipse(x + 1, y + 1, 4, 3, c);
+          b.line(x - 1, y, x + 1, y - 2, l);
+        }
+        gema(18, 19, 10, c); glifo('*', 17, 21, l);
+        cara = [18, 15, 3, 'par'];
+        break;
+      case 'primox':
+        pata(12, 27, -1); pata(22, 27, 1);
+        [[5, 8], [12, 3], [21, 2], [30, 6], [33, 16], [31, 26], [3, 24]].forEach(function (p, i) {
+          poly([[17, 20], [p[0], p[1]], [p[0] + (i < 4 ? 3 : -2), p[1] + 7]], i < 3 ? l : s);
+        });
+        poly([[7, 13], [14, 8], [23, 9], [29, 15], [27, 27], [22, 31], [12, 30], [6, 24]], s);
+        poly([[7, 13], [14, 9], [21, 10], [26, 15], [24, 25], [12, 28], [7, 23]], c);
+        b.line(8, 14, 13, 11, l); glifo('2', 10, 21); glifo('3', 16, 23); glifo('5', 22, 21);
+        cara = [17, 15, 4, 'par'];
+        break;
+      case 'negatron':
+        [[8,c], [24,E.c2]].forEach(function (p, i) {
+          var x = p[0], color = p[1];
+          b.rect(x, 11, 8, 13, dark(color, .33)); b.rect(x, 11, 6, 13, color);
+          b.rect(x, 8, 8, 4, metal); b.rect(x, 8, 6, 1, blanco);
+          b.line(x, 21, 18, 31, color, 5); b.line(x, 21, 18, 30, light(color, .27));
+          glifo(i ? '+' : '-', x + 1, 1 + (giro % 2), light(color, .65));
+        });
+        b.ellipse(19, 28, 6, 4, oscuro);
+        cara = [19, 26, 3, 'par'];
+        break;
+      case 'parentesis_maldito':
+        for (var j = 0; j < 24; j++) {
+          var arco = Math.round(((j - 12) * (j - 12)) / 33);
+          var iz = 5 + arco, de = 28 - arco;
+          b.rect(iz, 8 + j, 3, 1, c); b.set(iz, 8 + j, l);
+          b.rect(de, 8 + j, 3, 1, s); b.set(de, 8 + j, c);
+        }
+        gema(18, 19, 7, oscuro);
+        chispa(18, 7, l); chispa(18, 30, l);
+        cara = [18, 17, 0, 'ojo'];
+        break;
+      case 'denominadoron':
+        pata(10, 27, -1); pata(24, 27, 1);
+        poly([[7, 9], [12, 6], [24, 6], [28, 11], [25, 16], [10, 16]], s);
+        b.rect(9, 9, 15, 6, c); b.rect(10, 9, 13, 1, l); glifo('3', 16, 10, oscuro);
+        b.rect(3, 18, 30, 5, s); b.rect(4, 18, 27, 2, l);
+        poly([[7, 24], [27, 24], [29, 29], [24, 31], [10, 31]], c);
+        glifo('4', 16, 25, oscuro);
+        b.set(5, 20, blanco); b.set(30, 20, blanco);
+        cara = [17, 18, 7, 'visor'];
+        break;
+      case 'simplifract':
+        b.ellipse(16, 26, 13, 7, s); b.ellipse(13, 24, 10, 6, c);
+        b.ellipse(16, 26, 9, 2, l);
+        b.ellipse(13, 17, 9, 10, s); b.ellipse(11, 16, 7, 9, c);
+        b.line(6, 15, 10, 10, l, 2); glifo('/', 11, 13, oscuro);
+        b.line(22, 25, 26, 13 + q.brazo, c, 2); b.line(26, 25, 31, 15 - q.brazo, s, 2);
+        b.set(25, 12 + q.brazo, blanco); b.set(31, 14 - q.brazo, blanco);
+        cara = [28, 22, 0, 'ojo'];
+        break;
+      case 'senor_escala':
+        pata(11, 26, -1); pata(22, 26, 1);
+        poly([[9, 13], [25, 13], [29, 30], [6, 30]], s);
+        poly([[10, 13], [21, 13], [24, 29], [7, 29]], c);
+        b.line(11, 17, 9, 27, l);
+        b.rect(6, 9, 22, 3, s); b.rect(12, 3, 13, 7, c); b.rect(12, 3, 10, 1, l);
+        b.rect(12, 7, 13, 2, oscuro);
+        b.line(26, 25, 32, 11 + q.brazo, l, 3);
+        for (var r = 0; r < 5; r++) b.set(32 - r, 12 + q.brazo + 3 * r, oscuro);
+        glifo(':', 16, 23);
+        cara = [17, 13, 4, 'par'];
+        break;
+      case 'porcentajin':
+        b.ellipse(18, 22, 6, 10, s); b.ellipse(17, 20, 5, 8, c);
+        b.line(10, 27, 25, 10, l, 3);
+        b.ellipse(10, 13 - q.brazo, 6, 6, c); b.ellipse(9, 12 - q.brazo, 5, 5, l);
+        b.ellipse(26, 27 + q.brazo, 6, 6, s); b.ellipse(25, 26 + q.brazo, 5, 5, c);
+        b.ellipse(9, 12 - q.brazo, 2, 2, oscuro); b.ellipse(25, 26 + q.brazo, 2, 2, oscuro);
+        cara = [17, 18, 0, 'ojo'];
+        break;
+      case 'incognita_x':
+        poly([[3, 7], [9, 4], [18, 13], [27, 4], [32, 8], [23, 19], [33, 30], [26, 33], [18, 25], [10, 33], [4, 30], [13, 19]], c);
+        b.line(5, 7, 15, 17, l, 2); b.line(27, 6, 21, 14, l);
+        b.line(21, 23, 29, 31, s, 2); b.line(9, 31, 15, 24, s);
+        gema(18, 19, 6, oscuro); chispa(31, 18 + q.brazo, l);
+        cara = [18, 17, 0, 'ojo'];
+        break;
+      case 'polinomio_mutante':
+        [8, 18, 28].forEach(function (x, i) {
+          var altura = [16, 9, 21][i] + Math.round(Math.sin(giro + i) * 2);
+          b.line(18, 31, x, altura, s, 4); b.line(17, 30, x - 1, altura, c, 2);
+          b.ellipse(x, altura, 5, 5, c); b.set(x - 2, altura - 3, l);
+          glifo(['x','+','1'][i], x - 1, altura - 2, oscuro);
+        });
+        b.ellipse(18, 29, 12, 5, c); b.rect(12, 33, 14, 1, s);
+        cara = [18, 26, 3, 'par'];
+        break;
+      case 'equilibrius':
+        b.rect(10, 31, 16, 3, s); b.rect(12, 30, 12, 1, l);
+        b.rect(16, 10, 5, 20, c); b.rect(16, 12, 1, 17, l);
+        var inclinacion = Math.max(-2, Math.min(2, q.brazo - 1));
+        b.line(5, 12 + inclinacion, 31, 12 - inclinacion, s, 3);
+        b.line(5, 12 + inclinacion, 31, 12 - inclinacion, l);
+        [6, 29].forEach(function (x, i) {
+          var y = 22 + (i ? -inclinacion : inclinacion);
+          b.line(x, y - 9, x - 4, y, metal); b.line(x, y - 9, x + 4, y, metal);
+          b.ellipse(x, y, 5, 2, c); b.rect(x - 4, y, 8, 1, l);
+        });
+        gema(18, 9, 7, c); glifo('=', 17, 23, oscuro);
+        cara = [18, 7, 0, 'ojo'];
+        break;
+      case 'despejador_oscuro':
+        poly([[5, 32], [10, 19], [10, 10], [17, 2], [24, 6], [27, 17], [31, 31], [26, 34], [21, 30], [17, 34], [12, 31]], s);
+        poly([[6, 31], [11, 16], [11, 10], [17, 4], [23, 8], [25, 15], [17, 21], [15, 31]], c);
+        b.line(12, 10, 17, 5, l); b.line(8, 30, 13, 21, l);
+        b.ellipse(18, 13, 6, 5, oscuro); glifo('=', 17, 23, l);
+        b.line(28, 30, 30, 9 + q.brazo, metal, 2); gema(30, 8 + q.brazo, 4, l);
+        cara = [18, 12, 3, 'visor'];
+        break;
+      case 'pendientor':
+        pata(9, 26, -1); pata(24, 27, 1);
+        poly([[4, 27], [26, 7], [33, 7], [33, 28], [28, 32], [5, 32]], s);
+        poly([[4, 27], [26, 7], [29, 8], [29, 28], [5, 30]], c);
+        b.line(5, 26, 27, 7, l, 2);
+        b.line(9, 27, 25, 27, oscuro); b.line(25, 27, 25, 13, oscuro);
+        b.set(9, 27, blanco); b.set(25, 13, blanco);
+        cara = [21, 19, 3, 'par'];
+        break;
+      case 'parabola_vortice':
+        for (var k = 2; k <= 32; k++) {
+          var py = Math.round(27 - (k - 17) * (k - 17) / 11);
+          b.rect(k, py, 1, 4, k < 17 ? l : s); b.set(k, py + 1, c);
+        }
+        gema(17, 22, 8, c); chispa(17, 8 + q.brazo, l); chispa(17, 33, l);
+        cara = [17, 20, 0, 'ojo'];
+        break;
+      case 'mediana_traviesa':
+        [5, 18, 31].forEach(function (x, i) {
+          var y = [21, 9, 15][i] + (i === 1 ? -q.brazo : q.brazo);
+          b.rect(x - 3, y, 7, 30 - y, i === 1 ? c : s);
+          b.rect(x - 3, y, 2, 30 - y, l);
+          glifo(['3','5','7'][i], x - 1, y + 1, oscuro);
+        });
+        b.rect(3, 29, 31, 4, s); b.rect(4, 29, 28, 1, c);
+        b.line(5, 27, 30, 26, blanco); b.set(18, 26, oscuro);
+        cara = [18, 17 - q.brazo, 0, 'ojo'];
+        break;
+      case 'grafico_tramposo':
+        pata(9, 25, -1); pata(25, 25, 1);
+        poly([[4, 12], [12, 7], [29, 9], [33, 13], [32, 25], [25, 29], [5, 26]], s);
+        poly([[4, 12], [12, 8], [28, 10], [28, 24], [22, 27], [5, 25]], c);
+        b.line(6, 13, 13, 10, l);
+        b.rect(10, 18, 4, 6, oscuro); b.rect(16, 18, 4, 6, oscuro); b.rect(22, 18, 4, 6, oscuro);
+        b.rect(11, 21, 2, 2, l); b.rect(17, 19, 2, 4, l); b.rect(23, 18, 2, 5, l);
+        b.line(6, 25, 27, 5 + q.brazo, blanco, 2); b.rect(24, 5 + q.brazo, 5, 2, l);
+        cara = [15, 13, 4, 'visor'];
+        break;
+      case 'dado_caotico':
+        var sesgo = [0, 3, 1, -2][f % 4];
+        poly([[5, 12], [15 + sesgo, 5], [32, 8], [32, 26], [23 + sesgo, 33], [5, 29]], s);
+        poly([[5, 12], [15 + sesgo, 5], [32, 8], [23 + sesgo, 15]], l);
+        poly([[5, 12], [23 + sesgo, 15], [23 + sesgo, 33], [5, 29]], c);
+        b.line(6, 13, 22 + sesgo, 15, blanco);
+        var puntos = [[[14,22]],[[9,18],[19,26]],[[9,18],[14,22],[19,26]],[[9,18],[18,19],[9,25],[18,26]]];
+        puntos[(f + (q.ojos === 'furia' ? 2 : 0)) % 4].forEach(function (p) {
+          b.rect(p[0], p[1], 2, 2, oscuro); b.set(p[0], p[1], '#985055');
+        });
+        b.line(16 + sesgo, 9, 21 + sesgo, 9, metal); b.set(25, 22, blanco); b.set(28, 16, blanco);
+        cara = null;
+        break;
+      case 'ruleta_imposible':
+        b.rect(14, 27, 9, 6, s); b.rect(10, 32, 16, 2, c);
+        b.ellipse(18, 18, 15, 13, '#81552b'); b.ellipse(17, 17, 14, 12, '#edc267');
+        for (var y = -10; y <= 10; y++) for (var x = -12; x <= 12; x++) {
+          if (x * x / 144 + y * y / 100 > 1) continue;
+          var sector = Math.floor((Math.atan2(y, x) / Math.PI + 1) * 6 + giro / 2);
+          b.set(17 + x, 17 + y, sector % 2 ? c : E.c2);
+        }
+        gema(17, 17, 5, '#dca65b');
+        poly([[14, 2], [21, 2], [17, 10]], blanco);
+        chispa(26, 23, l);
+        cara = [17, 16, 0, 'ojo'];
+        break;
+    }
+    if (cara) caraEnemigo(b, q, cara);
+    return b;
+  }
+
+  function caraEnemigo(b, q, cara) {
+    var x = cara[0], y = cara[1], sep = cara[2], tipo = cara[3];
+    var luz = q.ojos === 'furia' ? '#ffab69' : '#fff3d5', pupila = '#25192f';
+    var centros = sep ? [x - sep, x + sep] : [x];
+    centros.forEach(function (ex) {
+      if (q.ojos === 'x') {
+        b.line(ex - 1, y, ex + 1, y + 2, pupila);
+        b.line(ex + 1, y, ex - 1, y + 2, pupila);
+      } else if (q.ojos === 'closed') b.rect(ex - 1, y + 1, 3, 1, pupila);
+      else if (tipo === 'visor') {
+        b.rect(ex - 2, y, 5, 2, pupila);
+        b.rect(ex - 1, y, 3, 1, luz);
+      } else {
+        b.ellipse(ex, y + 1, tipo === 'ojo' ? 3 : 2, 2, pupila);
+        b.rect(ex - 1, y, 2, 2, luz);
+        b.set(ex + (q.ojos === 'furia' ? -1 : 1), y + 1, pupila);
+        if (q.ojos === 'furia') b.line(ex - 2, y - 1, ex + 1, y, pupila);
+      }
     });
-    var my = ey + 4;
-    if (E.forma === 'dado' || E.forma === 'grafica') my = ey + 4;
-    if (q.boca === 'abierta') { b.rect(Math.round(G.cx - 3), my, 6, 3, '#4a1020'); b.rect(Math.round(G.cx - 2), my, 1, 1, white); b.rect(Math.round(G.cx + 1), my, 1, 1, white); }
-    else { b.rect(Math.round(G.cx - 2), my + 1, 5, 1, pup); b.set(Math.round(G.cx - 3), my, pup); b.set(Math.round(G.cx + 3), my, pup); }
+    if (tipo === 'par') {
+      b.rect(x - 2, y + 4, 5, q.boca === 'abierta' ? 3 : 1, pupila);
+      if (q.boca === 'abierta') b.set(x - 1, y + 4, luz);
+    }
+  }
+
+  function colocarEnemigo(b, local, q, base, escala) {
+    var sx = q.sx * escala, sy = q.sy * escala;
+    var cx = Math.round(b.w / 2 + q.ox), pie = Math.round(base + q.oy);
+    for (var y = 0; y < b.h; y++) for (var x = 0; x < b.w; x++) {
+      var color = local.get(18 + Math.round((x - cx) / sx), 33 + Math.round((y - pie) / sy));
+      if (color) b.set(x, y, color);
+    }
+    return { cx: cx, cy: Math.round(pie - 15 * sy), y0: Math.round(pie - 31 * sy), x0: Math.round(cx - 15 * sx), w: Math.round(30 * sx) };
   }
 
   function dibujarEnemigo(id, anim, f, opt) {
     opt = opt || {};
-    var E0 = enemigos[id] || enemigos.primox, E = Object.assign({}, E0);
+    if (!enemigos[id]) id = 'primox';
+    var E = Object.assign({}, enemigos[id]);
     var fase = opt.fase || 1, jefe = !!opt.jefe;
     if (jefe && fase === 2) E.c = mix(E.c, '#ff3a2a', .35);
     if (jefe && fase === 3) E.c = mix(E.c, '#2a0a3a', .45);
     var S = jefe ? 64 : 40, base = S - 3;
     var b = new Buf(S, S), q = poseEnemigo(anim, f);
-    var W = jefe ? 38 : 24, H = jefe ? 38 : 24;
-    if (E.forma === 'espectro' || E.forma === 'balanza') H += jefe ? 6 : 4;
-    var G = cuerpoEnemigo(b, E, q, W, H, S / 2, base, f);
-    // brazos (los que los tienen)
-    if (E.brazos) {
-      var ay = Math.round(G.y0 + G.h / 2), sw = q.brazo;
-      b.line(G.x0 - 1, ay, G.x0 - 5, ay - 2 - sw, dark(E.c, .45), 2); b.rect(G.x0 - 7, ay - 4 - sw, 3, 3, light(E.c, .2));
-      b.line(G.x0 + G.w, ay, G.x0 + G.w + 4, ay - 2 + sw, dark(E.c, .45), 2); b.rect(G.x0 + G.w + 4, ay - 4 + sw, 3, 3, light(E.c, .2));
-    }
-    // símbolo matemático en el cuerpo
-    if (E.g) {
-      var k = jefe ? 2 : 1, gw = anchoTexto(E.g, k), gy = Math.round(G.y0 + G.h - 5 * k - (E.forma === 'bloque' ? 5 : E.forma === 'bola' || E.forma === 'gota' ? 4 : 3) * k);
-      if (E.forma === 'espectro') gy = G.y0 + G.h - 9 * k;
-      if (E.forma === 'grafica') gy = G.y0 + 15 * k;
-      if (E.forma === 'iman' || E.forma === 'balanza') gy = G.y0 - 1;
-      texto(b, E.g, Math.round(G.cx - gw / 2), Math.round(gy), E.forma === 'bloque' || E.forma === 'bola' ? '#2a1a20' : '#fffbe8', k);
-    }
-    caraEnemigo(b, q, G, E);
-    if (jefe) { // corona del jefe
-      var cx = Math.round(G.cx), cy = G.y0 - 5;
-      b.rect(cx - 7, cy + 2, 15, 3, '#f2c14e'); [-7, -3, 1, 5].forEach(function (d, i) { b.rect(cx + d, cy - (i % 2 ? 2 : 0), 3, 3, '#f2c14e'); });
+    var G = colocarEnemigo(b, cuerpoEnemigo(id, E, q, f), q, base, jefe ? 1.43 : .94);
+    if (jefe) {
+      var cx = G.cx, cy = G.y0;
+      b.rect(cx - 7, cy + 2, 15, 3, '#f2c14e');
+      [-7, -3, 1, 5].forEach(function (d, i) { b.rect(cx + d, cy - (i % 2 ? 2 : 0), 3, 3, '#f2c14e'); });
       b.set(cx - 2, cy + 3, '#d83a3a'); b.set(cx + 2, cy + 3, '#3a8ad8');
-      if (fase >= 2) { b.line(G.x0 - 2, G.y0 + 4, G.x0 - 6, G.y0 - 4, '#ffefe0', 2); b.line(G.x0 + G.w + 1, G.y0 + 4, G.x0 + G.w + 5, G.y0 - 4, '#ffefe0', 2); }
+      if (fase >= 2) {
+        b.line(G.x0, cy + 7, G.x0 - 4, cy - 2, '#ffefe0', 2);
+        b.line(G.x0 + G.w, cy + 7, G.x0 + G.w + 4, cy - 2, '#ffefe0', 2);
+      }
     }
     b.outline();
-    if (jefe && fase >= 2) { for (var i = 0; i < 14; i++) { var a = i / 14 * Math.PI * 2 + f * .4, rr = S / 2 - 3 - (i % 3); b.set(S / 2 + Math.cos(a) * rr, S / 2 + 2 + Math.sin(a) * rr * .8, fase === 3 ? '#c06aff' : '#ff8a3a'); } }
-    if (q.proyectil !== null && E.ataque) { var tok = E.ataque[f % E.ataque.length]; texto(b, tok, Math.round(G.x0 - 4 - q.proyectil * 6 - anchoTexto(tok)), Math.round(G.cy - 3), '#fffbe8'); }
-    if (q.tint) b.map(function (c) { return mix(c, q.tint, .7); });
-    if (q.disolver) b.map(function (c, i) { return hash(i % S, (i / S) | 0, 3) < q.disolver ? null : c; });
-    if (q.chispas) for (var j = 0; j < 10; j++) b.set(hash(j, f, 1) * S, hash(f, j, 2) * S, j % 2 ? '#ffe28a' : '#ffffff');
+    if (jefe && fase >= 2) {
+      for (var i = 0; i < 14; i++) {
+        var a = i / 14 * Math.PI * 2 + f * .4, rr = S / 2 - 3 - (i % 3);
+        b.set(S / 2 + Math.cos(a) * rr, S / 2 + 2 + Math.sin(a) * rr * .8, fase === 3 ? '#c06aff' : '#ff8a3a');
+      }
+    }
+    if (q.proyectil !== null) {
+      var tok = E.ataque[f % E.ataque.length];
+      texto(b, tok, Math.max(1, G.x0 - anchoTexto(tok) - 2), G.cy - 5 - q.proyectil * 6, '#fffbe8');
+    }
+    if (q.tint) {
+      var colores = Object.create(null);
+      b.map(function (c) { return colores[c] || (colores[c] = mix(c, q.tint, .66)); });
+    }
+    if (q.disolver) {
+      // Bloques pequeños salen del cuerpo según la textura inicial.
+      var restos = [], paso = f - 2;
+      b.map(function (c, indice) {
+        var x = indice % S, y = (indice / S) | 0;
+        var azar = hash(x >> 1, y >> 1, 3);
+        if (azar >= q.disolver) return c;
+        if (azar < .19 && c !== OUT) restos.push([x, y, c, azar]);
+        return null;
+      });
+      restos.forEach(function (p) {
+        var vx = p[0] < G.cx ? -1 : 1;
+        b.set(p[0] + vx * paso * (2 + p[3] * 9), p[1] - paso * (1 + p[3] * 7), light(p[2], .24));
+      });
+    }
     return b;
   }
 
