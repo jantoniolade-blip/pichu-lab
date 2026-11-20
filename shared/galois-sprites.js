@@ -385,7 +385,7 @@
       b.rect(12 + bx, 13 + by + o, 3, 3, P.shirt); if (P.cuello) b.rect(12 + bx, 13 + by + o, 5, 2, P.cuello);
       if (!P.vestido) b.rect(12 + bx, 20 + by + o, 8, 1, coatS);
       ropaHeroe(b, P, 12 + bx, 13 + by + o, 8, vista);
-      var hx = 10 + bx, hy = 3 + by + o + p.cabeza;
+      var hx = 10 + bx, hy = Math.max(8, 3 + by + o + p.cabeza);
       b.rect(hx, hy, 11, 10, skin); b.clear(hx, hy); b.clear(hx, hy + 9); b.clear(hx + 10, hy + 9);
       b.set(hx - 1, hy + 6, skin); // nariz
       b.rect(hx + 6, hy + 5, 2, 2, skinS); // oreja
@@ -425,7 +425,7 @@
       ropaHeroe(b, P, 11 + bx, 13 + by + o, 10, vista);
       if (back && P.cape) capa(b, 10 + bx, 13 + by + o, 10, P.cape, p.tela || 0);
       // cabeza
-      var hx2 = 10 + bx, hy2 = 3 + by + o + p.cabeza;
+      var hx2 = 10 + bx, hy2 = Math.max(8, 3 + by + o + p.cabeza);
       b.rect(hx2, hy2, 12, 10, skin); b.clear(hx2, hy2); b.clear(hx2 + 11, hy2); b.clear(hx2, hy2 + 9); b.clear(hx2 + 11, hy2 + 9);
       b.rect(hx2 + 1, hy2 + 9, 10, 1, skinS);
       b.rect(hx2 + 2, hy2 + 3, 4, 2, light(skin, .27));
@@ -453,7 +453,11 @@
     b.outline();
     // efectos (sin contorno, encima)
     p.fx.forEach(function (e) { efecto(b, e, P, lado, bx, by); });
-    if (p.tint) b.map(function (c) { return c === OUT ? (p.tint === '#ffffff' ? '#ffffff' : dark(p.tint, .5)) : mix(c, p.tint, .65); });
+    if (p.tint) {
+      var colores = Object.create(null);
+      colores[OUT] = p.tint === '#ffffff' ? '#ffffff' : dark(p.tint, .5);
+      b.map(function (c) { return colores[c] || (colores[c] = mix(c, p.tint, .65)); });
+    }
     if (dir === 'right') b = b.mirror();
     return b;
   }
@@ -487,15 +491,46 @@
     }
   }
 
-  var cacheH = {};
+  // Una sola escritura en Canvas por hoja. Las paletas del generador son HEX.
+  function hojaCanvas(w, h) {
+    var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+    var ctx = cv.getContext('2d'), datos = ctx.createImageData(w, h);
+    var colores = Object.create(null);
+    return {
+      canvas: cv,
+      pegar: function (b, dx, dy) {
+        for (var y = 0; y < b.h; y++) for (var x = 0; x < b.w; x++) {
+          var c = b.p[y * b.w + x]; if (!c) continue;
+          var rgb = colores[c] || (colores[c] = hex(c));
+          var pos = ((dy + y) * w + dx + x) * 4;
+          datos.data[pos] = rgb[0]; datos.data[pos + 1] = rgb[1];
+          datos.data[pos + 2] = rgb[2]; datos.data[pos + 3] = 255;
+        }
+      },
+      terminar: function () { ctx.putImageData(datos, 0, 0); }
+    };
+  }
+
+  var cacheH = Object.create(null);
   function hojaHeroe(id, paleta) {
     var clave = paleta ? id + ':' + JSON.stringify(paleta) : id;
     if (cacheH[clave]) return cacheH[clave];
     var P = paleta || heroes[id] || heroes.galois, names = Object.keys(ANIM_HEROE);
-    var maxN = 8, filas = {}, row = 0;
-    var cv = document.createElement('canvas'); cv.width = FW * maxN; cv.height = FH * names.length * DIRS.length;
-    names.forEach(function (a) { DIRS.forEach(function (d) { filas[a + '-' + d] = row; for (var f = 0; f < ANIM_HEROE[a].n; f++) dibujarHeroe(P, a, f, d).toCanvas(cv, f * FW, row * FH); row++; }); });
-    return (cacheH[clave] = { canvas: cv, fw: FW, fh: FH, filas: filas, anims: ANIM_HEROE, pie: 42 });
+    var filas = {}, row = 0, hoja = hojaCanvas(FW * 8, FH * names.length * DIRS.length);
+    names.forEach(function (a) {
+      DIRS.forEach(function (d) {
+        filas[a + '-' + d] = row;
+        for (var f = 0; f < ANIM_HEROE[a].n; f++) {
+          // Las ilustraciones externas pueden usar colores CSS en sus paletas.
+          var b = dibujarHeroe(P, a, f, d);
+          if (paleta) b.toCanvas(hoja.canvas, f * FW, row * FH);
+          else hoja.pegar(b, f * FW, row * FH);
+        }
+        row++;
+      });
+    });
+    if (!paleta) hoja.terminar();
+    return (cacheH[clave] = { canvas: hoja.canvas, fw: FW, fh: FH, filas: filas, anims: ANIM_HEROE, pie: 42 });
   }
 
   /* =====================================================================
