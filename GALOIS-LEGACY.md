@@ -71,3 +71,12 @@ volver a llamarla `index.html` y restaurar el enlace «◀ πCHU ROYALE» de los
 - `shared/galois-theme.css`: paleta y componentes (marco dorado, cinta, botones de 48 px como mínimo).
 
 No se usan nombres, personajes, símbolos, música ni diseños de ninguna saga comercial.
+
+
+## Campiña sevillana y álbum de cartas (expansión)
+
+La nueva capa de mundo `shared/galois-campina.js` transforma Gaussoria en 10 reinos de la Campiña sevillana; el mapa se encuentra en `assets/galois/mapa/campina-sevillana.svg`. Los tres juegos activos se conservan y los siete mundos sin minijuego siguen bloqueados.
+
+[🃏 Abrir el álbum de 60 cartas](coleccion/index.html) · [Ver el catálogo y las 50 aventuras](coleccion/CATALOGO_60_CARTAS.md) · [Guía de integración para Claude](coleccion/GUIA_PARA_CLAUDE.md).
+
+El progreso es cosmético, separado de la evaluación y asociado a un alias local del navegador; se puede importar/exportar en JSON. Los iconos de las cartas son SVG originales generados desde `coleccion/album.js` (no se han importado retratos, insignias ni imágenes oficiales).
