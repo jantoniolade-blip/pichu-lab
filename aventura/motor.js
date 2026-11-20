@@ -81,14 +81,14 @@
     });
     solidos = []; for (var j = 0; j < MW.H; j++) { solidos.push([]); for (var i = 0; i < MW.W; i++) solidos[j].push(E.solido(def.mapa.t[j][i])); }
     edificios = def.edificios.map(function (b, k) {
-      var ed = E.edificio(b.t, b.o); for (var j2 = b.y; j2 < b.y + ed.h; j2++) for (var i2 = b.x; i2 < b.x + ed.w; i2++) if (solidos[j2]) solidos[j2][i2] = true;
+      var ed = E.edificio(b.t, b.o); for (var j2 = b.y; j2 < b.y + ed.h; j2++) for (var i2 = b.x; i2 < b.x + ed.w; i2++) if (solidos[j2]) solidos[j2][i2] = !(b.paso && b.paso.indexOf(i2 - b.x) >= 0);
       return Object.assign({ k: k, w: ed.w, h: ed.h }, b);
     });
     var fsal = def.salida; solidos[fsal[1]][fsal[0]] = false;
     vecinos = def.vecinos.map(function (v) { return Object.assign({ hoja: E.hojaVecino(v.v), px: v.x * T + 8, py: v.y * T + 14, dirA: v.dir || 'down' }, v); });
     cofres = def.cofres.map(function (c) { return Object.assign({ abierto: estado().cofres.indexOf(c.id) >= 0, anim: 0 }, c); });
     fragmentos = def.fragmentos.map(function (p, i) { return { i: i, x: p[0] * T + 8, y: p[1] * T + 10 }; });
-    G.jug.x = def.inicio[0] * T + 8; G.jug.y = def.inicio[1] * T + 14; G.jug.dir = 'up';
+    G.jug.x = def.inicio[0] * T + 8; G.jug.y = def.inicio[1] * T + 14; G.jug.dir = 'up'; G.jug.salto = null; G.jug.golpe = 0; G.jug.alto = 0; particulas = [];
     prepararEnemigos();
     G.modo = 'mapa'; MUS.tocar('mundo', { mundo: id });
     $('campina').hidden = true; $('hud').hidden = false; $('controles').hidden = !tactilVisible();
@@ -124,6 +124,8 @@
     if (MAPA_TECLAS[e.code]) { G.teclas[MAPA_TECLAS[e.code]] = true; if (G.modo === 'mapa') e.preventDefault(); }
     if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') G.correr = true;
     if ((e.code === 'Space' || e.code === 'Enter' || e.code === 'KeyE') && !e.repeat) { if (G.modo === 'mapa') { e.preventDefault(); accion(); } else if (G.modo === 'dialogo') { e.preventDefault(); avanzarDialogo(); } }
+    if ((e.code === 'KeyX' || e.code === 'KeyJ') && !e.repeat && G.modo === 'mapa') atacar();
+    if ((e.code === 'KeyC' || e.code === 'KeyK') && !e.repeat && G.modo === 'mapa') saltar();
     if (e.code === 'Escape' && G.modo === 'mapa') abrirMenu('misiones');
   });
   addEventListener('keyup', function (e) { if (MAPA_TECLAS[e.code]) G.teclas[MAPA_TECLAS[e.code]] = false; if (/Shift/.test(e.code)) G.correr = false; });
@@ -140,6 +142,8 @@
     pad.addEventListener('pointerdown', function (e) { activo = e.pointerId; pad.setPointerCapture(e.pointerId); mover(e); e.preventDefault(); });
     pad.addEventListener('pointermove', function (e) { if (activo === e.pointerId) mover(e); });
     pad.addEventListener('pointerup', fin); pad.addEventListener('pointercancel', fin);
+    $('botonB').addEventListener('pointerdown', function (e) { e.preventDefault(); if (G.modo === 'mapa') atacar(); });
+    $('botonS').addEventListener('pointerdown', function (e) { e.preventDefault(); if (G.modo === 'mapa') saltar(); });
     $('botonA').addEventListener('pointerdown', function (e) { e.preventDefault(); if (G.modo === 'mapa') accion(); else if (G.modo === 'dialogo') avanzarDialogo(); });
   })();
   cv.addEventListener('pointerdown', function () { if (G.modo === 'dialogo') avanzarDialogo(); });
@@ -158,7 +162,9 @@
   function actualizarMapa(dt) {
     var dx = (G.teclas.right ? 1 : 0) - (G.teclas.left ? 1 : 0) + G.tactil.dx, dy = (G.teclas.down ? 1 : 0) - (G.teclas.up ? 1 : 0) + G.tactil.dy;
     var n = Math.hypot(dx, dy), J = G.jug, anim = 'idle';
-    if (n > .2) {
+    if (J.salto) { var u = Math.min(1, (G.t - J.salto.t) / .5); J.x = J.salto.x0 + (J.salto.x1 - J.salto.x0) * u; J.y = J.salto.y0 + (J.salto.y1 - J.salto.y0) * u; J.alto = Math.sin(u * Math.PI) * (J.salto.x1 === J.salto.x0 && J.salto.y1 === J.salto.y0 ? 5 : 12); if (u >= 1) { J.salto = null; J.alto = 0; J.anim = 'idle'; } }
+    else if (J.golpe && G.t - J.golpe < .5) { /* atacando: quieto */ }
+    else if (n > .2) {
       dx /= Math.max(1, n); dy /= Math.max(1, n);
       var v = (G.correr ? 105 : 62) * dt;
       if (Math.abs(dx) > Math.abs(dy)) J.dir = dx > 0 ? 'right' : 'left'; else J.dir = dy > 0 ? 'down' : 'up';
@@ -167,24 +173,51 @@
       anim = G.correr ? 'run' : 'walk';
       pasoT += dt; if (pasoT > (G.correr ? .18 : .28)) { pasoT = 0; SFX.paso(); }
     }
-    if (anim !== J.anim) { J.anim = anim; J.t0 = G.t; }
+    if (!J.salto && !(J.golpe && G.t - J.golpe < .5) && anim !== J.anim) { J.anim = anim; J.t0 = G.t; }
+    particulas = particulas.filter(function (q) { return G.t - q.t < .5; });
     // recoger fragmentos (solo si la aventura 1 está activa y ya se habló con el vecino)
     if (pendiente(W.id) === 1 && G.hablado.mision1) fragmentos.forEach(function (f) { if (!G.recogidos[f.i] && Math.abs(f.x - J.x) < 10 && Math.abs(f.y - J.y) < 12) { G.recogidos[f.i] = true; SFX.cofre(); var n2 = Object.keys(G.recogidos).length; mostrarAviso('Fragmento ' + n2 + ' de 3', n2 === 3 ? 'Vuelve con ' + vecinoMision().nombre : ''); actualizarHUD(); } });
     // salida
     var s = W.def.salida; if (Math.abs(J.x - (s[0] * T + 8)) < 12 && J.y > s[1] * T + 6) { abrirCampina(); return; }
     // enemigos
-    enemigos.forEach(function (e) { if (Math.abs(e.x - J.x) < 13 && Math.abs(e.y - J.y) < 10) iniciarAventura(e.etapa, e); });
+    if (!J.salto) enemigos.forEach(function (e) { if (Math.abs(e.x - J.x) < 13 && Math.abs(e.y - J.y) < 10) iniciarAventura(e.etapa, e); });
     // cámara
     G.cam.x = Math.max(0, Math.min(MW.W * T - VW, J.x - VW / 2)); G.cam.y = Math.max(0, Math.min(MW.H * T - VH, J.y - VH / 2));
     if (MW.W * T < VW) G.cam.x = (MW.W * T - VW) / 2; if (MW.H * T < VH) G.cam.y = (MW.H * T - VH) / 2;
   }
   function actualizarEnemigos(dt) {
     enemigos.forEach(function (e) {
+      if (e.aturdido > G.t) return;
       e.cambio -= dt;
       if (e.cambio <= 0) { e.cambio = 1 + Math.random() * 1.5; var a = Math.random() * Math.PI * 2; e.vx = Math.random() < .3 ? 0 : Math.cos(a) * 22; e.vy = Math.random() < .3 ? 0 : Math.sin(a) * 22; }
       var nx = e.x + e.vx * dt, ny = e.y + e.vy * dt;
       if (Math.hypot(nx - e.x0, ny - e.y0) < 34 && libre(nx, ny)) { e.x = nx; e.y = ny; } else e.cambio = 0;
     });
+  }
+
+  /* ---------- Atacar y saltar en la exploración ---------- */
+  var particulas = [];
+  function atacar() {
+    var J = G.jug; if (J.salto || (J.golpe && G.t - J.golpe < .5)) return;
+    J.golpe = G.t; J.anim = 'attack'; J.t0 = G.t; SFX.golpe();
+    var p = delante();
+    enemigos.forEach(function (e) { if (Math.abs(e.x - p.x) < 18 && Math.abs(e.y - 6 - p.y) < 18 && !(e.aturdido > G.t)) { e.aturdido = G.t + 3; e.sorpresa = true; e.vx = e.vy = 0; mostrarAviso('¡Enemigo aturdido!', 'Tócalo ahora: empezarás el combate con un escudo.'); SFX.ok(); } });
+    var i = Math.floor(p.x / T), j = Math.floor((p.y + 2) / T), ch = W.def.mapa.t[j] && W.def.mapa.t[j][i];
+    if (ch && E.TILES[ch] && E.TILES[ch].cortable) {
+      W.def.mapa.t[j][i] = '.'; solidos[j][i] = false;
+      capas.forEach(function (c, f) { c.getContext('2d').drawImage(E.tile('.', i, j, f), i * T, j * T); });
+      for (var k = 0; k < 10; k++) particulas.push({ x: i * T + 8, y: j * T + 8, vx: (Math.random() - .5) * 30, vy: -Math.random() * 25, t: G.t, c: k % 2 ? '#3f7a2a' : '#87c45a' });
+      SFX.paso();
+    }
+  }
+  function saltar() {
+    var J = G.jug; if (J.salto || (J.golpe && G.t - J.golpe < .5)) return;
+    var d = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] }[J.dir], x1 = J.x + d[0] * 32, y1 = J.y + d[1] * 32;
+    // se puede saltar por encima de obstáculos bajos (vallas, rocas, macetas) si se cae en sitio libre
+    var ok = libre(x1, y1);
+    for (var s = 4; ok && s < 32; s += 4) { var x = J.x + d[0] * s, y = J.y + d[1] * s - 2, i = Math.floor(x / T), j = Math.floor(y / T), ch = W.def.mapa.t[j] && W.def.mapa.t[j][i]; if (solidos[j] && solidos[j][i] && !E.saltable(ch)) ok = false; }
+    if (!ok) { x1 = J.x; y1 = J.y; }
+    J.salto = { t: G.t, x0: J.x, y0: J.y, x1: x1, y1: y1 }; J.anim = 'jump'; J.t0 = G.t; tono(330, .08, 'square', .04); tono(495, .1, 'square', .04, .06);
   }
 
   /* ---------- Interacción ---------- */
@@ -267,6 +300,7 @@
       hA: 'idle', hT: 0, eA: 'idle', eT: 0, proy: [], textos: [], sacudir: 0,
       escudo: false, doble: false, habUsada: false, pistasUsadas: 0, ent: enem, terminado: false
     };
+    if (enem && enem.sorpresa && !enem.jefe) { B.escudo = true; B.textos.push({ txt: '¡SORPRESA! 🛡', t: G.t, lado: 'c' }); enem.sorpresa = false; }
     G.modo = 'batalla'; G.teclas = {}; MUS.tocar(etapa === 5 ? 'jefe' : tipo === 'combate' ? 'combate' : 'reto', { mundo: W.id }); G.tactil.dx = G.tactil.dy = 0;
     $('controles').hidden = true; $('hud').hidden = true; $('aviso').hidden = true; $('reto').hidden = false;
     var titulo = cofre ? 'Cofre del saber' : 'Aventura ' + etapa + ' · ' + wd.aventuras[etapa - 1].nombre;
@@ -442,10 +476,11 @@
     edificios.forEach(function (b) { L.push({ y: (b.y + b.h) * T, d: function () { var ed = E.edificio(b.t, b.o, b.t === 'molino' ? Math.floor(G.t * 6) % 16 : 0); ctx.drawImage(ed.canvas, b.x * T - cx, b.y * T - cy); if (b.obra && pendiente(W.id) <= 3) andamio(b, cx, cy); } }); });
     cofres.forEach(function (c) { L.push({ y: c.y * T + 14, d: function () { var fr = c.abierto ? (c.anim && G.t - c.anim < .4 ? Math.min(3, Math.floor((G.t - c.anim) * 10)) : 3) : 0; ctx.drawImage(E.objeto('cofre', fr), c.x * T - cx, c.y * T - cy); } }); });
     vecinos.forEach(function (v) { L.push({ y: v.py, d: function () { sombra(v.px - cx, v.py - cy); S.pintar(ctx, v.hoja, 'idle', v.dirA, S.indice(v.hoja, 'idle', G.t + v.x), v.px - cx, v.py - cy + 2, .5); } }); });
-    enemigos.forEach(function (e) { L.push({ y: e.y, d: function () { sombra(e.x - cx, e.y - cy); var a = (e.vx || e.vy) ? 'move' : 'idle'; S.pintar(ctx, e.hoja, a, 'left', S.indice(e.hoja, a, G.t), e.x - cx, e.y - cy + 3, e.etapa === 4 ? .75 : .6); } }); });
+    enemigos.forEach(function (e) { L.push({ y: e.y, d: function () { sombra(e.x - cx, e.y - cy); var aturd = e.aturdido > G.t, a = aturd ? 'hurt' : (e.vx || e.vy) ? 'move' : 'idle'; if (aturd && Math.floor(G.t * 10) % 2) return; S.pintar(ctx, e.hoja, a, 'left', aturd ? 2 : S.indice(e.hoja, a, G.t), e.x - cx, e.y - cy + 3, e.etapa === 4 ? .75 : .6); } }); });
     if (jefe) L.push({ y: jefe.y, d: function () { sombra(jefe.x - cx, jefe.y - cy, 14); S.pintar(ctx, jefe.hoja, 'idle', 'left', S.indice(jefe.hoja, 'idle', G.t), jefe.x - cx, jefe.y - cy + 3, .55); } });
     var J = G.jug, hoja = S.hojaHeroe(G.heroeId);
-    L.push({ y: J.y, d: function () { sombra(J.x - cx, J.y - cy); S.pintar(ctx, hoja, J.anim, J.dir, S.indice(hoja, J.anim, G.t - J.t0), J.x - cx, J.y - cy + 2, .5); } });
+    L.push({ y: J.y, d: function () { sombra(J.x - cx, J.y - cy); S.pintar(ctx, hoja, J.anim, J.dir, S.indice(hoja, J.anim, G.t - J.t0), J.x - cx, J.y - cy + 2 - (J.alto || 0), .5); } });
+    particulas.forEach(function (q) { L.push({ y: 9999, d: function () { var u = (G.t - q.t) / .5; ctx.fillStyle = q.c; ctx.fillRect(Math.round(q.x + q.vx * u - cx), Math.round(q.y + q.vy * u + 20 * u * u - cy), 2, 2); } }); });
     L.sort(function (a, b) { return a.y - b.y; }).forEach(function (o) { o.d(); });
     // marcador de misión
     var obj = objetivo();
@@ -605,7 +640,7 @@
     if (m >= 1 && m <= 10 && desbloqueado(m)) cargarMundo(m); else abrirCampina();
     if (m && !desbloqueado(m)) mostrarAviso('Ese mundo aún está bloqueado', 'Supera antes al jefe del mundo anterior.');
     requestAnimationFrame(bucle);
-    if (PRUEBA) window.__GL = { G: G, respuesta: function () { return G.batalla && G.batalla.q && G.batalla.q.respuesta; }, cargarMundo: cargarMundo, iniciarAventura: function (e) { iniciarAventura(e, e === 5 ? jefe : null, e === 1 ? vecinoMision() : null); }, pendiente: function () { return pendiente(G.mundo); } };
+    if (PRUEBA) window.__GL = { G: G, respuesta: function () { return G.batalla && G.batalla.q && G.batalla.q.respuesta; }, cargarMundo: cargarMundo, atacar: atacar, saltar: saltar, tile: function (i, j) { return W.def.mapa.t[j][i]; }, enemigos: function () { return enemigos; }, iniciarAventura: function (e) { iniciarAventura(e, e === 5 ? jefe : null, e === 1 ? vecinoMision() : null); }, pendiente: function () { return pendiente(G.mundo); } };
   }
   iniciar();
 })();

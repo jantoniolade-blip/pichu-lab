@@ -1,6 +1,6 @@
 /* Galois Legacy · 10 mundos, 50 aventuras detalladas, 60 cartas culturales. */
 window.GALOIS_CAMPINA={
-  "version": 1,
+  "version": 2,
   "fuente": "Diseño original educativo; referencias culturales contrastadas",
   "mundos": [
     {
@@ -781,7 +781,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Castillo de la Monclova",
       "categoria": "patrimonio",
-      "descripcion": "Fortaleza y paisaje vinculados a Fuentes de Andalucía.",
+      "descripcion": "Fortaleza de origen medieval situada en el término de Fuentes de Andalucía, en plena campiña. Sus muros recuerdan siglos de frontera y vigilancia de los caminos.",
       "rareza": "comun",
       "color": "#dda455"
     },
@@ -791,7 +791,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Virgen de las Nieves",
       "categoria": "devocion",
-      "descripcion": "Referencia al patrimonio religioso y a la iglesia parroquial de Fuentes.",
+      "descripcion": "Advocación mariana presente en la tradición religiosa andaluza, cuya festividad se celebra el 5 de agosto. Aparece aquí como parte del patrimonio artístico y cultural del pueblo.",
       "rareza": "comun",
       "color": "#dda455"
     },
@@ -801,7 +801,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Alarifes Ruiz Florindo",
       "categoria": "historia",
-      "descripcion": "Homenaje a los maestros de obras que inspiran este universo fantástico.",
+      "descripcion": "Familia de alarifes (maestros de obras) de Fuentes de Andalucía que trabajó en el barroco del siglo XVIII. El instituto de la localidad, punto de partida de esta aventura, lleva su nombre.",
       "rareza": "rara",
       "color": "#dda455"
     },
@@ -811,7 +811,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Campos de cereal",
       "categoria": "campina",
-      "descripcion": "La campiña combina extensos campos de cereal y olivares.",
+      "descripcion": "La campiña sevillana es tierra de secano, de suelos fértiles y suaves lomas. El trigo, la cebada y el girasol se alternan con el olivar según la estación.",
       "rareza": "rara",
       "color": "#dda455"
     },
@@ -821,7 +821,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Iglesia de San José",
       "categoria": "patrimonio",
-      "descripcion": "Un edificio del patrimonio monumental fontaniego.",
+      "descripcion": "Templo del patrimonio religioso de Fuentes de Andalucía. Como otras iglesias de la villa, muestra la arquitectura andaluza de la Edad Moderna, con ladrillo, cal y torre.",
       "rareza": "epica",
       "color": "#dda455"
     },
@@ -831,7 +831,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Casa Fernández Peñaranda",
       "categoria": "patrimonio",
-      "descripcion": "Una casa histórica recogida entre los monumentos de Fuentes.",
+      "descripcion": "Casa señorial de Fuentes de Andalucía. Las portadas, rejas y patios de este tipo de casas reflejan la riqueza de la arquitectura civil de la villa.",
       "rareza": "legendaria",
       "color": "#dda455"
     },
@@ -841,7 +841,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Puerta de Sevilla",
       "categoria": "patrimonio",
-      "descripcion": "Una de las entradas monumentales de Carmona.",
+      "descripcion": "Puerta fortificada de origen romano, reformada en época islámica y cristiana. Es uno de los símbolos de Carmona y la entrada histórica desde el camino de Sevilla.",
       "rareza": "comun",
       "color": "#c485d8"
     },
@@ -851,7 +851,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Murallas de Carmona",
       "categoria": "patrimonio",
-      "descripcion": "Las fortificaciones se convierten en un puzle de divisibilidad.",
+      "descripcion": "Recinto defensivo que protegió la ciudad desde la Antigüedad. Se conservan tramos de muralla y varias puertas monumentales.",
       "rareza": "comun",
       "color": "#c485d8"
     },
@@ -861,7 +861,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Puerta de Córdoba",
       "categoria": "patrimonio",
-      "descripcion": "Otra puerta monumental de la ciudad.",
+      "descripcion": "Puerta de origen romano, reformada en la Edad Moderna con aspecto clásico. Se abría al camino que llevaba hacia Córdoba.",
       "rareza": "rara",
       "color": "#c485d8"
     },
@@ -871,7 +871,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Necrópolis romana",
       "categoria": "historia",
-      "descripcion": "Testimonio de la Carmona de época romana.",
+      "descripcion": "Cementerio de época romana con tumbas excavadas en la roca, como la Tumba de Servilia o la del Elefante. Es uno de los conjuntos arqueológicos más importantes de Andalucía.",
       "rareza": "rara",
       "color": "#c485d8"
     },
@@ -881,7 +881,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Sergio Ramos",
       "categoria": "futbol",
-      "descripcion": "Futbolista nacido en Camas, con una trayectoria muy ligada al fútbol sevillano.",
+      "descripcion": "Futbolista nacido en Camas en 1986 que debutó en el Sevilla FC. Fue campeón del mundo con la selección española en 2010.",
       "rareza": "epica",
       "color": "#c485d8"
     },
@@ -891,7 +891,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Alcázar de la Puerta de Sevilla",
       "categoria": "patrimonio",
-      "descripcion": "Complejo defensivo junto al acceso histórico.",
+      "descripcion": "Fortaleza levantada sobre la Puerta de Sevilla de Carmona. Desde su torre se domina la vega y los caminos que llegaban a la ciudad.",
       "rareza": "legendaria",
       "color": "#c485d8"
     },
@@ -901,7 +901,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Torre de San Juan",
       "categoria": "patrimonio",
-      "descripcion": "Una de las torres del horizonte barroco de Écija.",
+      "descripcion": "Campanario barroco del siglo XVIII, decorado con azulejos de colores. Es una de las torres más admiradas del horizonte de Écija.",
       "rareza": "comun",
       "color": "#4ba6b5"
     },
@@ -911,7 +911,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Torre de Santa Cruz",
       "categoria": "patrimonio",
-      "descripcion": "Campanario dentro de la célebre ruta de torres ecijanas.",
+      "descripcion": "Torre de la iglesia de Santa Cruz, parte de la ruta de las torres ecijanas. Sus campanas y remates forman parte del perfil barroco de la ciudad.",
       "rareza": "comun",
       "color": "#4ba6b5"
     },
@@ -921,7 +921,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Plaza de España de Écija",
       "categoria": "patrimonio",
-      "descripcion": "Plaza histórica conocida popularmente como El Salón.",
+      "descripcion": "Plaza mayor de Écija, conocida popularmente como «el Salón». Es el centro de la vida de la ciudad y bajo ella se han hallado restos de su pasado.",
       "rareza": "rara",
       "color": "#4ba6b5"
     },
@@ -931,7 +931,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Mosaicos de Astigi",
       "categoria": "historia",
-      "descripcion": "Recuerdo del importante pasado romano de Écija.",
+      "descripcion": "En época romana Écija se llamaba Astigi y fue una ciudad muy importante de la Bética. Muchos de sus mosaicos se exponen en el museo histórico de la ciudad.",
       "rareza": "rara",
       "color": "#4ba6b5"
     },
@@ -941,7 +941,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "José Antonio Reyes",
       "categoria": "futbol",
-      "descripcion": "Futbolista nacido en Utrera y referente del fútbol sevillano.",
+      "descripcion": "Futbolista nacido en Utrera en 1983 que debutó muy joven en el Sevilla FC y jugó en clubes como el Arsenal. Ganó varias competiciones europeas con el Sevilla; falleció en 2019.",
       "rareza": "epica",
       "color": "#4ba6b5"
     },
@@ -951,7 +951,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Ruta de las once torres",
       "categoria": "tradicion",
-      "descripcion": "Itinerario para descubrir el paisaje monumental ecijano.",
+      "descripcion": "Itinerario por los campanarios barrocos que dan a Écija el nombre de «ciudad de las torres». Recorrerlo es mirar la ciudad hacia arriba.",
       "rareza": "legendaria",
       "color": "#4ba6b5"
     },
@@ -961,7 +961,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Puerta de Sevilla de Marchena",
       "categoria": "patrimonio",
-      "descripcion": "Una entrada a las murallas históricas de Marchena.",
+      "descripcion": "Puerta de la antigua muralla de Marchena, también conocida como Arco de la Rosa. Da paso al casco histórico de la villa.",
       "rareza": "comun",
       "color": "#89a75b"
     },
@@ -971,7 +971,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Murallas de Marchena",
       "categoria": "patrimonio",
-      "descripcion": "El recinto medieval inspira retos sobre el reparto de recursos.",
+      "descripcion": "Restos del recinto amurallado medieval que protegía Marchena. Sus tramos y puertas recuerdan la importancia de la villa en la campiña.",
       "rareza": "comun",
       "color": "#89a75b"
     },
@@ -981,7 +981,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Olivos de la Campiña",
       "categoria": "campina",
-      "descripcion": "Árboles asociados al paisaje agrícola sevillano.",
+      "descripcion": "El olivar ocupa buena parte de la campiña sevillana. De la aceituna se obtienen aceite y aceituna de mesa, de la que la provincia de Sevilla es gran productora.",
       "rareza": "rara",
       "color": "#89a75b"
     },
@@ -991,7 +991,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Almazara tradicional",
       "categoria": "tradicion",
-      "descripcion": "La extracción del aceite inspira problemas con fracciones.",
+      "descripcion": "En la almazara se lava, muele y prensa la aceituna para obtener el aceite de oliva. Antes se usaban molinos de piedra y prensas de viga; hoy, máquinas modernas.",
       "rareza": "rara",
       "color": "#89a75b"
     },
@@ -1001,7 +1001,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Azulejo de la cosecha",
       "categoria": "tradicion",
-      "descripcion": "Pieza ficticia del juego inspirada en la decoración cerámica andaluza.",
+      "descripcion": "Pieza inventada para el juego, inspirada en los azulejos andaluces. Representa la cosecha repartida en partes iguales, como una fracción.",
       "rareza": "epica",
       "color": "#89a75b"
     },
@@ -1011,7 +1011,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Trigal compartido",
       "categoria": "campina",
-      "descripcion": "La historia transforma una cosecha en un problema de partes y todo.",
+      "descripcion": "Carta legendaria inventada para el juego. Simboliza el trabajo compartido en el campo: un todo que se reparte en partes.",
       "rareza": "legendaria",
       "color": "#89a75b"
     },
@@ -1021,7 +1021,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Torre del Homenaje",
       "categoria": "patrimonio",
-      "descripcion": "Torre del recinto histórico del Cerro de San Cristóbal.",
+      "descripcion": "Torre del castillo medieval de Estepa, en lo alto del Cerro de San Cristóbal. Desde allí se domina un amplio paisaje de campiña y sierra.",
       "rareza": "comun",
       "color": "#bf8b5c"
     },
@@ -1031,7 +1031,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Cerro de San Cristóbal",
       "categoria": "patrimonio",
-      "descripcion": "Un balcón sobre Estepa y su entorno.",
+      "descripcion": "Cerro sobre el que se asentó la Estepa histórica, con su castillo y su iglesia. Por sus vistas, a Estepa la llaman «el Balcón de Andalucía».",
       "rareza": "comun",
       "color": "#bf8b5c"
     },
@@ -1041,7 +1041,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Mantecados de Estepa",
       "categoria": "tradicion",
-      "descripcion": "Dulces tradicionales asociados a la localidad.",
+      "descripcion": "Dulce navideño de manteca, harina y azúcar, famoso en toda España. Su elaboración es una tradición artesanal e industrial muy importante en Estepa.",
       "rareza": "rara",
       "color": "#bf8b5c"
     },
@@ -1051,7 +1051,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Polvorones",
       "categoria": "tradicion",
-      "descripcion": "Otro dulce tradicional que motiva retos de porcentajes.",
+      "descripcion": "Dulce de la misma familia que el mantecado, con almendra y forma ovalada, que se deshace al morderlo. Se envuelve tradicionalmente en papel de seda.",
       "rareza": "rara",
       "color": "#bf8b5c"
     },
@@ -1061,7 +1061,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Olivares de Estepa",
       "categoria": "campina",
-      "descripcion": "El olivar da forma al paisaje agrario.",
+      "descripcion": "Los olivares rodean Estepa y forman terrazas en sus lomas. El aceite de la comarca tiene fama por su calidad.",
       "rareza": "epica",
       "color": "#bf8b5c"
     },
@@ -1071,7 +1071,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Plano del castillo",
       "categoria": "historia",
-      "descripcion": "Plano ficticio del juego para investigar escalas.",
+      "descripcion": "Plano inventado para el juego. Sirve para practicar escalas: cada centímetro del papel representa una distancia real.",
       "rareza": "legendaria",
       "color": "#bf8b5c"
     },
@@ -1081,7 +1081,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Antigua Universidad de Osuna",
       "categoria": "patrimonio",
-      "descripcion": "Edificio emblemático de la historia académica de Osuna.",
+      "descripcion": "Universidad fundada en el siglo XVI por el conde de Ureña. Su edificio, con torres en las esquinas y patio central, domina Osuna desde lo alto.",
       "rareza": "comun",
       "color": "#779ad6"
     },
@@ -1091,7 +1091,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Colegiata de Osuna",
       "categoria": "patrimonio",
-      "descripcion": "Monumento destacado de la villa ducal.",
+      "descripcion": "Gran templo renacentista del siglo XVI, junto a la antigua universidad. Guarda obras de arte y el panteón de los duques de Osuna.",
       "rareza": "comun",
       "color": "#779ad6"
     },
@@ -1101,7 +1101,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Calle San Pedro",
       "categoria": "patrimonio",
-      "descripcion": "Calle conocida por sus palacios y arquitectura histórica.",
+      "descripcion": "Calle de Osuna famosa por sus palacios y portadas barrocas. Pasear por ella es recorrer la arquitectura señorial de la villa.",
       "rareza": "rara",
       "color": "#779ad6"
     },
@@ -1111,7 +1111,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Canteras de Osuna",
       "categoria": "patrimonio",
-      "descripcion": "Espacio de piedra que inspira los enigmas algebraicos.",
+      "descripcion": "Antiguas canteras de piedra explotadas desde época romana. Sus paredes talladas forman hoy un paisaje singular junto a la localidad.",
       "rareza": "rara",
       "color": "#779ad6"
     },
@@ -1121,7 +1121,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Villa ducal",
       "categoria": "historia",
-      "descripcion": "Recuerdo de la importante historia señorial de Osuna.",
+      "descripcion": "Osuna fue sede del ducado del mismo nombre, uno de los más poderosos de España. Sus palacios e iglesias recuerdan aquella época.",
       "rareza": "epica",
       "color": "#779ad6"
     },
@@ -1131,7 +1131,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Pergamino de la incógnita",
       "categoria": "historia",
-      "descripcion": "Objeto ficticio para resolver expresiones algebraicas.",
+      "descripcion": "Objeto inventado para el juego. Esconde expresiones algebraicas: letras que guardan números desconocidos.",
       "rareza": "legendaria",
       "color": "#779ad6"
     },
@@ -1141,7 +1141,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Puente de Isabel II",
       "categoria": "patrimonio",
-      "descripcion": "Puente de Triana que une las dos orillas del Guadalquivir.",
+      "descripcion": "Inaugurado en 1852, fue el primer puente fijo de hierro sobre el Guadalquivir en Sevilla. Une el barrio de Triana con el centro de la ciudad.",
       "rareza": "comun",
       "color": "#b787ce"
     },
@@ -1151,7 +1151,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Esperanza de Triana",
       "categoria": "devocion",
-      "descripcion": "Advocación mariana muy vinculada al barrio de Triana.",
+      "descripcion": "Advocación mariana de la Hermandad de la Esperanza de Triana, muy vinculada a los marineros del barrio. Procesiona en la Madrugada del Viernes Santo.",
       "rareza": "comun",
       "color": "#b787ce"
     },
@@ -1161,7 +1161,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Virgen de la Estrella",
       "categoria": "devocion",
-      "descripcion": "Devoción popular vinculada al patrimonio de Triana.",
+      "descripcion": "Advocación de la Hermandad de la Estrella, del barrio de Triana. Procesiona el Domingo de Ramos y es muy querida en el barrio.",
       "rareza": "rara",
       "color": "#b787ce"
     },
@@ -1171,7 +1171,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Cerámica de Triana",
       "categoria": "tradicion",
-      "descripcion": "Tradición artesanal ligada a talleres y azulejos.",
+      "descripcion": "Triana es desde hace siglos un gran centro alfarero. Sus talleres han dado azulejos, platos y piezas de cerámica que decoran toda Sevilla.",
       "rareza": "rara",
       "color": "#b787ce"
     },
@@ -1181,7 +1181,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Joaquín Sánchez",
       "categoria": "futbol",
-      "descripcion": "Leyenda del Real Betis Balompié nacida en El Puerto de Santa María.",
+      "descripcion": "Futbolista nacido en El Puerto de Santa María en 1981, símbolo del Real Betis Balompié. Se retiró en 2023, con más de 40 años.",
       "rareza": "epica",
       "color": "#b787ce"
     },
@@ -1191,7 +1191,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Rafael Gordillo",
       "categoria": "futbol",
-      "descripcion": "Referente histórico verdiblanco del fútbol andaluz.",
+      "descripcion": "Futbolista nacido en Almendralejo en 1957, referente histórico del Real Betis Balompié. También jugó en el Real Madrid y en la selección española.",
       "rareza": "legendaria",
       "color": "#b787ce"
     },
@@ -1201,7 +1201,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Castillo de Alcalá",
       "categoria": "patrimonio",
-      "descripcion": "Fortaleza ligada a la historia de Alcalá de Guadaíra.",
+      "descripcion": "Castillo de origen almohade, uno de los mayores recintos fortificados de la provincia. Se alza sobre el río Guadaíra.",
       "rareza": "comun",
       "color": "#70b9b1"
     },
@@ -1211,7 +1211,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Molinos del Guadaíra",
       "categoria": "patrimonio",
-      "descripcion": "Molinos de agua que aprovechan la corriente del río.",
+      "descripcion": "Durante siglos, decenas de molinos harineros aprovecharon la corriente del Guadaíra. Molían el trigo con el que se hacía el famoso pan de Alcalá.",
       "rareza": "comun",
       "color": "#70b9b1"
     },
@@ -1221,7 +1221,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Río Guadaíra",
       "categoria": "campina",
-      "descripcion": "Paisaje fluvial del entorno de Alcalá.",
+      "descripcion": "Afluente del Guadalquivir que atraviesa Alcalá de Guadaíra. Sus orillas, con pinares y molinos, forman un paisaje muy valioso.",
       "rareza": "rara",
       "color": "#70b9b1"
     },
@@ -1231,7 +1231,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Puente del Dragón",
       "categoria": "patrimonio",
-      "descripcion": "Puente contemporáneo con una silueta singular.",
+      "descripcion": "Puente moderno de Alcalá de Guadaíra cuya estructura, recubierta de cerámica, recuerda a un dragón. Es uno de los iconos contemporáneos de la ciudad.",
       "rareza": "rara",
       "color": "#70b9b1"
     },
@@ -1241,7 +1241,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Pan de Alcalá",
       "categoria": "tradicion",
-      "descripcion": "La tradición panadera inspira problemas funcionales.",
+      "descripcion": "A Alcalá se la conoció como «Alcalá de los Panaderos» porque abastecía de pan a Sevilla. La tradición panadera sigue viva en el pueblo.",
       "rareza": "epica",
       "color": "#70b9b1"
     },
@@ -1251,7 +1251,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Rueda del molino",
       "categoria": "historia",
-      "descripcion": "Objeto de juego inspirado en la mecánica hidráulica.",
+      "descripcion": "Rueda inspirada en los molinos hidráulicos. El agua mueve la rueda y la rueda mueve la piedra que muele el grano.",
       "rareza": "legendaria",
       "color": "#70b9b1"
     },
@@ -1261,7 +1261,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Anfiteatro de Itálica",
       "categoria": "patrimonio",
-      "descripcion": "Uno de los espacios más reconocibles del conjunto romano.",
+      "descripcion": "Uno de los mayores anfiteatros del Imperio romano, con capacidad para unos 25 000 espectadores. Se usaba para espectáculos de gladiadores.",
       "rareza": "comun",
       "color": "#cb9b6b"
     },
@@ -1271,7 +1271,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Mosaico romano",
       "categoria": "historia",
-      "descripcion": "Diseño geométrico basado en los mosaicos de la antigua ciudad.",
+      "descripcion": "Los suelos de las casas de Itálica se decoraban con mosaicos de teselas: figuras geométricas, aves y escenas mitológicas.",
       "rareza": "comun",
       "color": "#cb9b6b"
     },
@@ -1281,7 +1281,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "Teatro de Itálica",
       "categoria": "patrimonio",
-      "descripcion": "Edificio escénico del yacimiento arqueológico.",
+      "descripcion": "Teatro romano de Itálica, donde se representaban obras para el público de la ciudad. Sus gradas siguen en pie en el actual Santiponce.",
       "rareza": "rara",
       "color": "#cb9b6b"
     },
@@ -1291,7 +1291,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Trajano",
       "categoria": "historia",
-      "descripcion": "Emperador romano asociado a Itálica.",
+      "descripcion": "Marco Ulpio Trajano nació en Itálica en el año 53 y fue el primer emperador romano nacido fuera de Italia. Bajo su gobierno el Imperio alcanzó su mayor extensión.",
       "rareza": "rara",
       "color": "#cb9b6b"
     },
@@ -1301,7 +1301,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Adriano",
       "categoria": "historia",
-      "descripcion": "Emperador romano relacionado con la historia de Itálica.",
+      "descripcion": "Emperador romano muy ligado a Itálica, de donde procedía su familia. Embelleció la ciudad con nuevos barrios y edificios.",
       "rareza": "epica",
       "color": "#cb9b6b"
     },
@@ -1311,7 +1311,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Santiponce histórico",
       "categoria": "patrimonio",
-      "descripcion": "Municipio en cuyo entorno se conservan los restos de Itálica.",
+      "descripcion": "Localidad sevillana junto a la que se conservan las ruinas de Itálica. También alberga el monasterio de San Isidoro del Campo.",
       "rareza": "legendaria",
       "color": "#cb9b6b"
     },
@@ -1321,7 +1321,7 @@ window.GALOIS_CAMPINA={
       "etapa": 1,
       "nombre": "Esperanza Macarena",
       "categoria": "devocion",
-      "descripcion": "Advocación mariana vinculada a la Basílica de la Macarena.",
+      "descripcion": "Advocación mariana de la Hermandad de la Macarena, cuya basílica está junto a las murallas de Sevilla. Procesiona en la Madrugada del Viernes Santo.",
       "rareza": "comun",
       "color": "#b8779b"
     },
@@ -1331,7 +1331,7 @@ window.GALOIS_CAMPINA={
       "etapa": 2,
       "nombre": "Virgen de los Reyes",
       "categoria": "devocion",
-      "descripcion": "Advocación mariana de especial relevancia en la tradición sevillana.",
+      "descripcion": "Patrona de Sevilla y de su archidiócesis, venerada en la Catedral. Su procesión del 15 de agosto es una de las tradiciones más antiguas de la ciudad.",
       "rareza": "comun",
       "color": "#b8779b"
     },
@@ -1341,7 +1341,7 @@ window.GALOIS_CAMPINA={
       "etapa": 3,
       "nombre": "La Giralda",
       "categoria": "patrimonio",
-      "descripcion": "La gran torre que forma parte de la Catedral de Sevilla.",
+      "descripcion": "Antiguo alminar almohade del siglo XII, al que en el siglo XVI se añadió el campanario renacentista. Mide unos 100 metros y la corona el Giraldillo.",
       "rareza": "rara",
       "color": "#b8779b"
     },
@@ -1351,7 +1351,7 @@ window.GALOIS_CAMPINA={
       "etapa": 4,
       "nombre": "Real Alcázar",
       "categoria": "patrimonio",
-      "descripcion": "Conjunto palaciego y jardines históricos de Sevilla.",
+      "descripcion": "Conjunto de palacios y jardines usado por los reyes durante siglos, con arte mudéjar. Es Patrimonio de la Humanidad junto con la Catedral y el Archivo de Indias.",
       "rareza": "rara",
       "color": "#b8779b"
     },
@@ -1361,7 +1361,7 @@ window.GALOIS_CAMPINA={
       "etapa": 5,
       "nombre": "Jesús Navas",
       "categoria": "futbol",
-      "descripcion": "Futbolista de Los Palacios y Villafranca y leyenda del Sevilla FC.",
+      "descripcion": "Futbolista nacido en Los Palacios y Villafranca en 1985, capitán y leyenda del Sevilla FC. Fue campeón del mundo con la selección española en 2010.",
       "rareza": "epica",
       "color": "#b8779b"
     },
@@ -1371,7 +1371,7 @@ window.GALOIS_CAMPINA={
       "etapa": 6,
       "nombre": "Plaza de España",
       "categoria": "patrimonio",
-      "descripcion": "Conjunto monumental emblemático de Sevilla.",
+      "descripcion": "Obra del arquitecto Aníbal González para la Exposición Iberoamericana de 1929. Sus bancos de azulejos representan las provincias de España.",
       "rareza": "legendaria",
       "color": "#b8779b"
     }

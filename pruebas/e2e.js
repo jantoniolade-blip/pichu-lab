@@ -28,8 +28,8 @@ const ok = (c, m) => { console.log((c ? '✓ ' : '✗ ') + m); if (!c) fallos++;
     const res = await p.evaluate(() => {
       const E = GaloisEscenarios, MW = GaloisMundos, out = [];
       MW.lista.forEach(m => {
-        const sol = m.mapa.t.map(r => r.map(c => E.solido(c)));
-        m.edificios.forEach(bd => { const d = E.EDIF[bd.t]; for (let j = bd.y; j < bd.y + d[1]; j++) for (let i = bd.x; i < bd.x + d[0]; i++) if (sol[j]) sol[j][i] = true; });
+        const sol = m.mapa.t.map(r => r.map(c => E.solido(c) && !E.TILES[c].cortable && !E.saltable(c)));  // con el compás y el salto
+        m.edificios.forEach(bd => { const d = E.EDIF[bd.t]; for (let j = bd.y; j < bd.y + d[1]; j++) for (let i = bd.x; i < bd.x + d[0]; i++) if (sol[j]) sol[j][i] = !(bd.paso && bd.paso.includes(i - bd.x)); });
         const ocupado = {}; m.vecinos.forEach(v => { ocupado[v.x + ',' + v.y] = 'vecino ' + v.nombre; }); m.cofres.forEach(c => { ocupado[c.x + ',' + c.y] = 'cofre ' + c.id; });
         const problemas = [];
         Object.entries(ocupado).forEach(([k, n]) => { const [x, y] = k.split(',').map(Number); if (sol[y][x]) problemas.push(n + ' sobre casilla sólida'); });
@@ -48,6 +48,24 @@ const ok = (c, m) => { console.log((c ? '✓ ' : '✗ ') + m); if (!c) fallos++;
       return out;
     });
     res.forEach(([id, pr]) => ok(pr.length === 0, 'mundo ' + id + ': todos los objetivos alcanzables' + (pr.length ? ' → ' + pr.join('; ') : '')));
+    await p.close();
+  }
+  // 2b. atacar y saltar en la exploración
+  {
+    const p = await b.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
+    await p.goto(raiz + 'aventura/index.html?prueba=1'); await p.waitForTimeout(300);
+    const r = await p.evaluate(async () => {
+      const espera = ms => new Promise(f => setTimeout(f, ms)), G = __GL.G, out = {};
+      __GL.cargarMundo(2); G.jug.x = 25 * 16 + 4; G.jug.y = 15 * 16 + 14; G.jug.dir = 'right';
+      out.antes = __GL.tile(26, 15); __GL.atacar(); out.despues = __GL.tile(26, 15);
+      __GL.cargarMundo(3); G.jug.x = 23 * 16 + 8; G.jug.y = 10 * 16 + 14; G.jug.dir = 'up'; const y0 = G.jug.y;
+      __GL.saltar(); await espera(700); out.salto = y0 - G.jug.y;
+      __GL.cargarMundo(1); await espera(50); G.jug.x = 0; const pend = __GL.pendiente();
+      return out;
+    });
+    ok(r.antes === 'm' && r.despues === '.', 'el compás corta un matorral');
+    ok(r.salto >= 28, 'se puede saltar una valla (' + r.salto + ' px)');
+    ok(errs.length === 0, 'atacar y saltar sin errores JS');
     await p.close();
   }
   // 3. partida completa (modo prueba)

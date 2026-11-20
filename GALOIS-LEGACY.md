@@ -106,10 +106,8 @@ Trabajo hecho en la rama `claude/galois-legacy-rpg-9nanbv` (creada desde `dev`; 
 
 ### Pendiente (honestamente)
 
-- Los mundos 2-10 comparten una plantilla de mapa (cambian monumentos, terreno, vecinos y objetivos); solo Fuentes de Andalucía tiene un mapa diseñado a mano.
 - Los sprites son pixel art generado por código: coherentes y animados, pero sencillos. Los retratos del banco πCHU se mantienen en menús.
-- No hay salto/ataque libre en la exploración: los combates son por turnos con preguntas (las animaciones de saltar y correr se usan en la selección y al moverse).
-- Revisar con fuentes oficiales los textos culturales de vecinos y cartas.
+- Textos culturales: revisados y ampliados (noviembre de 2026, `herramientas/textos-cartas.js`), pero conviene que el profesorado los contraste, sobre todo los detalles de Fuentes de Andalucía (Iglesia de San José, Casa Fernández Peñaranda), que se han dejado en términos generales.
 - Ranking de Integer Ninja: igual que antes.
 
 ### Música (`shared/galois-musica.js`)
@@ -119,3 +117,9 @@ Chiptune original sintetizado con Web Audio, sin archivos de audio ni melodías 
 - **Campiña** (mapa general y portada), **un tema propio para cada mundo** (escala, tempo y carácter distintos; Écija, Triana y Sevilla con modo frigio andaluz, cadencia andaluza y palmas), **reto** (versión tranquila del tema del mundo), **combate**, **jefe** (se acelera y se intensifica en cada fase), **victoria** y **derrota**.
 - Botón 🎵 en el HUD, en el mapa de la Campiña y en la portada; en Ajustes, música y volumen por separado de los efectos. Se recuerda en el navegador.
 - Empieza con el primer toque o tecla (los navegadores no permiten sonar antes) y se pausa si se cambia de pestaña.
+
+### Mapas propios, salto y ataque (noviembre de 2026)
+
+- **Los diez mundos tienen mapa propio** (`aventura/mundos.js`, vista completa en `herramientas/mapas.html`): Carmona amurallada con la necrópolis fuera de la muralla y se entra por el arco de la Puerta de Sevilla; Écija con sus torres y el Genil; Marchena entre hileras de olivos con el Arco de la Rosa; Estepa con el camino entre rocas hasta el Cerro de San Cristóbal; Osuna con la Universidad, la Colegiata y la calle San Pedro; Triana con el río y el Puente de Isabel II; Alcalá con el Guadaíra, sus molinos y el castillo; Itálica con su cuadrícula romana, el anfiteatro y Santiponce; Sevilla con el Guadalquivir, la Torre del Oro, la Giralda, la Catedral y un **laberinto de setos** en los jardines del Alcázar donde espera el jefe final.
+- **Atacar con el compás** (X/J o botón B): corta matorrales y aturde enemigos; si tocas uno aturdido, empiezas el combate con escudo (no salta preguntas). **Saltar** (C/K o botón ⤴): salta vallas, rocas y macetas. Hay cofres escondidos tras matorrales y vallas.
+- Las puertas monumentales (Carmona, Marchena, Universidad de Osuna) se pueden atravesar por su arco.

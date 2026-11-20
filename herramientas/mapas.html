@@ -1,0 +1,21 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapas · Galois Legacy</title>
+<style>body{margin:0;padding:12px;background:#141024;color:#fbf0d6;font:15px system-ui,sans-serif}h1{font-weight:600}.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:14px}figure{margin:0}canvas{width:100%;image-rendering:pixelated;border:3px solid #000;display:block}figcaption{margin-top:4px}</style></head>
+<body><h1>Los diez mapas de la aventura</h1><p>Vista completa de cada mundo: ✦ fragmentos, ! objetivos (vecino, enemigos, jefe), cofres y salida. Generado con los mismos datos que el juego.</p><div class="g" id="g"></div>
+<script src="../coleccion/datos.js"></script><script src="../shared/galois-sprites.js"></script><script src="../shared/galois-escenarios.js"></script><script src="../aventura/mundos.js"></script>
+<script>
+var S=GaloisSprites,E=GaloisEscenarios,T=16;
+GaloisMundos.lista.forEach(function(m){
+ var c=document.createElement('canvas');c.width=32*T;c.height=24*T;var x=c.getContext('2d');
+ for(var j=0;j<24;j++)for(var i=0;i<32;i++)x.drawImage(E.tile(m.mapa.t[j][i],i,j,0),i*T,j*T);
+ var L=[];m.edificios.forEach(function(b){var ed=E.edificio(b.t,b.o);L.push([(b.y+ed.h)*T,function(){x.drawImage(ed.canvas,b.x*T,b.y*T)}])});
+ m.cofres.forEach(function(k){L.push([k.y*T+14,function(){x.drawImage(E.objeto('cofre',0),k.x*T,k.y*T)}])});
+ m.vecinos.forEach(function(v){L.push([v.y*T+14,function(){S.pintar(x,E.hojaVecino(v.v),'idle','down',0,v.x*T+8,v.y*T+16,.5)}])});
+ var w=GALOIS_CAMPINA.mundos[m.id-1];
+ [[w.enemigos[0],m.enemigo2,.6,null],[w.enemigos[1],m.minijefe,.75,null],[w.jefe,m.jefe,.55,{jefe:true,fase:1}]].forEach(function(e){L.push([e[1][1]*T+14,function(){S.pintar(x,S.hojaEnemigo(e[0],e[3]),'idle','left',0,e[1][0]*T+8,e[1][1]*T+17,e[2])}])});
+ var h=S.hojaHeroe('galois');L.push([m.inicio[1]*T+14,function(){S.pintar(x,h,'idle','up',0,m.inicio[0]*T+8,m.inicio[1]*T+16,.5)}]);
+ L.sort(function(a,b){return a[0]-b[0]}).forEach(function(o){o[1]()});
+ m.fragmentos.forEach(function(f){x.drawImage(E.objeto('brillo',1),f[0]*T,f[1]*T)});
+ var fig=document.createElement('figure');fig.appendChild(c);var cap=document.createElement('figcaption');cap.textContent=m.id+' · '+w.nombre+' — '+w.lugar;fig.appendChild(cap);document.getElementById('g').appendChild(fig);
+});
+</script></body></html>

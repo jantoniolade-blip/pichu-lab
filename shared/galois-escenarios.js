@@ -39,9 +39,12 @@
     'r': { solido: true, dibujar: function (b, x, y) { hierba(b, x, y); b.ellipse(8, 9, 7, 5, '#8a8a8a'); b.ellipse(7, 8, 5, 3, '#a8a8a8'); b.rect(5, 6, 3, 1, '#c8c8c8'); } },
     'k': { solido: true, dibujar: function (b, x, y) { TILES['='].dibujar(b, x, y); b.rect(5, 1, 6, 14, '#e8e2d4'); b.rect(5, 1, 1, 14, '#c8c0b0'); b.rect(4, 0, 8, 2, '#f4efe4'); b.rect(4, 14, 8, 2, '#c8c0b0'); b.rect(8, 2, 1, 12, '#d8d0c0'); } },
     'F': { solido: true, dibujar: function (b, x, y) { TILES['='].dibujar(b, x, y); b.rect(4, 8, 8, 7, '#c0623a'); b.rect(4, 8, 8, 1, '#e0824a'); b.ellipse(8, 6, 5, 3, '#2f8a3a'); b.set(6, 5, '#e83a4a'); b.set(10, 5, '#e83a4a'); b.set(8, 4, '#f4e04a'); } },
+    'm': { solido: true, cortable: true, dibujar: function (b, x, y) { hierba(b, x, y); b.ellipse(8, 9, 7, 6, '#3f7a2a'); b.ellipse(6, 8, 4, 4, '#5a9a3a'); b.ellipse(11, 10, 3, 3, '#4a8a32'); for (var i = 0; i < 6; i++) b.set(3 + hash(x, y, i) * 10, 4 + hash(y, x, i) * 9, '#2a5a1a'); b.set(5, 6, '#e86a8a'); b.set(11, 8, '#f4e04a'); } },
     'L': { solido: true, dibujar: function (b, x, y) { TILES['='].dibujar(b, x, y); b.rect(7, 4, 2, 11, '#2a2a34'); b.rect(5, 14, 6, 2, '#2a2a34'); b.rect(5, 1, 6, 4, '#2a2a34'); b.rect(6, 2, 4, 2, '#ffe28a'); } }
   };
   function solido(ch) { return !!(TILES[ch] && TILES[ch].solido); }
+  var BAJOS = 'frF'; // obstáculos bajos que se pueden saltar
+  function saltable(ch) { return BAJOS.indexOf(ch) >= 0; }
   var cacheT = {};
   function tile(ch, x, y, f) {
     var def = TILES[ch] || TILES['.'], v = (def.anim ? f % def.anim : 0), key = ch + ':' + (x & 3) + ':' + (y & 3) + ':' + v;
@@ -247,5 +250,5 @@
   };
   function hojaVecino(id) { return S.hojaHeroe('vecino:' + id, VECINOS[id] || VECINOS.alumno); }
 
-  root.GaloisEscenarios = { T: T, TILES: TILES, solido: solido, tile: tile, EDIF: EDIF, edificio: edificio, objeto: objeto, VECINOS: VECINOS, hojaVecino: hojaVecino };
+  root.GaloisEscenarios = { T: T, TILES: TILES, solido: solido, saltable: saltable, tile: tile, EDIF: EDIF, edificio: edificio, objeto: objeto, VECINOS: VECINOS, hojaVecino: hojaVecino };
 })(window);

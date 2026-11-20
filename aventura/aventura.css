@@ -83,3 +83,8 @@ button{font:inherit;cursor:pointer}
   .cruceta{width:116px;height:116px}.cruceta span{inset:33px}.botonA{width:74px;height:74px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.botonB,.botonS{position:fixed;width:62px;height:62px;border-radius:50%;border:4px solid #000;box-shadow:4px 4px 0 #000;color:#fff;font-size:26px;touch-action:none}
+.botonB{right:max(118px,calc(env(safe-area-inset-right) + 100px));bottom:max(22px,env(safe-area-inset-bottom));background:#4f9ee8;box-shadow:inset -4px -4px 0 #2a64a8,4px 4px 0 #000}
+.botonS{right:max(60px,calc(env(safe-area-inset-right) + 46px));bottom:max(122px,calc(env(safe-area-inset-bottom) + 110px));background:#6cc35a;box-shadow:inset -4px -4px 0 #2f7d33,4px 4px 0 #000}
+@media (max-width:760px){.botonB,.botonS{width:56px;height:56px}.botonB{right:104px}.botonS{right:52px;bottom:108px}}
