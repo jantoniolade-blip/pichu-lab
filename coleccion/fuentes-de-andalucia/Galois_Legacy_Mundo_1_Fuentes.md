@@ -35,7 +35,7 @@ La Fuente de la Reina toma como referencia la fuente y sus antiguas conducciones
 | **Inés, la aprendiz del taller** | Personaje ficticio y guía del patio. Coleta, lápiz en la oreja y caja de azulejos. Su animación de espera consiste en recomponer un patrón sobre el banco. | «El profe dice que cuente dos veces. Anda, échame una mano y quitamos el barro primero». |
 | **Alonso Ruiz Florindo** | Maestro de obras histórico en una recreación ficticia. Delantal de trabajo, regla de madera y mano manchada de pigmento. Levanta el plano cuando el jugador gira una pieza. | «Anda, pon siete en cada fila. Cuando los veas bien puestos, verás que la cuenta sale sola». |
 | **Lola del Silo** | Personaje ficticio. Gorra verde, libreta de pesadas y silbato. Mueve la palanca cada vez que llega una vagoneta. | «Ve apuntando los sacos conforme pasan, que luego te toca bajar otra vez». |
-| **La Máscara del Reverso** | Personaje ficticio inspirado en el Carnaval. Colcha remendada, cuerpo abultado y paso irregular. Su voz en falsete cuenta con subtítulos. Al encontrarla, gira la colcha y muestra el plano cosido al forro. | «¿A que no sabes quién soy? Fíjate en cómo ando, que por la voz no me vas a sacar». |
+| **La Máscara del Reverso** | Personaje ficticio inspirado en el Carnaval. Colcha remendada, cuerpo abultado y paso irregular. Su voz en falsete cuenta con subtítulos. Al encontrarla, gira la colcha y muestra el plano cosido al forro. | «¿Ya me has sacado? Anda, fíjate en cómo piso». |
 | **Rosario, del horno** | Personaje ficticio. Delantal tostado, bandeja de entornaos y una pizca de harina en la manga. Su encargo opcional abre el dibujo de la receta en el álbum. | «Pon cuatro entornaos por bandeja, anda. Y como te descuides, nos quedamos sin la primera». |
 | **La Compuerta del Revés** | Guardián mecánico ficticio. Portón de piedra con abrazaderas, juntas verdes y tres ruedas. Al acertar se abre un tramo visible de agua. | «A ver, que yo vea esas tres piezas. ¿Las traes todas?». |
 
@@ -74,6 +74,23 @@ Cada carta lleva ilustración delante y una frase breve detrás. Cada desbloqueo
 
 **Dirección de sprites.** Pixel art 16-bit con vista elevada y siluetas distintas. Dar a cada parada un hito que se reconozca al entrar en pantalla, como la vertical del Silo, los toldos de la Carrera y la piedra húmeda de la fuente. Reservar el movimiento ambiental para el agua, la tela de la máscara y el cereal. Dejar los nombres y diálogos como texto de interfaz.
 
+### Mascareo y coplas en la Carrera
+
+En la Carrera, la Máscara del Reverso cambia la voz y el paso con la colcha puesta. El jugador se fija en la tela y en la pausa tras el tercer paso. La máscara bromea con quien se le acerca. La murga canta sobre el patio seco y los azulejos de Alonso. Las pruebas se resuelven con texto, sonido o señales visuales.
+
+> **Vecina:** «Tira para la Carrera, que ya están de mascareo».
+>
+> **La Máscara del Reverso:** «¿Ya me has sacado? Anda, fíjate en cómo piso».
+>
+> **Murga, copla escrita para el juego**
+>
+> Alonso contó las losas,  
+> siete a siete en el taller.  
+> Una se fue a la Carrera,  
+> que también quería ver.
+
+El **Jueves Lardero** sirve para la escena de comida en el campo. La **rompía de la piñata** y la **quema del entornao** pueden aparecer como referencias al cierre de la fiesta, una vez recuperado el plano. [Programa municipal del Carnaval](https://fuentesdeandalucia.org/programacion-del-carnaval-2020-de-fuentes-de-andalucia/) · [Memoria de murgas y máscaras](https://www.fuentesdeinformacion.es/articulos/nuestros-imprescindibles-del-carnaval-de-fuentes).
+
 ## Lo que se lee al jugar
 
 | Cuándo sale | Texto |
@@ -91,7 +108,7 @@ Cada carta lleva ilustración delante y una frase breve detrás. Cada desbloqueo
 | Tres piezas reunidas | ¡Ya están las tres! Tira para la fuente. |
 | Fin del mundo | ¡Ya corre el agua otra vez! |
 
-Usa frases cortas y palabras que encajen en la escena, como «entornao», «mascareo», «copla», «barreño» y «campiña». Reserva giros como «ea», «anda» o «échame una mano» para las conversaciones y avisos breves. Los problemas de mates van escritos con claridad. En las estampas y fotografías, el reverso mantiene el nombre completo del lugar o imagen y su procedencia.
+Usa frases cortas y palabras que encajen en la escena, como «entornao», «mascareo», «copla», «barreño» y «campiña». En la Carrera manda el vocabulario de su Carnaval. Los giros como «ea», «anda» o «échame una mano» salen cuando encajan en la conversación. Consulta la [guía de habla y Carnaval de los diez mundos](../HABLA_Y_CARNAVAL.md). Los problemas de mates van escritos con claridad. En las estampas y fotografías, el reverso mantiene el nombre completo del lugar o imagen y su procedencia.
 
 ## Encargo para Claude
 
