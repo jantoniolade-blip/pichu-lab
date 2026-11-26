@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf2df">
+<meta name="description" content="Trampa Cero: 17 acertijos y problemas de números enteros para 1.º de ESO, ambientados en Fuentes de Andalucía y el IES Alarifes Ruiz Florindo.">
+<title>Trampa Cero</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='4' width='56' height='56' rx='14' fill='%23f2b632' stroke='%232a1e2e' stroke-width='5'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Arial Black,sans-serif' font-size='40' fill='%232a1e2e'%3E0%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<main class="juego">
+  <header class="cabecera">
+    <button type="button" id="contador" class="chip" aria-haspopup="dialog" title="Ver todos los retos">Reto 1/17</button>
+    <div class="herramientas">
+      <button type="button" id="btn-musica" class="redondo" aria-pressed="false" aria-label="Música" title="Activar música">♫</button>
+      <button type="button" id="btn-pista" class="redondo" aria-expanded="false" aria-controls="bocadillo" aria-label="Pista" title="Pista">?</button>
+    </div>
+    <h1 id="titulo" tabindex="-1">Trampa Cero</h1>
+    <p id="pregunta"></p>
+  </header>
+
+  <section id="escena" class="escena" aria-label="Escena del reto">
+    <div id="fondo" class="fondo"></div>
+    <div id="capa" class="capa"></div>
+    <button type="button" id="profe" class="profe" aria-label="Profe: pedir pista" hidden></button>
+    <p id="bocadillo" class="bocadillo" role="status" hidden></p>
+  </section>
+
+  <form id="respuesta" class="respuesta" hidden autocomplete="off">
+    <label for="valor">Tu resultado</label>
+    <div class="fila">
+      <button type="button" id="signo" class="redondo signo" aria-label="Cambiar el signo">±</button>
+      <input id="valor" name="valor" type="text" inputmode="text" enterkeyhint="done" maxlength="14" spellcheck="false" autocapitalize="off" placeholder="?">
+      <button type="submit" class="boton">Comprobar</button>
+    </div>
+    <p id="formato" class="formato"></p>
+  </form>
+
+  <p id="estado" class="estado" role="status" aria-live="polite"></p>
+
+  <div id="explica" class="explica" hidden>
+    <p id="explica-txt"></p>
+    <button type="button" id="siguiente" class="boton">Siguiente →</button>
+  </div>
+</main>
+
+<dialog id="mapa" class="mapa" aria-labelledby="mapa-tit">
+  <h2 id="mapa-tit">Retos</h2>
+  <div id="mapa-lista" class="mapa-lista"></div>
+  <p class="nota">El avance se guarda en este navegador.</p>
+  <div class="mapa-pie">
+    <button type="button" id="reiniciar" class="boton claro">Empezar de cero</button>
+    <form method="dialog"><button class="boton">Cerrar</button></form>
+  </div>
+</dialog>
+
+<script src="escenas.js"></script>
+<script src="retos.js"></script>
+<script src="musica.js"></script>
+<script src="juego.js"></script>
+</body>
+</html>
