@@ -3,7 +3,7 @@
 Prueba interactiva de números enteros para 1.º ESO: 17 retos en una sola partida, ambientados en Fuentes de Andalucía y en el IES Alarifes Ruiz Florindo.
 
 - **Retos 1–7**: acertijos en la escena (tocar, arrastrar, descubrir objetos escondidos): comparar, ordenar, opuesto, suma, resta, producto y suma cero.
-- **Retos 8–17**: problemas de clase con respuesta escrita: edades y fechas a. C./d. C. (sin año 0) y saldos bancarios (saldo final, ingreso, cobro, diferencia y saldo inicial).
+- **Retos 8–17**: problemas de clase con respuesta escrita: edades y fechas a. C./d. C. (contando el año 0, como en la recta) y saldos bancarios (saldo final, ingreso, cobro, diferencia y saldo inicial).
 - Una pista opcional por reto con «?». Música chiptune original (Web Audio), apagada al empezar, con «♫».
 - El avance se guarda en el navegador (`localStorage`, clave `trampa-cero-v2`).
 

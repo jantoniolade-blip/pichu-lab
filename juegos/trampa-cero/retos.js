@@ -269,32 +269,32 @@ const RETOS = [
   },
   {
     titulo: "La villa y el mosaico",
-    pregunta: "Una villa romana se fundó en el <b>45 a. C.</b> y su mosaico se colocó en el <b>120 d. C.</b> ¿Cuántos años pasaron? Recuerda: <b>no hubo año 0</b>; tras el 1 a. C. vino el 1 d. C.",
+    pregunta: "Una villa romana se fundó en el <b>45 a. C.</b> y su mosaico se colocó en el <b>120 d. C.</b> ¿Cuántos años pasaron? En este problema <b>contamos el año 0</b>, como el 0 de la recta.",
     escena: "archivo", tipo: "edad",
-    respuesta: 164,
-    pista: "Cuenta por tramos: hasta el cambio de era y desde él.",
-    errores: { 165: "Revisa el cambio de era: no hubo año 0.", 75: "Las dos fechas están en eras distintas: una a cada lado del cambio de era.", "-164": "Los años que pasan entre dos fechas no son negativos." },
-    explica: "Del 45 a. C. al 1 a. C. pasan 44 años; del 1 a. C. al 1 d. C., 1 año; y del 1 d. C. al 120 d. C., 119. En total, 164 años (120 + 45 − 1).",
-    doc: r => `<div class="doc linea"><span class="ltit">Línea del tiempo</span><div class="eje"><i class="m1">45 a. C.<br>villa</i><i class="m0">cambio de era</i><i class="m2">120 d. C.<br>mosaico</i></div><span>Pasaron <em>${r ?? "?"}</em> años</span></div>`
+    respuesta: 165,
+    pista: "Sitúa las dos fechas en una recta, con el año 0 en medio.",
+    errores: { 164: "En este problema sí contamos el año 0.", 75: "Las dos fechas están en eras distintas: una a cada lado del año 0.", "-165": "Los años que pasan entre dos fechas no son negativos." },
+    explica: "120 − (−45) = 120 + 45 = 165. Del 45 a. C. al año 0 pasan 45 años, y del año 0 al 120 d. C., 120 más: 165 años.",
+    doc: r => `<div class="doc linea"><span class="ltit">Línea del tiempo</span><div class="eje"><i class="m1">45 a. C.<br>villa</i><i class="m0">año 0</i><i class="m2">120 d. C.<br>mosaico</i></div><span>Pasaron <em>${r ?? "?"}</em> años</span></div>`
   },
   {
     titulo: "El legionario",
-    pregunta: "Un legionario nació en el <b>14 a. C.</b> y celebró su cumpleaños en el <b>12 d. C.</b> ¿Qué edad cumplió? Recuerda: <b>no hubo año 0</b>.",
+    pregunta: "Un legionario nació en el <b>14 a. C.</b> y celebró su cumpleaños en el <b>12 d. C.</b> ¿Qué edad cumplió? En este problema <b>contamos el año 0</b>.",
     escena: "archivo", profe: "perilla", tipo: "edad",
-    respuesta: 25,
-    pista: "Prueba con fechas pequeñas: del 1 a. C. al 1 d. C., ¿cuántos años pasan?",
-    errores: { 26: "Revisa el cambio de era: no hubo año 0.", 2: "Las fechas están a lados distintos del cambio de era: no se restan así." },
-    explica: "Del 14 a. C. al 1 a. C. cumple 13; en el 1 d. C., 14; y en el 12 d. C., 25. Es decir, 14 + 12 − 1 = 25 años.",
+    respuesta: 26,
+    pista: "Sitúa las dos fechas en una recta: ¿cuánto hay desde su nacimiento hasta el año 0? ¿Y después?",
+    errores: { 25: "En este problema sí contamos el año 0.", 2: "Las fechas están a lados distintos del año 0: no se restan así.", "-26": "Una edad no puede ser negativa." },
+    explica: "12 − (−14) = 12 + 14 = 26. Hasta el año 0 cumple 14, y 12 años después, 26.",
     doc: r => `<div class="doc escudo"><span>LEGIO</span><span>n. 14 a. C.</span><span>12 d. C. → <em>${r ?? "?"}</em> años</span></div>`
   },
   {
     titulo: "El poeta del foro",
-    pregunta: "Un poeta murió el día de su cumpleaños, con <b>60 años</b>, en el <b>17 d. C.</b> ¿En qué año nació? <b>No hubo año 0</b>. Escribe el año con su signo.",
+    pregunta: "Un poeta murió el día de su cumpleaños, con <b>60 años</b>, en el <b>17 d. C.</b> ¿En qué año nació? En este problema <b>contamos el año 0</b>. Escribe el año con su signo.",
     escena: "archivo", profe: "gafas", tipo: "año",
-    respuesta: -44,
-    pista: "Retrocede desde su muerte y fíjate bien en qué pasa al cruzar el cambio de era.",
-    errores: { "-43": "Revisa el cambio de era: no hubo año 0.", 44: "Nació antes de Cristo: el año lleva signo −.", 43: "Nació antes de Cristo: el año lleva signo −. Y revisa el año 0.", 77: "¡No pudo nacer después de morir! Hay que ir hacia atrás.", "-60": "El 60 es su edad, no el año." },
-    explica: "17 − 60 sería −43 si hubiera año 0. Como no lo hubo, hay que retroceder un año más: nació en el 44 a. C. (−44).",
+    respuesta: -43,
+    pista: "Retrocede en la recta desde el año de su muerte, pasando por el año 0.",
+    errores: { "-44": "En este problema sí contamos el año 0.", 44: "Nació antes de Cristo: el año lleva signo −. Y recuerda que contamos el año 0.", 77: "¡No pudo nacer después de morir! Hay que ir hacia atrás.", "-60": "El 60 es su edad, no el año." },
+    explica: "17 − 60 = −43. Nació en el 43 a. C.",
     doc: r => `<div class="doc pergamino"><span>Poeta del foro</span><span>nace: <em>${r ?? "?"}</em></span><span>muere: 17 d. C. (60 años)</span></div>`
   },
 
